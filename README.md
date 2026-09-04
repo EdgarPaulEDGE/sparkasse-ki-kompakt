@@ -55,7 +55,7 @@ aus `Sparky.png` nachbauen (Prompt: dieselbe Szene, Kappe aus der Vorlage).
 1. **Skippy-Updates** von Alyssa und Steffi auf Folie 7 einsetzen
    (Platzhalterkasten unten).
 2. **Slido**: `assets/images/slido-qr.png` ist der Code vom Juni. Neues Event
-   anlegen, QR tauschen. Vier Slido-Momente: Einstiegsfrage (4), Potenzial-
+   anlegen, QR tauschen. Fünf Slido-Momente: Einstiegsfrage (4), Potenzial-
    Wordcloud (12), Prompt-Battle-Voting (19), Live-Reparatur-Bausteine (24),
    Mein erster Prompt (33).
 3. **Kahoot**: PIN und QR auf Folie 32, zehn Fragen aus Block 1 und 2.
