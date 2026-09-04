@@ -5,6 +5,14 @@ Workshop von EDGE Digital für die **Sparkasse zu Lübeck**, online,
 Sechsergruppen, alle neu im Thema. 37 Folien plus drei Fall-PDFs.
 Referenten: Emre Erdogan und Edgar Paul-Ghazaryan (Eddie).
 
+## Live
+
+**https://edgarpauledge.github.io/sparkasse-ki-kompakt/**
+GitHub Pages aus `main`, Repo `EdgarPaulEDGE/sparkasse-ki-kompakt`, öffentlich.
+Jeder Push auf `main` geht in etwa einer Minute live. Eine eigene Adresse
+unter edge-digital.ai (wie `aufgeweckt.` und `ueberblick.`) braucht einen
+CNAME bei Wix, siehe README des K64-Decks; erst DNS, dann `CNAME`-Datei.
+
 ## Bauweise
 
 Das Deck ist ein Kind des K64-Stamms (`CC/cbl-aufgeweckt`, 80/20-Prinzip):
