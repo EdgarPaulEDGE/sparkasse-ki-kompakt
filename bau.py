@@ -107,6 +107,36 @@ zusatz = """
 .slido { position: absolute; right: 130px; top: 132px; display: flex; align-items: center; gap: 18px; }
 .slido img { width: 120px; height: 120px; border-radius: 12px; display: block; background: #fff; }
 .slido span { font-size: 20px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--w-45); }
+
+/* ---------- Füllgrad: Inhalt trägt die Fläche, keine Luft um kleine Gruppen ---------- */
+.spalten h3 { font-size: 42px; }
+.spalten p { font-size: 30px; line-height: 1.5; }
+.spalten .sp-icon svg { width: 88px; height: 88px; }
+.spalten .sp-icon { margin-bottom: 30px; }
+.rakete { gap: 0 70px; }
+.rakete > div { padding: 42px 6px; grid-template-columns: 120px 1fr; }
+.rakete .buchstabe { font-size: 118px; }
+.rakete b { font-size: 40px; margin-bottom: 10px; }
+.rakete span { font-size: 29px; }
+.typen img { height: 380px; }
+.typen h3 { font-size: 40px; }
+.typen .prompt.klein { font-size: 26px; }
+.typen .plus, .typen .minus { font-size: 26px; }
+.antwort { padding: 44px 6px; }
+.antwort p { font-size: 46px; }
+.antwort .label { font-size: 22px; }
+.mitnehmen > div { padding: 34px 4px; }
+.mitnehmen .satz { font-size: 42px; }
+.mitnehmen .satz small { font-size: 30px; }
+.strahl.zwei .strahl-reihe + .strahl-reihe { margin-top: 80px; }
+.strahl.zwei .strahl-text { font-size: 27px; }
+.strahl.zwei .strahl-jahr { font-size: 46px; }
+.tempo .zahl { font-size: 320px; }
+.tempo .einheit { font-size: 46px; }
+.tempo .was { font-size: 30px; }
+.stufe { font-size: 96px; }
+.stufe-wohin { font-size: 23px; margin-top: 24px; }
+.lead { font-size: 38px; }
 </style>"""
 html = html.replace("</style>", zusatz, 1)
 

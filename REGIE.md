@@ -80,10 +80,9 @@ Screenshot zeigen, liegt im Ordner `backup/` (vor dem Termin anlegen).
 - S-KIPilot im zweiten Fenster, eingeloggt, leerer Verlauf, Schriftgröße hoch
 - Beide Live-Prompts (24 und 25) im Zwischenspeicher, Fördermittel-Mail dazu
 - Slido-Event mit fünf Fragen angelegt, QR auf den Folien getauscht
-- Kahoot mit zehn Fragen, PIN auf Folie 32
+- Kahoot „KI-Kompakt Sparkasse zu Lübeck“ hosten, „Antworten mischen“ an, PIN in den Chat
 - Drei Fall-PDFs als Dateien im Chat vorbereitet, nicht erst in der Pause suchen
 - Breakout-Räume vorbelegt, Gruppensprecher von Alyssa benannt
-- Skippy-Updates auf Folie 7 eingesetzt
 - Wasserglas
 
 ## Ton

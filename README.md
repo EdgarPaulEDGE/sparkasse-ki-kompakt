@@ -46,25 +46,37 @@ zeigt: ratlos bei der ersten Frage, Fernglas beim Ausblick, Megafon beim
 Battle, Rakete beim Tempo, Laptop im Breakout, Glühbirne beim Prompt für
 morgen. Alle Bilder sind KI-erzeugt und auf den Vollbildfolien gekennzeichnet.
 
-Ausnahme: die beiden Pizza-Roboter auf Folie 21 tragen noch die
-Fischbrötchen-Mütze aus dem Lübeck-Deck. Wenn Zeit ist, mit Nano Banana 2
-aus `Sparky.png` nachbauen (Prompt: dieselbe Szene, Kappe aus der Vorlage).
+Die beiden Pizza-Roboter auf Folie 21 sind am 04.09.2026 mit Higgsfield
+(Nano Banana Pro, Referenzen: `Sparky.png` plus die K64-Pizzabilder) neu
+gebaut und per Background-Remover freigestellt worden.
 
 ## Was noch fehlt (Stand 04.09.2026)
 
-1. **Skippy-Updates** von Alyssa und Steffi auf Folie 7 einsetzen
-   (Platzhalterkasten unten).
-2. **Slido**: `assets/images/slido-qr.png` ist der Code vom Juni. Neues Event
+1. **Slido**: `assets/images/slido-qr.png` ist der Code vom Juni. Neues Event
    anlegen, QR tauschen. Fünf Slido-Momente: Einstiegsfrage (4), Potenzial-
    Wordcloud (12), Prompt-Battle-Voting (19), Live-Reparatur-Bausteine (24),
-   Mein erster Prompt (33).
-3. **Kahoot**: PIN und QR auf Folie 32, zehn Fragen aus Block 1 und 2.
-4. **Fall A**: geht davon aus, dass das Kundencenter schriftliche Beschwerden
-   bearbeitet. Falls dort fast nur telefoniert wird, den Fall auf
-   Gesprächsleitfaden plus internen Vermerk drehen (`faelle/bau_faelle.py`).
-5. **Live-Momente einmal durchspielen**: Fördermittel-Prompt (25) mit
+   Mein erster Prompt (33). Der Slido-Admin lässt sich in Safari nicht per
+   DOM bedienen (die Karte „Create a slido“ reagiert nur auf echte Klicks),
+   deshalb im Chrome-Tab mit Claude in Chrome anlegen, sobald dort der Login
+   steht.
+2. **Kahoot** „KI-Kompakt Sparkasse zu Lübeck“ liegt im Kahoot-Konto
+   (`create.kahoot.it/creator/1871ffde-06f3-448b-96e3-6b06f419230a`), zehn
+   Fragen aus `kahoot/kahoot-ki-kompakt.xlsx`. Die richtige Antwort steht
+   überall an Position 1, deshalb beim Hosten „Antworten mischen“ einschalten.
+   PIN entsteht erst beim Hosten, Folie 32 bleibt bei „Code kommt in den Chat“.
+3. **Live-Momente einmal durchspielen**: Fördermittel-Prompt (25) mit
    Web-Hilfe im S-KIPilot, Live-Reparatur (24) mit der Fördermittel-Anfrage
-   als Unterlage. Beide Prompts vorher in den Zwischenspeicher.
+   als Unterlage. Beide Prompts vorher in den Zwischenspeicher. Edgar hat
+   selbst keinen S-KIPilot-Zugang, also mit Alyssa abstimmen.
+
+## Kahoot
+
+`kahoot/kahoot-ki-kompakt.xlsx` ist die Import-Tabelle im Kahoot-Format
+(Fragen ab Zeile 9, Spalten B bis H). Der Weg, der funktioniert hat: im
+Creator „Hinzufügen“, Reiter „Import“, „Tabelle importieren“, Datei setzen.
+Direktes Tippen in die Lexical-Editoren per DOM sieht gespeichert aus,
+kommt aber nie im Modell an (`kahoot/treiber*.py` sind die Fehlversuche,
+`aufraeumen.py` der Import-Nachlauf).
 
 ## Die drei Fälle
 
