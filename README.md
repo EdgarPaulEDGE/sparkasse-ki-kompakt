@@ -79,6 +79,15 @@ Direktes Tippen in die Lexical-Editoren per DOM sieht gespeichert aus,
 kommt aber nie im Modell an (`kahoot/treiber*.py` sind die Fehlversuche,
 `aufraeumen.py` der Import-Nachlauf).
 
+Jede Frage trägt ein Sparky-Bild (`kahoot/bilder/`, Higgsfield Nano Banana
+Pro mit `Sparky.png` als Referenz, 16:9): Rakete, Türsteher, Papierberg,
+Laufband, Teamwork, EU-Richter, Verkehrspolizist, Tresor, Koch, Azubi mit
+Kaffeetablett. Upload über `kahoot/bilder_fix2.py`: Bild in Häppchen als
+Base64 in die Seite, per DataTransfer ins File-Input des Upload-Dialogs.
+Wichtig: vor jedem Upload warten, bis der Editor die richtige Frage zeigt
+(Titelabgleich), sonst landet das Bild eine Frage weiter. Prüfung über die
+Hintergrundbilder der Seitenleisten-Vorschau, nicht über den Editor.
+
 ## Die drei Fälle
 
 `faelle/bau_faelle.py` baut die PDFs mit reportlab und den Sparkasse-Schriften:
