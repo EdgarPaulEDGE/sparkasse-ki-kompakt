@@ -1,0 +1,1869 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KI-Kompakt. Der S-KIPilot im Arbeitsalltag | EDGE Digital x Sparkasse zu Lübeck</title>
+<meta name="theme-color" content="#030309">
+<meta name="description" content="KI-Kompakt Workshop, Sparkasse zu Lübeck, 10. September 2026">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<!-- Als App installierbar: Chrome bietet dann "Installieren" an, das Fenster
+     startet ohne Adressleiste und ohne Tableiste. -->
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="vendor/reveal/reveal.css">
+<style>
+/* ============================================================================
+   KI-KOMPAKT. DER S-KIPILOT IM ARBEITSALLTAG
+   Workshop für die Sparkasse zu Lübeck, online, 10.09.2026
+   Stamm: das K64-Deck (cbl-aufgeweckt), nur Folien, Bilder und Zusatzstil sind neu.
+   Gestaltung 1:1 aus der SoulByte-Schulung: Raumschwarz, Galaxie, Avenir Next,
+   Typografie trägt die Fläche, Struktur aus Hairline-Trennern.
+   Kein box-shadow (decktape-PDF-Bug). Kein Monospace. Keine Emojis.
+   ========================================================================== */
+
+@font-face { font-family: "Avenir Next LT"; src: url("assets/fonts/AvenirNext-Regular.ttf") format("truetype"); font-weight: 400; }
+@font-face { font-family: "Avenir Next LT"; src: url("assets/fonts/AvenirNext-Medium.ttf") format("truetype"); font-weight: 500; }
+@font-face { font-family: "Avenir Next LT"; src: url("assets/fonts/AvenirNext-DemiBold.ttf") format("truetype"); font-weight: 600; }
+@font-face { font-family: "Avenir Next LT"; src: url("assets/fonts/AvenirNext-Bold.ttf") format("truetype"); font-weight: 700; }
+
+:root {
+  --raum: #030309;
+  --weiss: #F4F6FF;
+  --w-70: rgba(244, 246, 255, 0.70);
+  --w-45: rgba(244, 246, 255, 0.45);
+  --w-25: rgba(244, 246, 255, 0.25);
+  --hairline: rgba(244, 246, 255, 0.14);
+  --hairline-stark: rgba(244, 246, 255, 0.28);
+  --purple: #C15DE6;
+  --blau: #009FF4;
+  --cyan: #00E2E2;
+  --limette: #C7D300;      /* Convention Lübeck, nur als Gastfarbe */
+  --warn: #ff6b5e;
+  --ok: #3ad29f;
+  --font: "Avenir Next LT", "Avenir Next", Avenir, "Nunito Sans", "Segoe UI", sans-serif;
+}
+
+/* Ohne diese Zeile rechnet der Browser Innenabstand und Rahmen ZUSÄTZLICH
+   zur angegebenen Breite. Ein Kasten mit width:100% und 48px Padding wird
+   dann 96px breiter als sein Platz und schiebt sich unter den Nachbarn.
+   Genau das ist auf der Halluzinations-Folie passiert. */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { background: var(--raum); font-family: var(--font); }
+.reveal-viewport { background: transparent !important; }
+
+/* ---------- Raum-Ebenen: liegen fix HINTER allen Folien ---------- */
+#kosmos { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; }
+.nebel {
+  position: fixed; inset: -20%; z-index: 0; pointer-events: none; filter: blur(60px);
+  background:
+    radial-gradient(38% 30% at 78% 24%, rgba(0, 159, 244, 0.10), transparent 70%),
+    radial-gradient(34% 28% at 16% 80%, rgba(193, 93, 230, 0.11), transparent 70%),
+    radial-gradient(24% 20% at 62% 86%, rgba(0, 226, 226, 0.07), transparent 70%);
+  animation: nebel-atmen 46s ease-in-out infinite alternate;
+}
+@keyframes nebel-atmen {
+  from { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
+  to   { transform: translate3d(2.5%, -1.8%, 0) scale(1.06); opacity: .82; }
+}
+.vignette {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(140% 120% at 50% 42%, transparent 50%, rgba(1, 1, 4, 0.88) 100%);
+}
+.schnuppe {
+  position: fixed; z-index: 0; width: 150px; height: 1.5px; pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(220, 235, 255, 0.9), transparent);
+  filter: drop-shadow(0 0 6px rgba(160, 220, 255, 0.8));
+  animation: schnuppen-flug 1.1s ease-out forwards;
+}
+@keyframes schnuppen-flug {
+  from { opacity: 0; transform: rotate(var(--wk)) translateX(0); }
+  12%  { opacity: 1; }
+  to   { opacity: 0; transform: rotate(var(--wk)) translateX(46vw); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nebel { animation: none; }
+  .schnuppe { animation: none; display: none; }
+}
+
+/* ---------- Reveal-Grundgerüst ---------- */
+.reveal { font-family: var(--font); font-size: 30px; color: var(--weiss); }
+.reveal .slides { text-align: left; }
+.reveal .slides > section { padding: 0; height: 1080px; }
+.reveal .progress { color: var(--cyan); height: 4px; }
+.reveal .controls { color: var(--w-45); }
+.reveal ::selection { background: rgba(0, 226, 226, 0.28); }
+
+.slide {
+  width: 1920px; height: 1080px;
+  display: flex !important; flex-direction: column;
+  padding: 132px 130px 96px;
+  box-sizing: border-box;
+}
+.slide.mittig { justify-content: center; align-items: center; text-align: center; }
+
+/* Für Prüfung und PDF-Export: jede Animation sofort auf ihren Endzustand.
+   Sonst fotografiert decktape die Folie mitten im Einlauf, und im PDF steht
+   ein halb aufgebauter Kasten samt Schreibmaschinen-Cursor. */
+body.standbild *, body.standbild *::before, body.standbild *::after {
+  animation-duration: .001s !important;
+  animation-delay: 0s !important;
+  transition: none !important;
+}
+body.standbild .cursor, body.standbild .tippen::after { display: none !important; }
+/* Bedienelemente gehören auf die Leinwand, nicht ins Export-PDF */
+body.standbild .reveal .controls,
+body.standbild .reveal .progress { display: none !important; }
+
+/* ---------- Typografie ---------- */
+h1, h2, h3, h4 { margin: 0; font-family: var(--font); }
+.hero {
+  font-size: 148px; line-height: 1.09; letter-spacing: -.025em; font-weight: 700;
+  text-transform: uppercase; text-wrap: balance; margin: 0 0 28px;
+}
+.headline {
+  font-size: 82px; line-height: 1.12; letter-spacing: -.02em; font-weight: 700;
+  text-transform: uppercase; text-wrap: balance; margin: 0 0 20px; flex-shrink: 0;
+}
+/* Headlines mit gesetztem Umbruch: balance würde gegen die Satzgrenze
+   rechnen und wieder mitten im Satz trennen. */
+.headline.gesetzt, .hero.gesetzt { text-wrap: initial; }
+.schimmer {
+  background: linear-gradient(96deg, var(--purple), var(--blau) 52%, var(--cyan));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.lead { color: var(--w-70); font-size: 35px; line-height: 1.5; max-width: 32em; text-wrap: balance; margin: 0; }
+.slide.mittig .lead { margin-left: auto; margin-right: auto; }
+.label {
+  font-weight: 600; font-size: 20px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--w-45);
+}
+
+/* ---------- Feld: dunkles Glas mit Space-Schimmer ---------- */
+.feld {
+  border: 1px solid var(--hairline);
+  border-radius: 28px;
+  background: rgba(8, 11, 22, 0.62);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  padding: 40px 48px;
+  position: relative; overflow: hidden;
+}
+.feld::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(90% 70% at 10% 0%, rgba(0, 226, 226, 0.07), transparent 60%),
+    radial-gradient(80% 60% at 95% 100%, rgba(0, 159, 244, 0.05), transparent 60%);
+}
+.feld.zeilen > div:first-child { border-top: none; }
+.feld.zeilen > div:last-child { border-bottom: none; }
+
+/* ---------- Offene Spalten mit Hairline-Trennern ---------- */
+.spalten { display: grid; width: 100%; }
+.spalten > div { padding: 0 50px; }
+.spalten > div:first-child { padding-left: 0; }
+.spalten > div:last-child { padding-right: 0; }
+.spalten > div + div { border-left: 1px solid var(--hairline); }
+.spalten .sp-icon { margin-bottom: 24px; }
+.spalten .sp-icon svg { width: 70px; height: 70px; }
+.spalten h3 { font-size: 36px; font-weight: 700; letter-spacing: -.015em; margin: 0 0 14px; }
+.spalten p { color: var(--w-70); font-size: 26px; line-height: 1.55; margin: 0; }
+.sp-num { font-size: 46px; font-weight: 700; color: var(--cyan); margin-bottom: 16px; line-height: 1; }
+
+/* ---------- Nummern-Badge: der drehende Verlaufs-Ring ----------
+   Nie 01 02 03, immer die nackte Zahl. Der Markenverlauf läuft als Kontur
+   einmal um den Kreis und rotiert langsam: dieselbe Sprache wie der
+   Schimmer in den Headlines, nur in Bewegung. Die Drehung liegt auf einem
+   Pseudo-Element mit transform, das läuft überall und kostet kein Layout. */
+.ring {
+  position: relative; width: 84px; height: 84px; border-radius: 50%;
+  padding: 3px; overflow: hidden; flex-shrink: 0; display: inline-block;
+}
+.ring::before {
+  content: ""; position: absolute; inset: -30%; border-radius: 50%;
+  background: conic-gradient(var(--purple), var(--blau) 38%, var(--cyan) 62%, var(--purple));
+  animation: ring-drehen 5s linear infinite;
+}
+.ring > b {
+  position: relative; display: grid; place-items: center;
+  width: 100%; height: 100%; border-radius: 50%;
+  background: #070a14; font-size: 38px; font-weight: 700; color: var(--weiss);
+}
+.ring.warn::before { background: conic-gradient(#ff9a8e, var(--warn) 45%, #b23a2f 75%, #ff9a8e); }
+.ring.ok::before { background: conic-gradient(#8fe9c9, var(--ok) 45%, #1e8f68 75%, #8fe9c9); }
+.ring.klein { width: 72px; height: 72px; }
+.ring.klein > b { font-size: 32px; }
+@keyframes ring-drehen { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .ring::before { animation: none; } }
+
+/* ---------- Fließband: rein, tippen, raus ---------- */
+.band { display: flex; gap: 26px; align-items: stretch; }
+/* Band plus Merkzeile stehen als Gruppe mittig im Rest der Folie. Die Kästen
+   sind so hoch wie der längste von ihnen, nicht so hoch wie die Folie:
+   ein Loch im Kasten liest sich als Fehler, Luft um die Gruppe als Absicht. */
+.gruppe-mittig { display: flex; flex-direction: column; justify-content: center; gap: 34px; min-height: 0; }
+.band .pfeil-r { flex-shrink: 0; align-self: center; }
+.station { display: flex; flex-direction: column; min-width: 0; }
+.station-kopf { display: flex; align-items: center; gap: 18px; margin-bottom: 20px; }
+.station .feld { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 22px; }
+.stich { display: flex; gap: 18px; align-items: flex-start; font-size: 29px; line-height: 1.45; }
+.stich svg { width: 34px; height: 34px; flex-shrink: 0; margin-top: 2px; }
+
+/* ---------- Zeilen-Liste mit Piktogramm ----------
+   Jede Zeile trägt ihr eigenes Zeichen, damit sie unterscheidbar bleibt
+   und nicht als Textblock gelesen wird. */
+.zeilen.mit-ikon > div { display: flex; align-items: center; gap: 24px; }
+.zeilen.mit-ikon svg { width: 30px; height: 30px; flex-shrink: 0; }
+
+/* ---------- Zeilen-Listen ---------- */
+.zeilen { display: flex; flex-direction: column; width: 100%; }
+.zeilen > div { padding: 24px 6px; border-bottom: 1px solid var(--hairline); }
+.zeilen > div:first-child { border-top: 1px solid var(--hairline); }
+
+/* ---------- Takeaway: Statement statt Box ---------- */
+.takeaway { text-align: center; padding-top: 6px; }
+.takeaway::before {
+  content: ""; display: block; width: 90px; height: 3px; margin: 0 auto 24px;
+  background: linear-gradient(90deg, var(--purple), var(--blau) 52%, var(--cyan));
+  border-radius: 2px;
+}
+.takeaway p { font-size: 40px; font-weight: 600; line-height: 1.35; margin: 0; text-wrap: balance; }
+
+/* ---------- Chrome (fixe Overlays) ---------- */
+.chrome { position: fixed; z-index: 20; pointer-events: none; transition: opacity .3s; }
+/* Die Werte sind Folienpixel und werden mit --folie-skala umgerechnet, die
+   Ränder kommen aus der tatsächlichen Lage der Bühne im Fenster. */
+.chrome-edge {
+  top: calc(var(--folie-oben, 0px) + 34px * var(--folie-skala, 1));
+  left: calc(var(--folie-links, 0px) + 56px * var(--folie-skala, 1));
+}
+.chrome-edge img { height: calc(50px * var(--folie-skala, 1)); display: block; }
+.chrome-client {
+  top: calc(var(--folie-oben, 0px) + 40px * var(--folie-skala, 1));
+  right: calc(var(--folie-rechts, 0px) + 56px * var(--folie-skala, 1));
+}
+.chrome-client img { height: calc(40px * var(--folie-skala, 1)); display: block; opacity: .9; }
+.chrome-num {
+  bottom: calc(var(--folie-unten, 0px) + 36px * var(--folie-skala, 1));
+  left: calc(var(--folie-links, 0px) + 60px * var(--folie-skala, 1));
+  font-weight: 600; font-size: calc(21px * var(--folie-skala, 1));
+  letter-spacing: .12em; color: var(--w-45);
+}
+body.chrome-aus .chrome-edge, body.chrome-aus .chrome-client { opacity: 0; }
+body.deckblatt .chrome-num { opacity: 0; }
+
+/* ---------- Divider ---------- */
+.riesenzahl {
+  position: absolute; top: 50%; right: 120px; transform: translateY(-50%);
+  font-size: 620px; font-weight: 700; line-height: 1; pointer-events: none;
+  color: transparent; -webkit-text-stroke: 2px rgba(244, 246, 255, 0.10);
+}
+.divider-zeit {
+  font-weight: 500; font-size: 24px; letter-spacing: .18em; color: var(--w-45);
+  margin-top: 32px; text-transform: uppercase;
+}
+
+/* ============================================================================
+   EIGENE BAUTEILE FÜR DIESEN VORTRAG
+   ========================================================================== */
+
+/* ---------- Kaffeetasse auf der Titelfolie ----------
+   Der Dampf steigt in drei Fäden unterschiedlich schnell auf. Reine CSS-
+   Animation auf einem SVG-Pfad: läuft auch dann weiter, wenn der Browser
+   die Seite im Hintergrund hält und rAF anhält. */
+.tasse { width: 268px; height: 268px; display: block; }
+.dampf { stroke: rgba(244, 246, 255, .5); stroke-width: 4.5; fill: none; stroke-linecap: round; }
+.dampf-1 { animation: dampf-steigen 4.2s ease-in-out infinite; }
+.dampf-2 { animation: dampf-steigen 5.4s ease-in-out infinite .6s; }
+.dampf-3 { animation: dampf-steigen 4.8s ease-in-out infinite 1.2s; }
+@keyframes dampf-steigen {
+  0%   { opacity: 0; transform: translateY(14px) scaleY(.7); }
+  25%  { opacity: .85; }
+  100% { opacity: 0; transform: translateY(-30px) scaleY(1.25); }
+}
+@media (prefers-reduced-motion: reduce) { .dampf-1, .dampf-2, .dampf-3 { animation: none; opacity: .55; } }
+
+/* ---------- Mail- und Chatfenster ----------
+   Ein Fenster steht für "das hier kennt ihr aus eurem Postfach". Die Kopfzeile
+   trägt Absender und Betreff, damit der Text darunter ohne Erklärung wirkt. */
+.fenster {
+  border: 1px solid var(--hairline); border-radius: 20px; overflow: hidden;
+  background: rgba(8, 11, 22, .72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  display: flex; flex-direction: column;
+}
+.fenster-kopf {
+  padding: 22px 34px; border-bottom: 1px solid var(--hairline);
+  display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap;
+}
+.fenster-kopf .von { font-size: 24px; font-weight: 600; color: var(--w-70); }
+.fenster-kopf .betreff { font-size: 24px; color: var(--w-45); }
+.fenster-leib { padding: 32px 34px; font-size: 29px; line-height: 1.55; color: var(--weiss); }
+.fenster-leib p { margin: 0 0 18px; }
+.fenster-leib p:last-child { margin-bottom: 0; }
+.fenster-fuss { padding: 18px 34px 24px; border-top: 1px solid var(--hairline); }
+
+/* ---------- Gegenüberstellung schwach gegen gut ----------
+   Kein farbiger Balken als Dekoration: die Wertung steht als Wort über der
+   Spalte, die Fläche bleibt ruhig. Nur ein Hauch Farbe im Hintergrund. */
+.gegen { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; width: 100%; }
+.gegen > div { display: flex; flex-direction: column; }
+.wertung { font-weight: 700; font-size: 22px; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 16px; }
+.wertung.schwach { color: var(--warn); }
+.wertung.gut { color: var(--ok); }
+.karte-schwach { border-color: rgba(255, 107, 94, .28); }
+.karte-gut { border-color: rgba(58, 210, 159, .32); background: rgba(9, 18, 20, .68); }
+
+/* ---------- Prompt-Zeile ----------
+   Der Prompt ist das Werkzeug, deshalb steht er nicht in Fließtext, sondern
+   in einer eigenen Zeile mit vorangestelltem Zeichen. Kein Monospace: die
+   Runde soll ihn lesen wie einen Satz, nicht wie Code. */
+.prompt {
+  border: 1px solid var(--hairline-stark); border-radius: 18px;
+  background: rgba(0, 226, 226, .045);
+  padding: 26px 32px; font-size: 28px; line-height: 1.5; color: var(--weiss);
+  display: flex; gap: 18px; align-items: flex-start;
+}
+.prompt::before {
+  content: ""; flex: 0 0 10px; height: 10px; margin-top: 14px; border-radius: 50%;
+  background: linear-gradient(96deg, var(--purple), var(--cyan));
+}
+.prompt.klein { font-size: 25px; padding: 20px 26px; }
+.prompt b { font-weight: 700; color: var(--cyan); }
+/* blinkender Balken hinter getipptem Text */
+.cursor { display: inline-block; width: 3px; height: 1em; margin-left: 4px;
+  background: var(--cyan); vertical-align: text-bottom; animation: blinken 1s steps(2) infinite; }
+@keyframes blinken { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+
+/* ---------- Wortzahl unter dem Prompt ----------
+   Ersetzt den Erklärabsatz: der Größenunterschied zwischen beiden Prompts
+   ist eine Zahl und braucht keinen Satz. margin-top:auto stellt beide Zahlen
+   auf dieselbe Linie, egal wie lang der Prompt darüber ist. */
+.wortzahl { display: flex; align-items: baseline; gap: 18px; padding-top: 26px; }
+.wortzahl .zahl { font-size: 104px; font-weight: 700; letter-spacing: -.03em; line-height: 1; }
+.wortzahl .was { font-size: 27px; color: var(--w-45); }
+.wortzahl.schwach .zahl { color: var(--w-45); }
+.wortzahl.gut .zahl {
+  background: linear-gradient(96deg, var(--purple), var(--blau) 52%, var(--cyan));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* ---------- Notizzettel: der handschriftliche Ausgangspunkt ---------- */
+.zettel {
+  border: 1px dashed var(--hairline-stark); border-radius: 18px;
+  padding: 26px 32px; background: rgba(244, 246, 255, .03);
+}
+.zettel ul { margin: 0; padding: 0; list-style: none; }
+.zettel li { font-size: 27px; line-height: 1.75; color: var(--w-70); }
+.zettel li::before { content: "·"; color: var(--cyan); font-weight: 700; margin-right: 14px; }
+
+/* ---------- Bausteine des Prompts ---------- */
+.baustein-kopf { font-weight: 700; font-size: 26px; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 12px; }
+.b-rolle { color: var(--purple); }
+.b-ziel { color: var(--blau); }
+.b-kontext { color: var(--cyan); }
+.b-aufgabe { color: var(--limette); }
+
+/* ---------- Pizza ---------- */
+.pizza { width: 340px; height: 340px; display: block; margin: 0 auto; }
+.pizza .zutat { opacity: 0; transition: opacity .5s ease; }
+.pizza.fertig .zutat { opacity: 1; }
+.pizza.fertig .zutat:nth-of-type(2) { transition-delay: .25s; }
+.pizza.fertig .zutat:nth-of-type(3) { transition-delay: .5s; }
+.pizza.fertig .zutat:nth-of-type(4) { transition-delay: .75s; }
+
+/* ---------- Sterne für die Bewertung ---------- */
+.sterne { display: flex; gap: 6px; }
+.sterne svg { width: 30px; height: 30px; }
+.stern-voll { fill: #ffc531; }
+.stern-leer { fill: rgba(244, 246, 255, .16); }
+
+/* ---------- Zeitstrahl ---------- */
+.strahl { position: relative; width: 100%; padding-top: 20px; }
+.strahl-linie { position: absolute; left: 0; right: 0; top: 96px; height: 2px; border: none; margin: 0;
+  background: linear-gradient(90deg, rgba(244,246,255,.18), var(--blau) 55%, var(--cyan)); }
+.strahl-reihe { display: grid; grid-template-columns: repeat(5, 1fr); gap: 26px; position: relative; }
+.strahl-punkt { text-align: center; }
+/* Die Jahreszahl bekommt eine feste Zeilenhöhe. Sonst schiebt die größere
+   Schrift von "Heute" den eigenen Knoten unter die Linie der anderen. */
+.strahl-jahr {
+  font-size: 40px; font-weight: 700; letter-spacing: -.01em; color: var(--w-45);
+  height: 56px; display: flex; align-items: center; justify-content: center; margin-bottom: 22px;
+}
+.strahl-punkt.jetzt .strahl-jahr { color: var(--cyan); font-size: 46px; }
+.strahl-knoten { width: 16px; height: 16px; border-radius: 50%; background: var(--w-25); margin: 0 auto 30px; }
+.strahl-punkt.jetzt .strahl-knoten {
+  width: 22px; height: 22px; background: var(--cyan); margin: -3px auto 27px;
+}
+.strahl-text { font-size: 25px; line-height: 1.45; color: var(--w-70); padding: 0 8px; text-wrap: balance; }
+
+/* ---------- Takeaway-Liste ---------- */
+.mitnehmen { display: grid; grid-template-columns: 1fr 1fr; gap: 0 60px; width: 100%; }
+.mitnehmen > div { display: flex; gap: 30px; align-items: center; padding: 26px 4px; border-bottom: 1px solid var(--hairline); }
+.mitnehmen .nr { flex: 0 0 62px; }
+.mitnehmen .satz { font-size: 35px; line-height: 1.35; font-weight: 600; }
+.mitnehmen .satz small { display: block; font-size: 26px; color: var(--w-45); margin-top: 6px; }
+
+/* ---------- Warnliste (was nie ins Tool gehört) ---------- */
+.nie { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px 34px; width: 100%; }
+.nie > div { display: flex; gap: 24px; align-items: center; font-size: 36px; line-height: 1.3; padding: 26px 0; }
+.nie .zeichen { flex: 0 0 50px; height: 50px; border-radius: 50%; display: grid; place-items: center;
+  background: rgba(255, 107, 94, .12); }
+.nie .zeichen svg { width: 28px; height: 28px; stroke: var(--warn); }
+
+/* ---------- Portraits ---------- */
+.koepfe { display: flex; gap: 56px; }
+.kopf { display: flex; align-items: center; gap: 28px; }
+.kopf-foto {
+  width: 224px; height: 224px; border-radius: 50%; flex: 0 0 224px;
+  border: 1px solid var(--hairline-stark);
+  background:
+    radial-gradient(75% 70% at 50% 12%, rgba(0, 226, 226, .10), transparent 62%),
+    radial-gradient(80% 80% at 50% 100%, rgba(0, 159, 244, .10), transparent 60%),
+    rgba(12, 16, 30, .78);
+  position: relative; overflow: hidden;
+}
+.kopf-foto img { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
+  width: 104%; height: auto; display: block; }
+.kopf-name { font-size: 46px; font-weight: 700; }
+.kopf-rolle { font-size: 28px; color: var(--w-45); margin-top: 8px; }
+
+/* ---------- Vollflächiges Bild hinter einer Trennfolie ----------
+   Der Verlauf darüber ist kein Effekt, sondern Bedingung: ohne ihn steht
+   weiße Schrift auf einem Foto mit hellen Stellen und wird unlesbar.
+   Bei "seite" läuft er von links (fast deckend) nach rechts (offen), also
+   entgegengesetzt zur Leserichtung der Headline. */
+/* Der Schleier gehört auf Reveals Hintergrund-Ebene: sie deckt das ganze
+   Fenster, während die Bühne nur 16:9 ist. Lag das Bild im Slide, endete es
+   an der Folienkante und daneben lief die Galaxie weiter. */
+.reveal .slide-background[data-schleier]::after { content: ""; position: absolute; inset: 0; }
+.reveal .slide-background[data-schleier="seite"]::after {
+  background:
+    linear-gradient(90deg, rgba(3, 3, 9, .97) 0%, rgba(3, 3, 9, .88) 38%, rgba(3, 3, 9, .35) 78%, rgba(3, 3, 9, .55) 100%),
+    linear-gradient(0deg, rgba(3, 3, 9, .7) 0%, transparent 45%);
+}
+/* "leicht" lässt das Motiv sichtbar: nur oben und unten so viel Dunkel,
+   dass Headline und Uferzeilen lesbar bleiben. */
+.reveal .slide-background[data-schleier="leicht"]::after {
+  background: linear-gradient(180deg, rgba(3, 3, 9, .74) 0%, rgba(3, 3, 9, .28) 30%, rgba(3, 3, 9, .22) 62%, rgba(3, 3, 9, .68) 100%);
+}
+.reveal .slide-background[data-schleier="mittig"]::after {
+  background: radial-gradient(120% 100% at 50% 50%, rgba(3, 3, 9, .8) 0%, rgba(3, 3, 9, .92) 55%, rgba(3, 3, 9, .97) 100%);
+}
+/* Hinter einem Vollbild hat die Galaxie nichts zu suchen */
+body.bildfolie #kosmos, body.bildfolie .nebel, body.bildfolie .vignette { opacity: 0; }
+#kosmos, .nebel, .vignette { transition: opacity .4s; }
+/* Wir verlangen die Kennzeichnung auf Folie 20 selbst, also steht sie auch
+   an unserem eigenen Bild. Dezent, aber vorhanden. */
+.bild-quelle {
+  position: absolute; left: 130px; bottom: 40px; z-index: 2;
+  font-weight: 500; font-size: 17px; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(244, 246, 255, .38);
+}
+
+/* ---------- Beispiel-Posting mit Kennzeichnung ----------
+   Das Bild auf der Rechtsfolie ist selbst mit KI erzeugt. Die Zeile darunter
+   ist die Kennzeichnung, die das Gesetz verlangt, und zugleich die Vorlage,
+   die die Runde abschreiben kann. */
+.posting { border: 1px solid var(--hairline-stark); border-radius: 20px; overflow: hidden; background: rgba(8, 11, 22, .7); }
+.posting img { width: 100%; height: 420px; object-fit: cover; display: block; }
+.posting .hinweis {
+  display: flex; align-items: center; gap: 16px;
+  padding: 22px 26px; font-size: 25px; color: var(--w-70); border-top: 1px solid var(--hairline);
+}
+.posting .hinweis svg { width: 26px; height: 26px; flex: 0 0 26px; stroke: var(--cyan); }
+
+/* ---------- Vier Bilder als Beleg ----------
+   Enge Fugen und gleiche Rundung lassen die vier als eine Fläche lesen.
+   Die Bildunterschrift trägt den Ort, nicht die Erklärung. */
+.galerie { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; width: 100%; }
+.galerie figure { margin: 0; position: relative; overflow: hidden; border-radius: 18px;
+  border: 1px solid var(--hairline); }
+.galerie img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.galerie figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 24px 16px;
+  font-weight: 600; font-size: 22px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--weiss);
+  background: linear-gradient(0deg, rgba(3, 3, 9, .88), transparent);
+}
+
+/* ---------- Bilder in Flex-Spalten ----------
+   In einer Spalten-Flexbox gilt align-items:stretch. Ein Bild mit fester Höhe
+   und width:auto wird dadurch auf die Containerbreite gezogen und verzerrt.
+   Hier stand der Roboter am Laptop 825px breit statt 195px. */
+.gegen > div > img, .spalte > img, .zeilen > img { align-self: flex-start; }
+
+/* ---------- Protokoll: eine Geschichte von oben nach unten ----------
+   Drei Zeilen statt drei Blöcke: die Leute lesen abwärts, nicht über die
+   Fläche. Die Zeitmarken sind bewusst fast gleich lang (Davor, Dabei,
+   Danach), damit die Textspalte daneben auf einer Kante steht. */
+.protokoll { display: flex; gap: 50px; align-items: stretch; min-height: 0; }
+.protokoll .liste { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.protokoll .zeile { display: flex; gap: 34px; align-items: center; padding: 34px 46px; border-bottom: 1px solid var(--hairline); }
+.protokoll .zeile:last-child { border-bottom: none; }
+.protokoll .wann {
+  font-size: 22px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--w-45); font-weight: 600; flex: 0 0 150px;
+}
+.protokoll .was { font-size: 33px; line-height: 1.35; }
+.protokoll .zeile.schluss .wann { color: var(--warn); }
+.protokoll .zeile.schluss .was { font-size: 44px; font-weight: 700; }
+.protokoll .beweis {
+  flex: 0 0 430px; border-radius: 26px; overflow: hidden;
+  border: 1px solid var(--hairline); position: relative; margin: 0;
+}
+.protokoll .beweis img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; }
+.protokoll .beweis figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 26px;
+  background: linear-gradient(0deg, rgba(3, 3, 9, .94), transparent);
+  font-size: 22px; color: var(--w-70);
+}
+
+/* ---------- Collage: echte Fotos, echte Menschen ----------
+   Drei mal drei Kacheln im Seitenverhältnis 3:2, enge Fugen, gleiche Rundung:
+   so lesen sich die neun Bilder als eine Fläche statt als Tabelle. */
+.collage {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  width: 100%; align-content: center;
+}
+.collage img {
+  width: 100%; aspect-ratio: 3 / 2; object-fit: cover; display: block;
+  border-radius: 12px; border: 1px solid var(--hairline);
+}
+
+/* ---------- Der Begleiter ----------
+   Freigestellt, deshalb ohne Rahmen und ohne Fläche: er steht einfach da. */
+.begleiter { position: absolute; z-index: 3; pointer-events: none; }
+.begleiter img { display: block; height: 100%; width: auto; }
+
+/* ---------- Die offiziellen EU-Zeichen plus QR ----------
+   Die Icons liegen als SVG in Weiß vor, deshalb brauchen sie keine Fläche
+   hinter sich. Der QR-Code bleibt bewusst dunkel auf hell: helle Module auf
+   dunklem Grund lesen ältere Scanner nicht zuverlässig, und dieser Code wird
+   im Saal vom Beamer abfotografiert. */
+.zeichen-reihe { display: flex; align-items: center; gap: 44px; }
+.zeichen-reihe .eu-icon { display: block; }
+.qr { display: flex; align-items: center; gap: 20px; }
+.qr img { width: 140px; height: 140px; display: block; border-radius: 12px; }
+.qr span { font-size: 22px; line-height: 1.35; color: var(--w-45); }
+
+/* ---------- Platzhalter für offene Punkte ---------- */
+.ph {
+  border: 2px dashed var(--hairline-stark); border-radius: 26px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 14px; color: var(--w-25); background: rgba(244, 246, 255, 0.02); padding: 40px;
+  text-align: center;
+}
+.ph .label { color: var(--w-25); font-size: 16px; letter-spacing: .2em; }
+.ph p { font-size: 26px; color: var(--w-45); margin: 0; max-width: 24em; line-height: 1.5; }
+
+/* ---------- Aufbau einer Folie ----------
+   Regel: erst die Headline, allein. Danach Segment für Segment, ein Klick je
+   Segment. Headline und Inhalt kommen nie zusammen.
+   Die Headline ist deshalb KEIN Fragment: sie würde sonst einen eigenen Klick
+   kosten und die Folie liefe leer an. Stattdessen läuft sie beim Blättern von
+   selbst ein, sobald die Folie steht. */
+.reveal .slides section.present .headline,
+.reveal .slides section.present .hero {
+  animation: kopf-ein .5s cubic-bezier(.2, .7, .3, 1) both;
+}
+@keyframes kopf-ein {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+/* Beim Zurückblättern und in der Übersicht stört das Einlaufen nur */
+.reveal.overview .headline, .reveal.overview .hero { animation: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal .slides section.present .headline,
+  .reveal .slides section.present .hero { animation: none; }
+}
+
+/* ---------- Fragmente ---------- */
+.reveal .fragment.fade-up { transform: translateY(14px); }
+.reveal .fragment.fade-up.visible { transform: translateY(0); }
+
+/* ---------- Utility ---------- */
+.reihe { display: flex; gap: 34px; }
+.spalte { display: flex; flex-direction: column; gap: 34px; }
+.wachsen { flex: 1; min-height: 0; }
+.mt-auto { margin-top: auto; }
+.mt { margin-top: 40px; }
+.zentriert { text-align: center; }
+.cyan { color: var(--cyan); }
+.warn { color: var(--warn); }
+.ok { color: var(--ok); }
+.limette { color: var(--limette); }
+.quelle { font-size: 19px; color: var(--w-25); letter-spacing: .04em; }
+
+/* ---------- Gastfarbe: Sparkassen-Rot ---------- */
+:root { --rot: #FF0000; --gold: #FFC531; }
+.rot { color: var(--rot); }
+.chrome-client img { height: calc(48px * var(--folie-skala, 1)); opacity: 1; }
+
+/* ---------- Titel: beide Logos unten links ---------- */
+.titel-logos { position: absolute; left: 130px; bottom: 96px; display: flex; align-items: center; gap: 34px; }
+.titel-logos img { height: 54px; display: block; }
+.titel-logos img.sparkasse { height: 64px; }
+.titel-x { font-size: 36px; color: var(--w-45); font-weight: 500; }
+.slide.rechts { align-items: flex-end; text-align: right; }
+.slide.rechts .titel-logos { left: auto; right: 130px; }
+.slide.rechts .bild-quelle { left: auto; right: 130px; }
+.reveal .slide-background[data-schleier="seite-rechts"]::after {
+  background:
+    linear-gradient(270deg, rgba(3, 3, 9, .97) 0%, rgba(3, 3, 9, .88) 38%, rgba(3, 3, 9, .35) 78%, rgba(3, 3, 9, .55) 100%),
+    linear-gradient(0deg, rgba(3, 3, 9, .7) 0%, transparent 45%);
+}
+
+/* ---------- Sechs Bausteine der RAKETE ----------
+   Jeder Buchstabe hat seine Farbe, damit die Runde ihn später auf der
+   Reparatur-Folie und in den Fall-PDFs wiedererkennt. */
+.b-ergebnis { color: var(--ok); }
+.b-ton { color: var(--gold); }
+.b-grenze { color: var(--rot); }
+.rakete { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 60px; width: 100%; }
+.rakete > div { display: grid; grid-template-columns: 96px 1fr; column-gap: 26px; padding: 30px 6px; border-bottom: 1px solid var(--hairline); align-items: start; }
+.rakete > div:nth-child(-n+3) { border-top: 1px solid var(--hairline); }
+.rakete .buchstabe { font-size: 92px; font-weight: 700; line-height: .9; letter-spacing: -.03em; }
+.rakete b { display: block; font-size: 34px; font-weight: 700; margin-bottom: 8px; }
+.rakete span { display: block; font-size: 25px; line-height: 1.45; color: var(--w-70); }
+
+/* ---------- Drei Antworten, Frage klein, Antwort groß ---------- */
+.antwort { padding: 36px 6px; }
+.antwort .label { display: block; margin-bottom: 12px; }
+.antwort p { font-size: 42px; font-weight: 600; line-height: 1.3; margin: 0; }
+
+/* ---------- Schutzstufen S1 bis S4 ---------- */
+.stufe { font-size: 74px; font-weight: 700; letter-spacing: -.03em; line-height: 1; margin-bottom: 14px; }
+.stufe-wohin { display: inline-block; margin-top: 18px; padding: 10px 18px; border-radius: 999px;
+  font-size: 21px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  border: 1px solid var(--hairline-stark); color: var(--weiss); }
+.stufe-wohin.beide { border-color: rgba(58, 210, 159, .5); color: var(--ok); }
+
+/* ---------- Die drei Fälle in ihren Farben ---------- */
+.ring.rot::before { background: conic-gradient(#ff8a8a, var(--rot) 45%, #b30000 75%, #ff8a8a); }
+.ring.blau::before { background: conic-gradient(#8fd4ff, var(--blau) 45%, #005f94 75%, #8fd4ff); }
+.ring.gruen::before { background: conic-gradient(#8fe9c9, var(--ok) 45%, #1e8f68 75%, #8fe9c9); }
+.fall-a { border-color: rgba(255, 0, 0, .35); }
+.fall-b { border-color: rgba(0, 159, 244, .45); }
+.fall-c { border-color: rgba(58, 210, 159, .45); }
+
+/* ---------- Zeitstrahl mit zwei Reihen à fünf ---------- */
+.strahl.zwei .strahl-reihe + .strahl-reihe { margin-top: 44px; }
+.strahl.zwei .strahl-linie { display: none; }
+.strahl.zwei .strahl-reihe { position: relative; }
+.strahl.zwei .strahl-reihe::before { content: ""; position: absolute; left: 0; right: 0; top: 76px; height: 2px;
+  background: linear-gradient(90deg, rgba(244,246,255,.18), var(--blau) 55%, var(--cyan)); }
+.strahl.zwei .strahl-jahr { margin-bottom: 14px; }
+.strahl.zwei .strahl-knoten { margin-bottom: 22px; }
+.strahl.zwei .strahl-text { font-size: 24px; }
+
+/* ---------- Zwei Zahlen nebeneinander (Tempo) ---------- */
+.tempo { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
+.tempo > div { padding: 40px 60px; text-align: center; }
+.tempo > div + div { border-left: 1px solid var(--hairline); }
+.tempo .zahl { font-size: 260px; font-weight: 700; line-height: 1; letter-spacing: -.04em; }
+.tempo .einheit { font-size: 40px; font-weight: 600; margin-top: 10px; }
+.tempo .was { font-size: 26px; color: var(--w-45); margin-top: 18px; }
+
+/* ---------- Vier Prompt-Typen ---------- */
+.typen { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; width: 100%; }
+.typen > div { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.typen img { height: 300px; width: auto; display: block; margin-bottom: 18px; }
+.typen h3 { font-size: 36px; font-weight: 700; margin: 0 0 12px; }
+.typen .prompt.klein { font-size: 23px; text-align: left; width: 100%; }
+.typen .plus, .typen .minus { font-size: 23px; line-height: 1.5; margin: 14px 0 0; text-align: left; width: 100%; }
+.typen .plus { color: var(--ok); }
+.typen .minus { color: var(--warn); }
+
+/* ---------- Slido-Kennung am Folienrand ---------- */
+.slido { position: absolute; right: 130px; top: 132px; display: flex; align-items: center; gap: 18px; }
+.slido img { width: 120px; height: 120px; border-radius: 12px; display: block; background: #fff; }
+.slido span { font-size: 20px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--w-45); }
+</style>
+</head>
+<body>
+
+<canvas id="kosmos"></canvas>
+<div class="nebel"></div>
+<div class="vignette"></div>
+
+<div class="chrome chrome-edge"><img src="assets/logos/edge-logo-white.png" alt="EDGE Digital"></div>
+<div class="chrome chrome-client"><img src="assets/logos/sparkasse-weiss.svg" alt="Sparkasse zu Lübeck"></div>
+<div class="chrome chrome-num" id="chrome-num"></div>
+
+<div class="reveal">
+<div class="slides">
+
+<!-- ============ 1: TITEL ============ -->
+<section data-chrome="aus">
+  <div class="slide" style="justify-content:center;position:relative;">
+    <div class="begleiter" style="right:150px;bottom:40px;height:760px;">
+      <img src="assets/images/sparky/hey.png" alt="">
+    </div>
+    <p class="label">Sparkasse zu Lübeck · 10. September 2026 · online</p>
+    <h1 class="hero gesetzt" style="font-size:168px;margin-top:26px;">KI-<span class="schimmer">Kompakt.</span></h1>
+    <p class="lead" style="font-size:42px;margin-top:6px;">Der S-KIPilot im Arbeitsalltag.</p>
+    <div class="titel-logos">
+      <img src="assets/logos/edge-logo-white.png" alt="EDGE Digital">
+      <span class="titel-x">×</span>
+      <img class="sparkasse" src="assets/logos/sparkasse-weiss.svg" alt="Sparkasse zu Lübeck">
+    </div>
+    <aside class="notes">
+      13:00. Emre begrüßt, Kamera an, Mikros aus. Ein Satz zum Ablauf, dann die Vorstellung.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 2: WER WIR SIND ============ -->
+<section>
+  <div class="slide">
+    <h2 class="headline">Moin. Wir sind <span class="schimmer">EDGE.</span></h2>
+    <div class="reihe wachsen" style="margin-top:26px;gap:60px;align-items:center;">
+      <div class="spalte" style="flex:0 0 540px;gap:40px;justify-content:center;">
+        <div class="kopf">
+          <div class="kopf-foto"><img src="assets/images/team/emre.png" alt="Emre Erdogan"></div>
+          <div>
+            <div class="kopf-name">Emre</div>
+            <div class="kopf-rolle">Geschäftsführer</div>
+          </div>
+        </div>
+        <div class="kopf">
+          <div class="kopf-foto"><img src="assets/images/team/edgar.png" alt="Edgar Paul-Ghazaryan"></div>
+          <div>
+            <div class="kopf-name">Eddie</div>
+            <div class="kopf-rolle">COO</div>
+          </div>
+        </div>
+        <p class="lead" style="font-size:30px;">KI aus Lübeck.<br>Für Deutschland.</p>
+      </div>
+      <div class="collage">
+        <img src="assets/images/collage/01.jpg" alt="">
+        <img src="assets/images/collage/02.jpg" alt="">
+        <img src="assets/images/collage/03.jpg" alt="">
+        <img src="assets/images/collage/04.jpg" alt="">
+        <img src="assets/images/collage/07.jpg" alt="">
+        <img src="assets/images/collage/05.jpg" alt="">
+        <img src="assets/images/collage/08.jpg" alt="">
+        <img src="assets/images/collage/06.jpg" alt="">
+        <img src="assets/images/collage/09.jpg" alt="">
+      </div>
+    </div>
+    <aside class="notes">
+      Zwei Minuten, über die Fotos erzählt. Alle 18 sind neu, also die volle Vorstellung.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 3: FAHRPLAN ============ -->
+<section>
+  <div class="slide">
+    <h2 class="headline">Der <span class="schimmer">Fahrplan.</span></h2>
+    <div class="gruppe-mittig wachsen">
+    <div class="spalten feld" style="grid-template-columns:repeat(3,1fr);padding:56px 52px;">
+      <div>
+        <span class="ring"><b>1</b></span>
+        <p class="label" style="margin:26px 0 10px;">13:10 bis 13:50</p>
+        <h3>Verstehen und Einordnen</h3>
+        <p>Was KI ist, was sie mit eurem Alltag macht, welche Daten wohin dürfen.</p>
+      </div>
+      <div>
+        <span class="ring"><b>2</b></span>
+        <p class="label" style="margin:26px 0 10px;">14:00 bis 15:00</p>
+        <h3>Üben und Können</h3>
+        <p>Prompt-Battle, die RAKETE, eine Reparatur live im S-KIPilot.</p>
+      </div>
+      <div>
+        <span class="ring"><b>3</b></span>
+        <p class="label" style="margin:26px 0 10px;">15:10 bis 16:30</p>
+        <h3>Vertiefen und Merken</h3>
+        <p>Drei Fälle in drei Gruppen, Kahoot, euer erster Prompt für morgen.</p>
+      </div>
+    </div>
+    <div class="takeaway mt-auto" style="padding-top:26px;">
+      <p>Zwei Pausen. Fragen jederzeit in den Chat.</p>
+    </div>
+    </div>
+    <aside class="notes">
+      Kurz: drei Blöcke, zwei Pausen (13:50 und 15:00). Alyssa sammelt Fragen im Chat.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 4: ERSTE FRAGE ============ -->
+<section>
+  <div class="slide" style="position:relative;">
+    <h2 class="headline">Erste Frage an <span class="schimmer">euch.</span></h2>
+    <div class="slido"><span>Slido</span><img src="assets/images/slido-qr.png" alt="Slido"></div>
+    <div class="begleiter" style="right:110px;bottom:0;height:560px;">
+      <img src="assets/images/sparky/ratlos.png" alt="">
+    </div>
+    <div class="gruppe-mittig wachsen" style="padding-right:560px;">
+      <p class="hero gesetzt" style="font-size:88px;text-transform:none;letter-spacing:-.02em;margin:0;">Wer hat den S-KIPilot<br>schon mal <span class="schimmer">geöffnet?</span></p>
+      <p class="lead" style="font-size:34px;margin-top:30px;">Handzeichen reicht. Slido geht auch.</p>
+    </div>
+    <aside class="notes">
+      Bei komplett neuen Leuten gehen wenige Hände hoch. Genau das ist der Aufhänger:
+      „Dann fangen wir ganz vorne an." Nicht bewerten, weitergehen.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 5: DIVIDER 1 ============ -->
+<section data-chrome="aus" data-background-image="assets/images/szenen/holstentor.jpg" data-background-size="cover" data-schleier="seite">
+  <div class="slide" style="justify-content:center;">
+    <span class="bild-quelle">Bild mit KI erstellt</span>
+    <p class="label">Block 1 · 13:10 bis 13:50</p>
+    <h2 class="hero gesetzt" style="font-size:118px;margin-top:26px;">Verstehen und<br><span class="schimmer">Einordnen.</span></h2>
+    <p class="divider-zeit">Was ist KI · Tempo · Werkzeuge · S1 bis S4 · EU AI Act</p>
+    <aside class="notes">Eddie übernimmt den Basisteil.</aside>
+  </div>
+</section>
+
+<!-- ============ 6: WAS IST KI ============ -->
+<section>
+  <div class="slide">
+    <h2 class="headline">Was ist KI <span class="schimmer">eigentlich?</span></h2>
+    <div class="gruppe-mittig wachsen">
+    <div class="feld" style="padding:60px 72px;">
+      <p style="font-size:44px;line-height:1.4;font-weight:500;margin:0;text-wrap:balance;">„Die Fähigkeit einer Maschine, menschliche Fähigkeiten wie logisches Denken, Lernen, Planen und Kreativität zu imitieren.“</p>
+      <p class="quelle" style="margin-top:24px;font-size:22px;">Europäisches Parlament, 2024</p>
+    </div>
+    <div class="spalten" style="grid-template-columns:repeat(3,1fr);margin-top:44px;">
+      <div><h3>Lernt aus Daten</h3><p>Milliarden Texte, keine Regeln von Hand.</p></div>
+      <div><h3>Erkennt Muster</h3><p>Was in einer Kundenmail steht, was fehlt.</p></div>
+      <div><h3>Erstellt Neues</h3><p>Texte, Zusammenfassungen, Vorschläge.</p></div>
+    </div>
+    <div class="takeaway mt-auto" style="padding-top:26px;">
+      <p>Das macht ChatGPT. Das macht euer S-KIPilot.</p>
+    </div>
+    </div>
+    <aside class="notes">
+      Die Definition einmal vorlesen, dann in Alltagssprache übersetzen. Der Takeaway
+      ist die Brücke zum Werkzeug, das sie schon im Haus haben.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 7: AKTUELLES ============ -->
+<section>
+  <div class="slide">
+    <h2 class="headline">Aktuelles aus der Welt der <span class="schimmer">KI.</span></h2>
+    <p class="label" style="margin-bottom:26px;">Stand September 2026</p>
+    <div class="spalten" style="grid-template-columns:repeat(3,1fr);">
+      <div>
+        <p class="label" style="color:var(--purple);margin-bottom:16px;">Global</p>
+        <h3>Neue Modelle im Wochentakt</h3>
+        <p>Claude Fable 5.1 am 1. September, Gemini 3.8 Flash am 2. September, GPT-6 ausgerollt. Jede Generation liest längere Dokumente und erledigt mehrstufige Aufgaben allein.</p>
+      </div>
+      <div>
+        <p class="label" style="color:var(--blau);margin-bottom:16px;">Recht</p>
+        <h3>EU AI Act, Stufe zwei</h3>
+        <p>Seit 2. August 2026: Wer mit einer KI chattet, muss das erfahren. KI-erzeugte Inhalte werden gekennzeichnet. Bestehende Systeme haben Frist bis 2. Dezember.</p>
+      </div>
+      <div>
+        <p class="label" style="color:var(--cyan);margin-bottom:16px;">Sparkasse</p>
+        <h3>S-KIPilot wächst</h3>
+        <p>Rund 150.000 Nutzer in der Gruppe. Outlook-Add-in, tiefere OSPlus-Anbindung, Gesprächsleitfäden aus dem Kundenprofil.</p>
+      </div>
+    </div>
+    <div class="ph mt-auto" style="padding:26px 40px;flex-direction:row;gap:30px;">
+      <span class="label">Platzhalter</span>
+      <p>Skippy-Updates aus dem Haus: kommen von Alyssa und Steffi, hier einsetzen.</p>
+    </div>
+    <aside class="notes">
+      Drei Spalten, drei Sätze. Die Modelle: nicht die Namen erklären, nur das Tempo.
+      Recht: Kennzeichnung gilt für uns alle, auch für ein KI-Bild im Intranet.
+      Sparkasse: hier die hauseigenen Skippy-Neuigkeiten von Alyssa und Steffi einbauen,
+      sobald sie da sind.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 8: VON TURING BIS HEUTE ============ -->
+<section>
+  <div class="slide">
+    <h2 class="headline">Von Turing bis <span class="schimmer">heute.</span></h2>
+    <div class="gruppe-mittig wachsen">
+    <div class="strahl zwei">
+      <div class="strahl-reihe">
+        <div class="strahl-punkt"><div class="strahl-jahr">1950</div><div class="strahl-knoten"></div><div class="strahl-text">Turing-Test: Können Maschinen&nbsp;denken?</div></div>
+        <div class="strahl-punkt"><div class="strahl-jahr">1956</div><div class="strahl-knoten"></div><div class="strahl-text">Dartmouth: der Begriff „KI“ entsteht</div></div>
+        <div class="strahl-punkt"><div class="strahl-jahr">1966</div><div class="strahl-knoten"></div><div class="strahl-text">ELIZA: der erste Chatbot spielt Therapeut</div></div>
+        <div class="strahl-punkt"><div class="strahl-jahr">1997</div><div class="strahl-knoten"></div><div class="strahl-text">Deep Blue schlägt Kasparow</div></div>
+        <div class="strahl-punkt"><div class="strahl-jahr">2011</div><div class="strahl-knoten"></div><div class="strahl-text">Watson gewinnt Jeopardy, Siri bekommt eine Stimme</div></div>
+      </div>
+      <div class="strahl-reihe">
+        <div class="strahl-punkt"><div class="strahl-jahr">2012</div><div class="strahl-knoten"></div><div class="strahl-text">AlexNet: Durchbruch bei der Bilderkennung</div></div>
+        <div class="strahl-punkt"><div class="strahl-jahr">2016</div><div class="strahl-knoten"></div><div class="strahl-text">AlphaGo schlägt Lee Sedol im Go</div></div>
+        <div class="strahl-punkt"><div class="strahl-jahr">2017</div><div class="strahl-knoten"></div><div class="strahl-text">Google erfindet den Transformer, die Basis für GPT</div></div>
+        <div class="strahl-punkt"><div class="strahl-jahr">2022</div><div class="strahl-knoten"></div><div class="strahl-text">ChatGPT: 100 Millionen Nutzer in zwei Monaten</div></div>
+        <div class="strahl-punkt jetzt"><div class="strahl-jahr">Heute</div><div class="strahl-knoten"></div><div class="strahl-text">Der S-KIPilot bei der Sparkasse</div></div>
+      </div>
+    </div>
+    </div>
+    <aside class="notes">
+      76 Jahre in einer Minute. Nur zwei Punkte ausspielen: 2017 (der Transformer, ohne
+      den es kein ChatGPT gäbe) und 2022 (die schnellste Verbreitung, die ein Produkt je
+      hatte). Der Rest ist Kulisse.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 9: DAS NEUE TEMPO ============ -->
+<section>
+  <div class="slide" style="position:relative;">
+    <h2 class="headline">Das neue <span class="schimmer">Tempo.</span></h2>
+    <p class="label" style="margin-bottom:10px;">Wie schnell verdoppelt sich die Leistung?</p>
+    <div class="begleiter" style="right:40px;bottom:0;height:520px;">
+      <img src="assets/images/sparky/rakete.png" alt="">
+    </div>
+    <div class="gruppe-mittig wachsen" style="padding-right:540px;">
+    <div class="tempo">
+      <div>
+        <p class="label">Klassische IT</p>
+        <div class="zahl" style="color:var(--w-45);">18</div>
+        <div class="einheit">Monate</div>
+        <div class="was">Moore’s Law</div>
+      </div>
+      <div>
+        <p class="label">KI</p>
+        <div class="zahl schimmer">6</div>
+        <div class="einheit">Monate</div>
+        <div class="was">Scaling Law</div>
+      </div>
+    </div>
+    </div>
+    <aside class="notes">
+      Dreimal so schnell. Was heute hakt, klappt nach dem nächsten Update. Deshalb
+      lernen wir heute das Fragen, nicht ein Tool.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 10: AUTOMATISIERUNG GEGEN ERWEITERUNG ============ -->
+<section>
+  <div class="slide">
+    <h2 class="headline">Der entscheidende <span class="schimmer">Unterschied.</span></h2>
+    <div class="gruppe-mittig wachsen">
+    <div class="gegen">
+      <div>
+        <span class="wertung" style="color:var(--w-45);">Automatisierung</span>
+        <div class="feld wachsen" style="display:flex;flex-direction:column;justify-content:center;gap:30px;padding:70px 60px;">
+          <p style="font-size:48px;font-weight:600;line-height:1.25;margin:0;">Die Maschine erledigt die Aufgabe statt euch.</p>
+          <p style="font-size:32px;color:var(--w-70);margin:0;line-height:1.5;">Überweisung, Kontostand, Dauerauftrag.<br>Regelbasiert, vorhersehbar, immer gleich.</p>
+        </div>
+      </div>
+      <div>
+        <span class="wertung gut">Erweiterung</span>
+        <div class="feld karte-gut wachsen" style="display:flex;flex-direction:column;justify-content:center;gap:30px;padding:70px 60px;">
+          <p style="font-size:48px;font-weight:600;line-height:1.25;margin:0;">Die KI arbeitet mit euch, ihr entscheidet.</p>
+          <p style="font-size:32px;color:var(--w-70);margin:0;line-height:1.5;">Der S-KIPilot entwirft die Mail, ihr prüft und schickt.<br>Mit Kontext, anpassbar, jedes Mal anders.</p>
+        </div>
+      </div>
+    </div>
+    <div class="takeaway mt-auto" style="padding-top:26px;">
+      <p>KI ersetzt euch nicht. Sie erweitert, was ihr schon könnt.</p>
+    </div>
+    </div>
+    <aside class="notes">
+      Links kennt jeder aus dem Online-Banking. Rechts ist der Workshop. Der Takeaway
+      ist der Satz, den sie nach Hause tragen sollen.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 11: BERECHTIGTE FRAGEN ============ -->
+<section>
+  <div class="slide" style="position:relative;">
+    <h2 class="headline">Berechtigte <span class="schimmer">Fragen.</span></h2>
+    <div class="begleiter" style="right:90px;bottom:0;height:520px;">
+      <img src="assets/images/sparky/nachdenken.png" alt="">
+    </div>
+    <div class="gruppe-mittig wachsen" style="padding-right:520px;">
+    <div class="zeilen feld" style="padding:10px 56px;">
+      <div class="antwort">
+        <span class="label">Nimmt KI mir den Job?</span>
+        <p>Sie nimmt euch das Tippen ab. Nicht das Entscheiden, nicht den Kunden.</p>
+      </div>
+      <div class="antwort">
+        <span class="label">Kann ich das lernen?</span>
+        <p>Wer eine Mail schreiben kann, kann das. Es ist ein Gespräch, kein Programmieren.</p>
+      </div>
+      <div class="antwort">
+        <span class="label">Ist das sicher?</span>
+        <p>Der S-KIPilot läuft in der FI-Umgebung. Draußen gilt: nur Öffentliches.</p>
+      </div>
+    </div>
+    </div>
+    <aside class="notes">
+      Die drei Fragen, die in jedem Raum kommen. Eddie beantwortet sie, bevor jemand sie
+      stellt. Nicht spalten, den Raum mitnehmen: „Routine wird schneller, Kundenzeit
+      wird mehr."
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 12: KI FÜR EUREN ALLTAG ============ -->
+<section>
+  <div class="slide" style="position:relative;">
+    <h2 class="headline">KI für euren <span class="schimmer">Alltag.</span></h2>
+    <div class="slido"><span>Slido</span><img src="assets/images/slido-qr.png" alt="Slido"></div>
+    <div class="gruppe-mittig wachsen">
+    <div class="spalten feld" style="grid-template-columns:repeat(3,1fr);padding:56px 52px;">
+      <div>
+        <div class="sp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#C15DE6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2Z"/><path d="M4 19a2 2 0 0 0 2 2h13"/><path d="M9 7h6M9 11h4"/></svg></div>
+        <h3>Wissen finden</h3>
+        <p>Der S-KIPilot liest euer ICM.<br>„Lampe kaputt, was tun?“</p>
+      </div>
+      <div>
+        <div class="sp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#009FF4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
+        <h3>Kommunikation</h3>
+        <p>Mails entwerfen, Notizen bündeln, Formulierungen glätten.</p>
+      </div>
+      <div>
+        <div class="sp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#00E2E2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 13h6M9 17h6M9 9h2"/></svg></div>
+        <h3>Prozesse</h3>
+        <p>Dokumente analysieren, Sachverhalte aufbereiten, Reports vorbereiten.</p>
+      </div>
+    </div>
+    <div class="takeaway mt-auto" style="padding-top:26px;">
+      <p>Wo seht ihr das größte Potenzial in eurem Alltag?</p>
+    </div>
+    </div>
+    <aside class="notes">
+      Slido-Wordcloud, zwei Minuten. Die Antworten kommen später wieder: bei „Mein erster
+      Prompt für morgen" sieht man, ob sich etwas bewegt hat.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 13: EURE WERKZEUGE ============ -->
+<section>
+  <div class="slide">
+    <h2 class="headline">Eure <span class="schimmer">Werkzeuge.</span></h2>
+    <div class="gruppe-mittig wachsen">
+    <div class="gegen">
+      <div>
+        <span class="wertung gut">S1 bis S4</span>
+        <div class="feld karte-gut wachsen" style="display:flex;flex-direction:column;gap:20px;">
+          <h3 style="font-size:52px;font-weight:700;margin:0;">S-KIPilot</h3>
+          <div class="zeilen mit-ikon" style="font-size:28px;">
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="#3ad29f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Chat, Web-Hilfe, Dokumentenanalyse</div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="#3ad29f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Internes Wissen aus dem ICM</div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="#3ad29f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Geschützte FI-Umgebung</div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="#3ad29f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Interne Dokumente erlaubt</div>
+          </div>
+          <p style="font-size:26px;color:var(--w-70);margin:auto 0 0;">Bei allem mit internen Daten die erste Wahl.</p>
+        </div>
+      </div>
+      <div>
+        <span class="wertung" style="color:var(--w-45);">Nur S1</span>
+        <div class="feld wachsen" style="display:flex;flex-direction:column;gap:20px;">
+          <h3 style="font-size:52px;font-weight:700;margin:0;">ChatGPT, Gemini, Copilot</h3>
+          <div class="zeilen mit-ikon" style="font-size:28px;">
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="#00E2E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Texte umformulieren und glätten</div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="#00E2E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Brainstorming, Ideen, Struktur</div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="#00E2E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Öffentliche Infos zusammenfassen</div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="#ff6b5e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>Keine internen Daten, keine Kundendaten</div>
+          </div>
+          <p style="font-size:26px;color:var(--w-70);margin:auto 0 0;">Im Browser freigeschaltet. Gerne nutzen.</p>
+        </div>
+      </div>
+    </div>
+    </div>
+    <aside class="notes">
+      Zwei Wege, ein Ziel. Die rechte Seite ist keine Verbotsfolie: die Tools sind
+      freigeschaltet, nur die Datenfrage entscheidet. Das kommt gleich als S1 bis S4.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 14: WELCHE DATEN WOHIN ============ -->
+<section>
+  <div class="slide" style="position:relative;">
+    <h2 class="headline">Welche Daten <span class="schimmer">wohin?</span></h2>
+    <div class="gruppe-mittig wachsen">
+    <div class="spalten feld" style="grid-template-columns:repeat(4,1fr);padding:56px 52px;align-items:stretch;">
+      <div>
+        <div class="stufe" style="color:var(--ok);">S1</div>
+        <h3>Öffentlich</h3>
+        <p>Produktinfos, Pressetexte, Konditionen von der Website.</p>
+        <span class="stufe-wohin beide">S-KIPilot + externe Tools</span>
+      </div>
+      <div>
+        <div class="stufe" style="color:var(--cyan);">S2</div>
+        <h3>Intern</h3>
+        <p>Arbeitsanweisungen, Prozessdoku, Rundschreiben.</p>
+        <span class="stufe-wohin">Nur S-KIPilot</span>
+      </div>
+      <div>
+        <div class="stufe" style="color:var(--blau);">S3</div>
+        <h3>Vertraulich</h3>
+        <p>Kundendaten, Kontodaten, Kreditentscheidungen.</p>
+        <span class="stufe-wohin">Nur S-KIPilot</span>
+      </div>
+      <div>
+        <div class="stufe" style="color:var(--purple);">S4</div>
+        <h3>Streng vertraulich</h3>
+        <p>Zugangsdaten, Prüfberichte, Sicherheitsarchitektur.</p>
+        <span class="stufe-wohin">Nur S-KIPilot</span>
+      </div>
+    </div>
+    <div class="takeaway mt-auto" style="padding-top:26px;">
+      <p>Nicht öffentlich? Dann S-KIPilot.</p>
+    </div>
+    </div>
+    <aside class="notes">
+      Die Faustregel reicht. Wer unsicher ist, nimmt den S-KIPilot, damit macht man
+      nie etwas falsch. Alle drei Fälle heute sind S1, das sagen wir bei der Übung noch mal.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 15: EU AI ACT ============ -->
+<section>
+  <div class="slide">
+    <h2 class="headline">EU AI Act, kurz und <span class="schimmer">knapp.</span></h2>
+    <div class="gruppe-mittig wachsen">
+    <div class="spalten" style="grid-template-columns:repeat(3,1fr);">
+      <div>
+        <p class="label" style="color:var(--warn);margin-bottom:14px;">Hochrisiko</p>
+        <h3>Kredit-Scoring, automatische Ablehnung</h3>
+        <p>Aufsicht und Transparenz, Frist bis Dezember 2027.</p>
+      </div>
+      <div>
+        <p class="label" style="color:var(--gold);margin-bottom:14px;">Transparenz</p>
+        <h3>Chatbots und KI-Inhalte</h3>
+        <p>Seit 2. August 2026: Kunden erfahren, dass sie mit KI reden. KI-Bilder und Texte werden gekennzeichnet.</p>
+      </div>
+      <div>
+        <p class="label" style="color:var(--ok);margin-bottom:14px;">Niedriges Risiko</p>
+        <h3>Der S-KIPilot als interner Assistent</h3>
+        <p>Niedrigste Stufe, solange die Daten im Haus bleiben.</p>
+      </div>
+    </div>
+    <div class="gegen" style="margin-top:44px;">
+      <div>
+        <span class="wertung gut">So ist es sicher</span>
+        <div class="prompt klein"><span>„Fasse die Kreditrichtlinie zusammen.“ <b>Im S-KIPilot.</b></span></div>
+        <div class="prompt klein" style="margin-top:14px;"><span>„Formuliere diesen Website-Text verständlicher.“ <b>In ChatGPT, weil S1.</b></span></div>
+      </div>
+      <div>
+        <span class="wertung schwach">So bitte nicht</span>
+        <div class="prompt klein" style="border-color:rgba(255,107,94,.4);background:rgba(255,107,94,.05);"><span>„ChatGPT, analysiere diese Kundenliste.“</span></div>
+        <p style="font-size:26px;color:var(--w-70);margin:14px 0 0;">Kundendaten im externen Tool. Das ist der Verstoß.</p>
+      </div>
+    </div>
+    </div>
+    <aside class="notes">
+      Kein Paragrafenritt. Drei Stufen, zwei Beispiele. Die Kennzeichnung gilt auch für
+      uns: das Holstentor-Bild von vorhin trägt sie.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 16: WO GEHT DIE REISE HIN ============ -->
+<section>
+  <div class="slide" style="position:relative;">
+    <h2 class="headline">Wo geht die Reise <span class="schimmer">hin?</span></h2>
+    <div class="begleiter" style="right:90px;bottom:0;height:540px;">
+      <img src="assets/images/sparky/fernglas.png" alt="">
+    </div>
+    <div class="gruppe-mittig wachsen" style="padding-right:520px;">
+    <div class="zeilen feld" style="padding:10px 56px;">
+      <div class="antwort">
+        <span class="label">Heute</span>
+        <p>Der S-KIPilot antwortet, fasst zusammen, sucht.</p>
+      </div>
+      <div class="antwort">
+        <span class="label">Morgen</span>
+        <p>Jedes Update macht ihn besser, schneller, genauer.</p>
+      </div>
+      <div class="antwort">
+        <span class="label">Übermorgen</span>
+        <p>KI tief in euren Prozessen. Sie meldet sich, bevor ihr fragt.</p>
+      </div>
+    </div>
+    <div class="takeaway mt-auto" style="padding-top:26px;">
+      <p>Wer heute gut fragt, profitiert von jedem Update automatisch.</p>
+    </div>
+    </div>
+    <aside class="notes">
+      Der Bogen zu Block 2: Prompting ist keine Eintagsfliege.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 17: PAUSE ============ -->
+<section data-chrome="aus" data-background-image="assets/images/szenen/tee.jpg" data-background-size="cover" data-schleier="seite">
+  <div class="slide" style="justify-content:center;">
+    <span class="bild-quelle">Bild mit KI erstellt</span>
+    <p class="label">13:50 bis 14:00</p>
+    <h2 class="hero gesetzt" style="font-size:150px;margin-top:26px;"><span class="schimmer">Pause.</span></h2>
+    <p class="lead" style="font-size:38px;">Kaffee holen. Um 14:00 geht es weiter.</p>
+    <aside class="notes">Timer im Chat posten. Kamera aus ist okay.</aside>
+  </div>
+</section>
+
+<!-- ============ 18: DIVIDER 2 ============ -->
+<section data-chrome="aus" data-background-image="assets/images/szenen/prompting.jpg" data-background-size="cover" data-schleier="seite">
+  <div class="slide" style="justify-content:center;">
+    <span class="bild-quelle">Bild mit KI erstellt</span>
+    <p class="label">Block 2 · 14:00 bis 15:00</p>
+    <h2 class="hero gesetzt" style="font-size:118px;margin-top:26px;">Üben und<br><span class="schimmer">Können.</span></h2>
+    <p class="divider-zeit">Prompt-Battle · Pizza · RAKETE · Live-Reparatur · Fördermittel</p>
+    <aside class="notes">Emre übernimmt. Der S-KIPilot ist im zweiten Fenster offen, eingeloggt, leerer Verlauf.</aside>
+  </div>
+</section>
+
+<!-- ============ 19: PROMPT-BATTLE ============ -->
+<section>
+  <div class="slide" style="position:relative;">
+    <h2 class="headline">Prompt-<span class="schimmer">Battle.</span></h2>
+    <div class="slido"><span>Slido</span><img src="assets/images/slido-qr.png" alt="Slido"></div>
+    <div class="begleiter" style="right:70px;bottom:0;height:520px;">
+      <img src="assets/images/sparky/megafon.png" alt="">
+    </div>
+    <div class="gruppe-mittig wachsen" style="padding-right:500px;">
+      <p class="label" style="margin-bottom:16px;">Die Aufgabe für alle 18</p>
+      <div class="prompt" style="font-size:36px;"><span>Erkläre einem Kunden in zwei Sätzen, was der S-KIPilot ist.</span></div>
+      <div class="zeilen" style="margin-top:34px;font-size:34px;font-weight:600;">
+        <div style="display:flex;align-items:center;gap:30px;"><span class="ring klein"><b>1</b></span>Jeder tippt seinen Prompt in den S-KIPilot</div>
+        <div style="display:flex;align-items:center;gap:30px;"><span class="ring klein"><b>2</b></span>Ergebnis in den Chat</div>
+        <div style="display:flex;align-items:center;gap:30px;"><span class="ring klein"><b>3</b></span>Voting per Slido. Dann sehen wir den Prompt dahinter.</div>
+      </div>
+      <p class="label" style="margin-top:30px;">10 Minuten</p>
+    </div>
+    <aside class="notes">
+      Der Aha-Moment, den keine Folie schafft: gleiche Aufgabe, 18 Prompts, 18 Ergebnisse.
+      Emre moderiert, Eddie sammelt drei Ergebnisse in Slido zum Voting. Beim Sieger
+      fragen: „Was hast du genau getippt?" Dann den Prompt im Chat zeigen.
+      Nicht bewerten, wer schlecht war. Nur zeigen, was der gute anders macht.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 20: MERKSATZ ============ -->
+<section data-chrome="aus" data-background-image="assets/images/szenen/buehne.jpg" data-background-size="cover" data-schleier="mittig">
+  <div class="slide mittig">
+    <span class="bild-quelle">Bild mit KI erstellt</span>
+    <h2 class="hero" style="font-size:96px;margin-bottom:14px;">Die KI liefert nicht schlecht.</h2>
+    <p class="hero schimmer" style="font-size:126px;margin:0;">Wir fragen schlecht.</p>
+    <aside class="notes">Nach dem Battle stehen lassen. Nicht erklären.</aside>
+  </div>
+</section>
+
+<!-- ============ 21: PIZZA ============ -->
+<section>
+  <div class="slide">
+    <h2 class="headline">Was ist ein <span class="schimmer">Prompt?</span></h2>
+    <div class="gruppe-mittig wachsen">
+    <div class="gegen" style="align-items:end;">
+      <div style="align-items:center;text-align:center;">
+        <img src="assets/images/sparky/pizza-schlecht.png" alt="" style="height:380px;width:auto;">
+        <div class="prompt klein" style="margin-top:26px;width:100%;"><span>„Eine Pizza bitte.“</span></div>
+        <p style="font-size:28px;color:var(--w-45);margin:16px 0 0;">Ihr bekommt irgendwas.</p>
+      </div>
+      <div style="align-items:center;text-align:center;">
+        <img src="assets/images/sparky/pizza-gut.png" alt="" style="height:380px;width:auto;">
+        <div class="prompt klein" style="margin-top:26px;width:100%;"><span>„Eine große Margherita, dünner Boden, extra Mozzarella, gut durchgebacken.“</span></div>
+        <p style="font-size:28px;color:var(--cyan);margin:16px 0 0;">Genau das, was ihr wollt.</p>
+      </div>
+    </div>
+    <div class="takeaway mt-auto" style="padding-top:26px;">
+      <p>Ein Prompt ist eure Bestellung. Je genauer, desto besser das Ergebnis.</p>
+    </div>
+    </div>
+    <aside class="notes">
+      Die Analogie aus allen bisherigen Runden. In zwei Sätzen erzählt, dann weiter.
+      Achtung: der Pizza-Roboter trägt die Fischbrötchen-Mütze aus dem Lübeck-Deck,
+      falls jemand fragt: das ist sein Cousin.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 22: SCHWACH GEGEN STARK ============ -->
+<section>
+  <div class="slide">
+    <h2 class="headline">Der Unterschied in der <span class="schimmer">Praxis.</span></h2>
+    <div class="gruppe-mittig wachsen">
+    <div class="gegen">
+      <div>
+        <span class="wertung schwach">Schwacher Prompt</span>
+        <div class="feld karte-schwach wachsen" style="display:flex;flex-direction:column;">
+          <div class="prompt"><span>Schreib eine E-Mail an einen Kunden.</span></div>
+          <p style="font-size:26px;color:var(--w-45);margin:18px 0 0;">Kein Wer, kein Warum, kein Wie.</p>
+          <div class="wortzahl schwach mt-auto"><span class="zahl">6</span><span class="was">Wörter</span></div>
+        </div>
+      </div>
+      <div>
+        <span class="wertung gut">Starker Prompt</span>
+        <div class="feld karte-gut wachsen" style="display:flex;flex-direction:column;">
+          <div class="prompt klein"><span><b>Du bist Kundenberater bei einer Sparkasse.</b> Schreibe eine Antwort-E-Mail an Herrn Müller. Bedanke dich für sein Feedback, zeige Verständnis und weise auf die Terminbuchung online hin. <b>Herr Müller hat sich über lange Wartezeiten in der Filiale beschwert.</b> Liefere eine fertige E-Mail mit Betreffzeile. <b>Wertschätzend, lösungsorientiert. Maximal 150 Wörter. Keine Schuldzuweisungen an Kollegen.</b></span></div>
+          <div class="wortzahl gut mt-auto"><span class="zahl">58</span><span class="was">Wörter</span></div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <aside class="notes">
+      Nicht vorlesen. Nur zeigen: links vier Sekunden Tipparbeit, rechts eine Minute,
+      und rechts kommt eine Mail raus, die man verschicken kann. Die fetten Stellen sind
+      die Bausteine der nächsten Folie.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 23: DIE RAKETE ============ -->
+<section>
+  <div class="slide" style="position:relative;">
+    <h2 class="headline">Die <span class="schimmer">RAKETE.</span></h2>
+    <div class="gruppe-mittig wachsen">
+    <div class="rakete">
+      <div class="fragment fade-up"><span class="buchstabe b-rolle">R</span><div><b>Rolle</b><span>„Du bist erfahrener Kundenberater bei einer Sparkasse.“</span></div></div>
+      <div class="fragment fade-up"><span class="buchstabe b-ziel">A</span><div><b>Auftrag</b><span>„Erstelle eine Gesprächsvorbereitung für morgen.“</span></div></div>
+      <div class="fragment fade-up"><span class="buchstabe b-kontext">K</span><div><b>Kontext</b><span>„Jahresgespräch, Kundin, 45, selbstständig im Einzelhandel.“</span></div></div>
+      <div class="fragment fade-up"><span class="buchstabe b-ergebnis">E</span><div><b>Ergebnis</b><span>„Halbe Seite, drei Abschnitte: Themen, Ansätze, Fragen.“</span></div></div>
+      <div class="fragment fade-up"><span class="buchstabe b-ton">T</span><div><b>Ton</b><span>„Kollegial und lösungsorientiert, nicht verkäuferisch.“</span></div></div>
+      <div class="fragment fade-up"><span class="buchstabe b-grenze">E</span><div><b>Einschränkung</b><span>„Keine Produktempfehlungen, nur Gesprächsansätze.“</span></div></div>
+    </div>
+    </div>
+    <aside class="notes">
+      Sechs Klicks, sechs Bausteine, jeder mit einem Satz. Das ist die eine Folie, die
+      auf jeder Fallkarte wiederkommt. Die Farben bleiben bis zum Schluss dieselben.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 24: LIVE-REPARATUR ============ -->
+<section>
+  <div class="slide" style="position:relative;">
+    <h2 class="headline">Live-<span class="schimmer">Reparatur.</span></h2>
+    <div class="slido"><span>Slido</span><img src="assets/images/slido-qr.png" alt="Slido"></div>
+    <div class="gruppe-mittig wachsen">
+    <div class="band">
+      <div class="station" style="flex:0 0 440px;">
+        <div class="station-kopf">
+          <span class="ring klein warn"><b>1</b></span>
+          <span class="label">Der Prompt, so wie er kommt</span>
+        </div>
+        <div class="feld wachsen" style="border-color:rgba(255,107,94,.25);justify-content:center;">
+          <p style="font-size:38px;font-weight:600;line-height:1.35;margin:0;">„Fass mir diese Unterlagen mal zusammen.“</p>
+        </div>
+      </div>
+      <svg class="pfeil-r" width="86" height="60" viewBox="0 0 86 60" fill="none">
+        <path d="M5 30h66M58 16l16 14-16 14" stroke="url(#r1a)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        <defs><linearGradient id="r1a" x1="0" y1="30" x2="86" y2="30" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#C15DE6"/><stop offset="1" stop-color="#009FF4"/></linearGradient></defs>
+      </svg>
+      <div class="station" style="flex:1;">
+        <div class="station-kopf">
+          <span class="ring klein"><b>2</b></span>
+          <span class="label">Ihr werft die Bausteine ein</span>
+        </div>
+        <div class="feld wachsen" style="gap:0;padding:14px 40px;">
+          <div class="zeilen" style="font-size:30px;">
+            <div style="display:flex;gap:24px;align-items:baseline;"><span class="baustein-kopf b-rolle" style="margin:0;flex:0 0 220px;">Rolle</span><span style="color:var(--w-45);">per Slido</span></div>
+            <div style="display:flex;gap:24px;align-items:baseline;"><span class="baustein-kopf b-ziel" style="margin:0;flex:0 0 220px;">Auftrag</span><span style="color:var(--w-45);">per Slido</span></div>
+            <div style="display:flex;gap:24px;align-items:baseline;"><span class="baustein-kopf b-kontext" style="margin:0;flex:0 0 220px;">Kontext</span><span style="color:var(--w-45);">per Slido</span></div>
+            <div style="display:flex;gap:24px;align-items:baseline;"><span class="baustein-kopf b-ergebnis" style="margin:0;flex:0 0 220px;">Ergebnis</span><span style="color:var(--w-45);">per Slido</span></div>
+            <div style="display:flex;gap:24px;align-items:baseline;"><span class="baustein-kopf b-ton" style="margin:0;flex:0 0 220px;">Ton</span><span style="color:var(--w-45);">per Slido</span></div>
+            <div style="display:flex;gap:24px;align-items:baseline;"><span class="baustein-kopf b-grenze" style="margin:0;flex:0 0 220px;">Einschränkung</span><span style="color:var(--w-45);">per Slido</span></div>
+          </div>
+        </div>
+      </div>
+      <svg class="pfeil-r" width="86" height="60" viewBox="0 0 86 60" fill="none">
+        <path d="M5 30h66M58 16l16 14-16 14" stroke="url(#r1b)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        <defs><linearGradient id="r1b" x1="0" y1="30" x2="86" y2="30" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#009FF4"/><stop offset="1" stop-color="#00E2E2"/></linearGradient></defs>
+      </svg>
+      <div class="station" style="flex:0 0 380px;">
+        <div class="station-kopf">
+          <span class="ring klein ok"><b>3</b></span>
+          <span class="label">Beide im S-KIPilot</span>
+        </div>
+        <div class="feld wachsen" style="border-color:rgba(58,210,159,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+          <p class="schimmer" style="font-size:220px;font-weight:700;line-height:1;margin:0;">?</p>
+          <p class="label" style="margin:0;color:var(--weiss);text-align:center;">Vorher gegen<br>nachher, live</p>
+        </div>
+      </div>
+    </div>
+    </div>
+    <aside class="notes">
+      Ersetzt die stille Einzelübung. Slido offene Frage: „Welchen Baustein gibst du dem
+      Prompt?" Eddie baut aus den Antworten live den Prompt zusammen, ein Satz je
+      Baustein, und lässt ihn im S-KIPilot laufen. Als Unterlage dient die
+      Fördermittel-Anfrage aus Fall C, die liegt im Zwischenspeicher. Davor einmal den
+      Original-Prompt laufen lassen, damit der Vergleich sitzt. Acht Minuten.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 25: LIVE-BEISPIEL FÖRDERMITTEL ============ -->
+<section>
+  <div class="slide">
+    <h2 class="headline">Live: Fördermittel mit <span class="schimmer">Web-Hilfe.</span></h2>
+    <div class="gruppe-mittig wachsen">
+    <div class="rakete">
+      <div><span class="buchstabe b-rolle">R</span><div><b>Rolle</b><span>Firmenkundenberater der Sparkasse zu Lübeck, Schwerpunkt Investitionsfinanzierung.</span></div></div>
+      <div><span class="buchstabe b-ziel">A</span><div><b>Auftrag</b><span>Recherchiere mit Web-Hilfe aktuelle Förderprogramme für eine Photovoltaikanlage auf einem Betriebsdach in Schleswig-Holstein.</span></div></div>
+      <div><span class="buchstabe b-kontext">K</span><div><b>Kontext</b><span>Produktionsbetrieb aus Lübeck, 40 Mitarbeitende, 1.200 Quadratmeter Dach, 200 Kilowatt-Peak, rund 220.000 Euro Investition.</span></div></div>
+      <div><span class="buchstabe b-ergebnis">E</span><div><b>Ergebnis</b><span>Tabelle: Programm, Geber, Förderart, Konditionen, Quelle. Darunter drei nächste Schritte.</span></div></div>
+      <div><span class="buchstabe b-ton">T</span><div><b>Ton</b><span>Sachlich, verständlich, ohne Fachjargon.</span></div></div>
+      <div><span class="buchstabe b-grenze">E</span><div><b>Einschränkung</b><span>Nur öffentliche Quellen mit Link. Unklares als „zu prüfen“ markieren. Keine Kreditzusage.</span></div></div>
+    </div>
+    <div class="takeaway mt-auto" style="padding-top:26px;">
+      <p>Web-Hilfe an, Quellen prüfen, dann erst dem Kunden schreiben.</p>
+    </div>
+    </div>
+    <aside class="notes">
+      Das Live-Beispiel passt zu Fall C, damit die Gruppe nachher weiß, wie es geht.
+      Eddie: Web-Hilfe einschalten, Prompt einfügen, eine halbe Minute warten, eine
+      Quelle anklicken. Wenn die KI ein Programm erfindet, ist das der Punkt: prüfen
+      bleibt euer Klick. Prompt liegt im Zwischenspeicher. Fünf Minuten.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 26: VIER TIPPS ============ -->
+<section>
+  <div class="slide" style="position:relative;">
+    <h2 class="headline">Vier Tipps für den <span class="schimmer">Alltag.</span></h2>
+    <div class="begleiter" style="right:70px;bottom:0;height:480px;">
+      <img src="assets/images/sparky/daumen.png" alt="">
+    </div>
+    <div class="gruppe-mittig wachsen" style="padding-right:460px;">
+    <div class="mitnehmen" style="grid-template-columns:1fr;gap:0;">
+      <div><span class="ring"><b>1</b></span><span class="satz">Nachbessern statt neu anfangen<small>„Kürzer.“ „Freundlicher.“ „Als Tabelle.“</small></span></div>
+      <div><span class="ring"><b>2</b></span><span class="satz">Beispiele mitgeben<small>„Hier ist eine Mail, die mir gefällt. Schreib in diesem Stil.“</small></span></div>
+      <div><span class="ring"><b>3</b></span><span class="satz">Perspektive wechseln<small>„Lies das aus Kundensicht. Was ist unklar?“</small></span></div>
+      <div><span class="ring"><b>4</b></span><span class="satz">Euren Ton mitgeben<small>„Ich schreibe direkt und unkompliziert.“</small></span></div>
+    </div>
+    </div>
+    <aside class="notes">
+      Abschluss von Block 2. Tipp 1 ist der wichtigste: der erste Prompt muss nicht
+      perfekt sein, die Folgefrage macht ihn gut.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 27: PAUSE 2 ============ -->
+<section data-chrome="aus" data-background-image="assets/images/szenen/tee.jpg" data-background-size="cover" data-schleier="seite">
+  <div class="slide" style="justify-content:center;">
+    <span class="bild-quelle">Bild mit KI erstellt</span>
+    <p class="label">15:00 bis 15:10</p>
+    <h2 class="hero gesetzt" style="font-size:150px;margin-top:26px;"><span class="schimmer">Pause.</span></h2>
+    <p class="lead" style="font-size:38px;">Kurz durchatmen. Der letzte Block wird praktisch.</p>
+    <aside class="notes">In der Pause: Breakout-Räume anlegen, Gruppensprecher stehen (Alyssa).</aside>
+  </div>
+</section>
+
+<!-- ============ 28: DIVIDER 3 ============ -->
+<section data-chrome="aus" data-background-image="assets/images/szenen/laptop-meeting.jpg" data-background-size="cover" data-schleier="seite">
+  <div class="slide" style="justify-content:center;">
+    <span class="bild-quelle">Bild mit KI erstellt</span>
+    <p class="label">Block 3 · 15:10 bis 16:30</p>
+    <h2 class="hero gesetzt" style="font-size:118px;margin-top:26px;">Vertiefen und<br><span class="schimmer">Merken.</span></h2>
+    <p class="divider-zeit">Drei Fälle · Präsentationen · Kahoot · Mein erster Prompt</p>
+    <aside class="notes">Beide vorne. Emre erklärt die Fälle, Eddie verteilt die PDFs im Chat.</aside>
+  </div>
+</section>
+
+<!-- ============ 29: HANDS-ON ============ -->
+<section>
+  <div class="slide">
+    <h2 class="headline">Jetzt seid ihr <span class="schimmer">dran.</span></h2>
+    <div class="gruppe-mittig wachsen">
+    <div class="spalten" style="grid-template-columns:repeat(3,1fr);align-items:stretch;">
+      <div>
+        <div class="station-kopf"><span class="ring rot"><b>A</b></span><span class="label">Kundencenter</span></div>
+        <div class="feld fall-a wachsen" style="margin-top:10px;">
+          <h3 style="font-size:38px;">Die verärgerte Kundenmail</h3>
+          <p style="font-size:27px;">Unerwartete Kontogebühr nach Produktwechsel, Kündigung angedroht.</p>
+          <p style="font-size:27px;margin-top:18px;color:var(--weiss);">Antwortmail plus Leitfaden für den Rückruf.</p>
+        </div>
+      </div>
+      <div>
+        <div class="station-kopf"><span class="ring blau"><b>B</b></span><span class="label">Vorstandsstab</span></div>
+        <div class="feld fall-b wachsen" style="margin-top:10px;">
+          <h3 style="font-size:38px;">Das FI-Rundschreiben</h3>
+          <p style="font-size:27px;">OSPlus-Release, neue Schritte bei Legitimation und Kontoeröffnung.</p>
+          <p style="font-size:27px;margin-top:18px;color:var(--weiss);">Management Summary plus Intranet-Meldung.</p>
+        </div>
+      </div>
+      <div>
+        <div class="station-kopf"><span class="ring gruen"><b>C</b></span><span class="label">Firmenkundencenter</span></div>
+        <div class="feld fall-c wachsen" style="margin-top:10px;">
+          <h3 style="font-size:38px;">Fördermittel für die PV-Anlage</h3>
+          <p style="font-size:27px;">Produktionsbetrieb fragt nach Finanzierung und Förderung.</p>
+          <p style="font-size:27px;margin-top:18px;color:var(--weiss);">Antwortmail mit Web-Hilfe, Optionen, nächste Schritte.</p>
+        </div>
+      </div>
+    </div>
+    <div class="takeaway mt-auto" style="padding-top:26px;">
+      <p>30 Minuten. Alles fiktiv, alles S1. Der Prompt ist euer Ergebnis.</p>
+    </div>
+    </div>
+    <aside class="notes">
+      Drei Sechsergruppen, Gruppensprecher hat Alyssa vorab benannt. Die PDFs liegen
+      im Chat, Fall B hat das Rundschreiben auf Seite 2. Die Farben der Ringe sind die
+      Farben der PDFs. Noch einmal sagen: keine echten Kundendaten, alles ist erfunden.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 30: BREAKOUT ============ -->
+<section data-chrome="aus">
+  <div class="slide" style="justify-content:center;position:relative;">
+    <div class="begleiter" style="right:110px;bottom:0;height:620px;">
+      <img src="assets/images/sparky/tippt.png" alt="">
+    </div>
+    <p class="label">15:10 bis 15:40</p>
+    <h2 class="hero gesetzt" style="font-size:118px;margin-top:20px;padding-right:700px;">Ab in die<br><span class="schimmer">Breakout-Räume.</span></h2>
+    <p class="divider-zeit">Zurück um 15:40</p>
+    <aside class="notes">
+      Emre und Eddie wandern durch die Räume, je zehn Minuten. Fünf Minuten vor Schluss
+      eine Nachricht in alle Räume.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 31: PRÄSENTATIONEN ============ -->
+<section>
+  <div class="slide" style="position:relative;">
+    <h2 class="headline">Zeigt uns euren <span class="schimmer">Prompt.</span></h2>
+    <div class="begleiter" style="right:80px;bottom:0;height:520px;">
+      <img src="assets/images/sparky/erklaert.png" alt="">
+    </div>
+    <div class="gruppe-mittig wachsen" style="padding-right:520px;">
+    <div class="zeilen feld" style="padding:20px 52px;">
+      <div style="display:flex;align-items:center;gap:44px;padding:36px 6px;">
+        <span class="ring rot"><b>A</b></span>
+        <span style="font-size:44px;font-weight:600;">Kundencenter</span>
+        <span class="label" style="margin-left:auto;">5 Minuten</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:44px;padding:36px 6px;">
+        <span class="ring blau"><b>B</b></span>
+        <span style="font-size:44px;font-weight:600;">Vorstandsstab</span>
+        <span class="label" style="margin-left:auto;">5 Minuten</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:44px;padding:36px 6px;">
+        <span class="ring gruen"><b>C</b></span>
+        <span style="font-size:44px;font-weight:600;">Firmenkundencenter</span>
+        <span class="label" style="margin-left:auto;">5 Minuten</span>
+      </div>
+    </div>
+    <div class="takeaway mt-auto" style="padding-top:26px;">
+      <p>Erst der Prompt, dann das Ergebnis.</p>
+    </div>
+    </div>
+    <aside class="notes">
+      15:40 bis 15:55. Der Sprecher teilt den Bildschirm. Nachfragen nur zum Prompt:
+      „Welchen Baustein habt ihr zuerst geändert?" Loben, was gut war, ein Hinweis pro
+      Gruppe, weiter.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 32: KAHOOT ============ -->
+<section>
+  <div class="slide" style="position:relative;">
+    <h2 class="headline">Quiz <span class="schimmer">Time.</span></h2>
+    <div class="begleiter" style="right:110px;bottom:0;height:560px;">
+      <img src="assets/images/sparky/highfive.png" alt="">
+    </div>
+    <div class="gruppe-mittig wachsen" style="padding-right:560px;">
+      <p class="hero gesetzt" style="font-size:120px;margin:0;">Kahoot.</p>
+      <p class="lead" style="font-size:38px;margin-top:20px;">Handy raus. Der Code kommt in den Chat.</p>
+      <div class="ph" style="margin-top:40px;width:420px;height:200px;padding:20px;">
+        <span class="label">Platzhalter</span>
+        <p>Kahoot-PIN und QR</p>
+      </div>
+    </div>
+    <aside class="notes">
+      15:55 bis 16:05. Zehn Fragen aus Block 1 und 2. Eddie hostet, Emre kommentiert.
+      Der Gewinn: eine Kleinigkeit von EDGE, mit Alyssa abstimmen.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 33: MEIN ERSTER PROMPT FÜR MORGEN ============ -->
+<section>
+  <div class="slide" style="position:relative;">
+    <h2 class="headline gesetzt">Mein erster Prompt<br>für <span class="schimmer">morgen.</span></h2>
+    <div class="slido"><span>Slido</span><img src="assets/images/slido-qr.png" alt="Slido"></div>
+    <div class="begleiter" style="right:90px;bottom:0;height:540px;">
+      <img src="assets/images/sparky/gluehbirne.png" alt="">
+    </div>
+    <div class="gruppe-mittig wachsen" style="padding-right:520px;">
+      <div class="prompt" style="font-size:36px;"><span>Welchen Prompt probierst du am nächsten Arbeitstag wirklich aus?</span></div>
+      <div class="zeilen" style="margin-top:34px;font-size:32px;color:var(--w-70);">
+        <div>Anonym per Slido, ein konkreter Fall aus eurem Alltag</div>
+        <div>Wir lesen ein paar vor</div>
+        <div>Ihr nehmt euren mit nach Hause</div>
+      </div>
+    </div>
+    <aside class="notes">
+      Der Transfer. Drei Minuten schreiben, dann liest Emre vier vor und sagt zu jedem
+      einen Satz, welcher Baustein ihn noch besser macht. Nebenbei sehen wir, wo das Haus
+      Potenzial sieht. Das Ergebnis geht nachher an Alyssa.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 34: PROMPT-TYPEN ============ -->
+<section>
+  <div class="slide">
+    <h2 class="headline">Welcher Prompt-Typ seid <span class="schimmer">ihr?</span></h2>
+    <div class="gruppe-mittig wachsen">
+    <div class="typen">
+      <div>
+        <img src="assets/images/sparky/persona-effizient.png" alt="">
+        <h3>Der Effiziente</h3>
+        <div class="prompt klein"><span>„Kurzfassung. Drei Sätze. Nur das Wichtigste.“</span></div>
+        <p class="plus">Schnell, klar, Zeit gespart</p>
+        <p class="minus">Wenig Kontext, Nachfragen nötig</p>
+      </div>
+      <div>
+        <img src="assets/images/sparky/persona-gruendlich.png" alt="">
+        <h3>Der Gründliche</h3>
+        <div class="prompt klein"><span>„Drei Perspektiven, Vor- und Nachteile jeder Option.“</span></div>
+        <p class="plus">Präzise, tief, viel Kontext</p>
+        <p class="minus">Lange Prompts, hoher Aufwand</p>
+      </div>
+      <div>
+        <img src="assets/images/sparky/persona-kreativ.png" alt="">
+        <h3>Der Kreative</h3>
+        <div class="prompt klein"><span>„Locker und mit Humor, zum Schmunzeln.“</span></div>
+        <p class="plus">Frischer Blick, neue Ansätze</p>
+        <p class="minus">Schwer steuerbar, Prüfung nötig</p>
+      </div>
+      <div>
+        <img src="assets/images/sparky/persona-strukturiert.png" alt="">
+        <h3>Der Strukturierte</h3>
+        <div class="prompt klein"><span>„Nummerierte Liste, genau fünf Punkte, je zwei Sätze.“</span></div>
+        <p class="plus">Klare Gliederung, sofort nutzbar</p>
+        <p class="minus">Starre Form, wenig Spielraum</p>
+      </div>
+    </div>
+    </div>
+    <aside class="notes">
+      Gleiche KI, vier Persönlichkeiten. Kurzer Spaß: „Wer erkennt sich?" Handzeichen.
+      Die Pointe: die besten Prompts mischen zwei Typen.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 35: DREI DINGE ============ -->
+<section>
+  <div class="slide" style="position:relative;">
+    <h2 class="headline">Drei Dinge zum <span class="schimmer">Merken.</span></h2>
+    <div class="begleiter" style="right:70px;bottom:0;height:500px;">
+      <img src="assets/images/sparky/checkliste.png" alt="">
+    </div>
+    <div class="gruppe-mittig wachsen" style="padding-right:480px;">
+    <div class="zeilen feld" style="padding:20px 52px;">
+      <div style="display:flex;align-items:center;gap:44px;padding:36px 6px;">
+        <span class="ring"><b>1</b></span>
+        <span style="font-size:44px;font-weight:600;">KI erweitert, was ihr schon könnt.</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:44px;padding:36px 6px;">
+        <span class="ring"><b>2</b></span>
+        <span style="font-size:44px;font-weight:600;">Gute Prompts machen den Unterschied.<br><small style="font-size:28px;color:var(--w-45);font-weight:500;">Rolle, Auftrag, Kontext, Ergebnis, Ton, Einschränkung.</small></span>
+      </div>
+      <div style="display:flex;align-items:center;gap:44px;padding:36px 6px;">
+        <span class="ring"><b>3</b></span>
+        <span style="font-size:44px;font-weight:600;">Behandelt die KI wie euren Azubi.</span>
+      </div>
+    </div>
+    </div>
+    <aside class="notes">
+      Punkt 3 ausspielen: ein Azubi macht Fehler, lernt dazu, wird jeden Tag besser.
+      Und man lässt ihn nichts allein rausschicken.
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 36: TRAUT EUCH ============ -->
+<section data-chrome="aus" data-background-image="assets/images/szenen/kundenkontakt.jpg" data-background-size="cover" data-schleier="mittig">
+  <div class="slide mittig">
+    <span class="bild-quelle">Bild mit KI erstellt</span>
+    <h2 class="hero" style="font-size:150px;margin-bottom:24px;">Traut <span class="schimmer">euch.</span></h2>
+    <p class="lead" style="font-size:40px;color:var(--weiss);">Morgen den S-KIPilot öffnen.<br>Mit dem einen Prompt anfangen.<br>Jeden Tag ein bisschen mutiger.</p>
+    <aside class="notes">Der Schluss. Kurz, dann die Dankefolie.</aside>
+  </div>
+</section>
+
+<!-- ============ 37: DANKE ============ -->
+<section data-chrome="aus">
+  <div class="slide" style="flex-direction:row;align-items:center;gap:90px;">
+    <div class="spalte" style="flex:1;gap:26px;justify-content:center;">
+      <img src="assets/logos/edge-logo-white.png" alt="EDGE Digital" style="height:110px;align-self:flex-start;margin-bottom:26px;">
+      <h2 class="hero gesetzt" style="font-size:100px;margin:0;">Danke fürs<br><span class="schimmer">Mitmachen.</span></h2>
+      <p class="lead" style="font-size:34px;margin-top:10px;">
+        EDGE Digital<br>
+        Fischstraße 16 · 23552 Lübeck
+      </p>
+      <p class="label" style="margin-top:34px;">Künstliche Intelligenz. Echte Wirkung.</p>
+    </div>
+    <div class="posting" style="flex:0 0 640px;">
+      <img src="assets/images/team-luebeck.jpg" alt="Das EDGE-Team über den Dächern von Lübeck" style="height:820px;object-fit:cover;object-position:center 30%;">
+    </div>
+    <aside class="notes">16:30. Stehen lassen, bis der letzte den Call verlässt.</aside>
+  </div>
+</section>
+
+</div>
+</div>
+
+<script src="vendor/reveal/reveal.js"></script>
+<script src="vendor/reveal/plugin/notes/notes.js"></script>
+<script>
+/* Standbild-Modus für Prüfläufe und den PDF-Export */
+if (new URLSearchParams(location.search).has('nofrag')) {
+  document.body.classList.add('standbild');
+}
+
+Reveal.initialize({
+  /* ?nofrag zeigt alle Einblendungen sofort: für die visuelle Prüfung und den PDF-Export */
+  fragments: !new URLSearchParams(location.search).has('nofrag'),
+  hash: true,
+  history: true,
+  transition: 'fade',
+  transitionSpeed: 'default',
+  backgroundTransition: 'none',
+  controls: true,
+  controlsLayout: 'bottom-right',
+  controlsTutorial: false,
+  progress: true,
+  slideNumber: false,
+  center: false,
+  width: 1920,
+  height: 1080,
+  margin: 0,
+  plugins: [RevealNotes]
+});
+
+/* Seitenzahl und Chrome: Titel- und Trennfolien (data-chrome="aus")
+   laufen ohne Logos und ohne Zähler. */
+var numEl = document.getElementById('chrome-num');
+function chromeUpdate() {
+  var idx = Reveal.getState().indexh;
+  var aktuelle = Reveal.getCurrentSlide();
+  var aus = aktuelle.dataset.chrome === 'aus';
+  document.body.classList.toggle('chrome-aus', aus);
+  document.body.classList.toggle('deckblatt', idx === 0);
+  /* Nur die nackte Zahl: 2, 3, 4. Kein Gesamtzähler, keine führende Null. */
+  numEl.textContent = String(idx + 1);
+}
+Reveal.on('ready', chromeUpdate);
+Reveal.on('slidechanged', chromeUpdate);
+
+/* Wo genau liegt die Bühne im Fenster? Reveal skaliert sie und zentriert sie,
+   sobald das Fenster nicht 16:9 ist. Die Logos sollen an der Folienkante
+   hängen, nicht am Fensterrand. */
+function chromeAusrichten() {
+  var s = document.querySelector('.reveal .slides');
+  if (!s) return;
+  var r = s.getBoundingClientRect();
+  var w = document.documentElement.style;
+  w.setProperty('--folie-links', Math.max(0, r.left) + 'px');
+  w.setProperty('--folie-rechts', Math.max(0, window.innerWidth - r.right) + 'px');
+  w.setProperty('--folie-oben', Math.max(0, r.top) + 'px');
+  w.setProperty('--folie-unten', Math.max(0, window.innerHeight - r.bottom) + 'px');
+  w.setProperty('--folie-skala', String(r.height / 1080));
+}
+/* Reveal legt für jede Folie ein eigenes Hintergrund-Element an, kopiert
+   aber nur seine eigenen data-background-Attribute dorthin. Die Angabe,
+   welcher Schleier über das Bild gehört, muss also von Hand hinüber. */
+function schleierKopieren() {
+  document.querySelectorAll('.reveal .slides section[data-schleier]').forEach(function (s) {
+    var bg = Reveal.getSlideBackground(s);
+    if (bg) bg.dataset.schleier = s.dataset.schleier;
+  });
+}
+Reveal.on('ready', schleierKopieren);
+Reveal.on('slidechanged', schleierKopieren);
+
+/* Trägt die Folie ein Vollbild, tritt die Galaxie dahinter zurück */
+function bildfolie() {
+  var s = Reveal.getCurrentSlide();
+  document.body.classList.toggle('bildfolie', !!(s && s.dataset.backgroundImage));
+}
+Reveal.on('ready', bildfolie);
+Reveal.on('slidechanged', bildfolie);
+
+Reveal.on('ready', chromeAusrichten);
+Reveal.on('resize', chromeAusrichten);
+window.addEventListener('resize', chromeAusrichten);
+
+/* Die Pizza baut sich auf, sobald ihre Folie steht. Der Aufbau läuft über
+   CSS-Transitions mit gestaffelter Verzögerung, nicht über Einzelbilder:
+   so kommt er auch dann an, wenn der Browser die Seite im Hintergrund hält
+   und Animationsbilder gar nicht erst anfordert. */
+function pizzaPruefen() {
+  var p = document.getElementById('pizza-gut');
+  if (!p) return;
+  var aufFolie = Reveal.getCurrentSlide().contains(p);
+  p.classList.toggle('fertig', aufFolie);
+}
+Reveal.on('ready', pizzaPruefen);
+Reveal.on('slidechanged', pizzaPruefen);
+
+/* Die beiden Wortzahlen zählen hoch, sobald ihr Segment erscheint. Der
+   Unterschied zwischen 4 und 61 wird dadurch körperlich spürbar: die eine
+   Zahl ist sofort fertig, die andere läuft. Über setInterval statt
+   requestAnimationFrame, weil der Browser Animationsbilder anhält, sobald
+   die Seite im Hintergrund liegt, Timer aber weiterlaufen. */
+function zahlHochzaehlen(el) {
+  if (el.dataset.gezaehlt) return;
+  el.dataset.gezaehlt = '1';
+  /* Zielwert einmal merken: wird beim Zurückblättern mitten im Lauf
+     abgebrochen, stünde sonst der halbe Zwischenstand als neues Ziel da. */
+  var ziel = parseInt(el.dataset.ziel || el.textContent, 10);
+  if (!ziel) return;
+  el.dataset.ziel = String(ziel);
+  var dauer = 340 + ziel * 9;     // grosse Zahlen laufen laenger
+  var start = null;
+  el.textContent = '0';
+  var takt = setInterval(function () {
+    start = (start || 0) + 40;
+    var anteil = Math.min(1, start / dauer);
+    /* am Ende auslaufen lassen, sonst wirkt der Stopp abgehackt */
+    var weich = 1 - Math.pow(1 - anteil, 3);
+    el.textContent = String(Math.round(ziel * weich));
+    if (anteil >= 1) clearInterval(takt);
+  }, 40);
+}
+Reveal.on('fragmentshown', function (e) {
+  var z = e.fragment.querySelector('.wortzahl .zahl');
+  if (z) zahlHochzaehlen(z);
+});
+/* Beim Zurückblättern wieder auf Anfang, damit der Effekt beim zweiten
+   Durchgang nicht fehlt. */
+Reveal.on('fragmenthidden', function (e) {
+  var z = e.fragment.querySelector('.wortzahl .zahl');
+  if (z) { delete z.dataset.gezaehlt; }
+});
+
+/* Sternschnuppen wie im EdgeVision-Wizard: alle 6,5 Sekunden eine,
+   hinter den Folien auf der Raum-Ebene. */
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  var nebel = document.querySelector('.nebel');
+  setInterval(function () {
+    if (document.hidden) return;
+    var s = document.createElement('div');
+    s.className = 'schnuppe';
+    s.style.top = (8 + Math.random() * 55) + 'vh';
+    s.style.left = (5 + Math.random() * 55) + 'vw';
+    s.style.setProperty('--wk', (18 + Math.random() * 24) + 'deg');
+    nebel.after(s);
+    setTimeout(function () { s.remove(); }, 1300);
+  }, 6500);
+}
+</script>
+<!-- Die Galaxie aus dem EdgeVision-Wizard: three.js-Spiralarme, Sternschichten,
+     Milchstraßenband, langsame Rotation. 2D-Sternenfeld als Rückfall.
+     Zuletzt geladen: die Folien stehen, bevor three.js überhaupt kommt. -->
+<script src="kosmos.js"></script>
+</body>
+</html>

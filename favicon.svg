@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1186 1354">
+<!-- EDGE-Würfel als Favicon.
+     Nachgezeichnet, nicht kopiert: das Markenzeichen besteht aus hauchdünnen
+     gefüllten Konturen, die bei 16 Pixeln verschwinden. Hier sind dieselben
+     Kanten als gestrichene Linien angelegt, Strichstärke 64 Einheiten. Bei
+     echten 16 Pixeln stehen damit alle Kanten, bei 32 bleibt der Würfel so
+     schlank wie im Original. Die Eckpunkte sind aus edge-cube.svg gemessen
+     (Mittellinie zwischen Außen- und Innenkontur). -->
+  <defs>
+    <linearGradient id="ec" x1="0" y1="200" x2="1186" y2="1100" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8f7dff"/>
+      <stop offset=".5" stop-color="#3fb8f0"/>
+      <stop offset="1" stop-color="#96ffff"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#ec)" stroke-width="64" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M592 49 L1120 327 L1120 994 L592 1272 L64 994 L64 327 Z"/>
+    <path d="M592 619 L64 327 M592 619 L1120 327 M592 619 L592 1272"/>
+  </g>
+</svg>

@@ -1,0 +1,17 @@
+{
+  "name": "cbl-aufgeweckt",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node pruefe.mjs",
+    "serve": "npx http-server -p 8080 -c-1",
+    "pdf": "npx decktape reveal --size 1920x1080 --pause 3000 --load-pause 3000 \"http://localhost:8080/?nofrag\" aufgeweckt-ki-klartext.pdf",
+    "pruefe": "node pruefe-folien.mjs http://localhost:8080 ./.pruefung",
+    "pruefe-karte": "node pruefe-karte.mjs ./.pruefung",
+    "pruefe-alles": "node pruefe-folien.mjs http://localhost:8080 ./.pruefung && node pruefe-ueberlappung.mjs http://localhost:8080 && node pruefe-verzerrung.mjs http://localhost:8080 && node pruefe-ausrichtung.mjs http://localhost:8080 && node pruefe-reihenfolge.mjs http://localhost:8080"
+  },
+  "devDependencies": {
+    "decktape": "^3.15.0",
+    "puppeteer": "^24.0.0"
+  }
+}
