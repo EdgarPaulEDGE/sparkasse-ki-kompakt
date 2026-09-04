@@ -106,7 +106,7 @@ zusatz = """
 /* ---------- Slido-Kennung am Folienrand ---------- */
 .slido { position: absolute; right: 130px; top: 132px; display: flex; align-items: center; gap: 18px; }
 .slido img { width: 120px; height: 120px; border-radius: 12px; display: block; background: #fff; }
-.slido span { font-size: 20px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--w-45); }
+.slido span { font-size: 20px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--w-45); text-align: right; line-height: 1.5; }
 
 /* ---------- Füllgrad: Inhalt trägt die Fläche, keine Luft um kleine Gruppen ---------- */
 .spalten h3 { font-size: 42px; }

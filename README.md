@@ -52,22 +52,23 @@ gebaut und per Background-Remover freigestellt worden.
 
 ## Was noch fehlt (Stand 04.09.2026)
 
-1. **Slido**: `assets/images/slido-qr.png` ist der Code vom Juni. Neues Event
-   anlegen, QR tauschen. Fünf Slido-Momente: Einstiegsfrage (4), Potenzial-
-   Wordcloud (12), Prompt-Battle-Voting (19), Live-Reparatur-Bausteine (24),
-   Mein erster Prompt (33). Der Slido-Admin lässt sich in Safari nicht per
-   DOM bedienen (die Karte „Create a slido“ reagiert nur auf echte Klicks),
-   deshalb im Chrome-Tab mit Claude in Chrome anlegen, sobald dort der Login
-   steht.
+1. **Slido** ist angelegt, zwei Events, weil der kostenlose Plan drei
+   Abfragen je Event erlaubt: **#9940537** (Folien 4, 12, 19: Einstiegsfrage,
+   Potenzial-Wordcloud, Prompt-Battle-Voting) und **#3748531** „Teil 2“
+   (Folien 24, 33: Live-Reparatur-Bausteine, Mein erster Prompt). QR-Codes
+   liegen in `assets/images/slido-1.png` und `slido-2.png`, mit zxingcpp
+   gegengelesen. Beim Battle die drei Optionen „Ergebnis 1 bis 3“ live
+   umbenennen. Ein Upgrade auf Engage würde beides in ein Event holen.
 2. **Kahoot** „KI-Kompakt Sparkasse zu Lübeck“ liegt im Kahoot-Konto
    (`create.kahoot.it/creator/1871ffde-06f3-448b-96e3-6b06f419230a`), zehn
    Fragen aus `kahoot/kahoot-ki-kompakt.xlsx`. Die richtige Antwort steht
    überall an Position 1, deshalb beim Hosten „Antworten mischen“ einschalten.
    PIN entsteht erst beim Hosten, Folie 32 bleibt bei „Code kommt in den Chat“.
-3. **Live-Momente einmal durchspielen**: Fördermittel-Prompt (25) mit
-   Web-Hilfe im S-KIPilot, Live-Reparatur (24) mit der Fördermittel-Anfrage
-   als Unterlage. Beide Prompts vorher in den Zwischenspeicher. Edgar hat
-   selbst keinen S-KIPilot-Zugang, also mit Alyssa abstimmen.
+3. **Live-Momente einmal in Claude durchspielen**: Fördermittel-Prompt (25)
+   mit Websuche, Live-Reparatur (24) mit der Fördermittel-Anfrage als
+   Unterlage. Beide Prompts vorher in den Zwischenspeicher. Die Demos laufen
+   in Claude, weil EDGE keinen S-KIPilot-Zugang hat; die Teilnehmenden
+   arbeiten in ihren Übungen im S-KIPilot.
 
 ## Kahoot
 

@@ -34,12 +34,12 @@ allein.
 
 **Live-Reparatur (24).** Ersetzt die stille Einzelübung vom Juni. Slido als
 offene Frage: „Welchen Baustein gibst du dem Prompt?" Eddie baut aus den
-Antworten live den Prompt, ein Satz je Baustein, in RAKETE-Reihenfolge. Erst
+Antworten live den Prompt, ein Satz je Baustein, in RAKETE-Reihenfolge, in Claude. Erst
 den Original-Prompt laufen lassen (das Ergebnis ist die Sorte Zusammenfassung,
 die niemand liest), dann den reparierten. Unterlage: die Fördermittel-Mail aus
 Fall C, liegt im Zwischenspeicher.
 
-**Fördermittel live (25).** Web-Hilfe einschalten, Prompt einfügen, eine halbe
+**Fördermittel live (25).** In Claude die Websuche einschalten, Prompt einfügen, eine halbe
 Minute warten, eine Quelle anklicken. Wenn die KI ein Programm erfindet, ist
 das der Punkt, nicht die Panne: prüfen bleibt euer Klick. Vorher einmal selbst
 durchspielen, damit man weiß, was kommt.
@@ -70,16 +70,16 @@ Workshop stattfindet.
 
 Battle ohne Slido: Ergebnisse im Chat lesen, Emre wählt zwei aus, Handzeichen
 im Call. Reparatur ohne Slido: Bausteine per Zuruf, Alyssa sammelt im Chat.
-S-KIPilot ohne Web-Hilfe: das Fördermittel-Ergebnis von der Probe als
+Claude ohne Netz: das Fördermittel-Ergebnis von der Probe als
 Screenshot zeigen, liegt im Ordner `backup/` (vor dem Termin anlegen).
 
 ## Checkliste vor dem Termin
 
 - Deck im Kiosk-Modus (`Vollbild starten.command` auf die lokale Adresse
   umstellen oder `F` im Browser), zweiter Bildschirm für die Redneransicht (S)
-- S-KIPilot im zweiten Fenster, eingeloggt, leerer Verlauf, Schriftgröße hoch
+- Claude im zweiten Fenster (Websuche verfügbar), eingeloggt, leerer Verlauf, Schriftgröße hoch. Die Live-Demos laufen in Claude, weil wir keinen S-KIPilot-Zugang haben; Teilnehmende arbeiten im S-KIPilot
 - Beide Live-Prompts (24 und 25) im Zwischenspeicher, Fördermittel-Mail dazu
-- Slido-Event mit fünf Fragen angelegt, QR auf den Folien getauscht
+- Slido: Event #9940537 (Block 1 und Battle) und #3748531 (Reparatur, Prompt für morgen) im Admin öffnen, beide auf „aktiv“; beim Battle die Optionen live nach den Chat-Ergebnissen benennen
 - Kahoot „KI-Kompakt Sparkasse zu Lübeck“ hosten, „Antworten mischen“ an, PIN in den Chat
 - Drei Fall-PDFs als Dateien im Chat vorbereitet, nicht erst in der Pause suchen
 - Breakout-Räume vorbelegt, Gruppensprecher von Alyssa benannt
