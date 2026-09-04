@@ -137,6 +137,11 @@ zusatz = """
 .stufe { font-size: 96px; }
 .stufe-wohin { font-size: 23px; margin-top: 24px; }
 .lead { font-size: 38px; }
+/* Folie 25: sechs lange Bausteine plus Takeaway, deshalb enger */
+.rakete.kompakt > div { padding: 22px 6px; grid-template-columns: 100px 1fr; }
+.rakete.kompakt .buchstabe { font-size: 96px; }
+.rakete.kompakt b { font-size: 34px; margin-bottom: 6px; }
+.rakete.kompakt span { font-size: 26px; line-height: 1.4; }
 </style>"""
 html = html.replace("</style>", zusatz, 1)
 
