@@ -156,7 +156,7 @@ def bauen(kennung, bloecke, anlage=None):
 HINWEISE = ("Denkt zum Beispiel an", [
     "R-A-K-E-T-E: Rolle, Auftrag, Kontext, Ergebnis, Ton, Einschränkung",
     "Der Prompt ist euer Ergebnis. Zeigt, WIE ihr gefragt habt.",
-    "Alles ist fiktiv und S1. Keine echten Kundendaten in den S-KIPilot.",
+    "Alles ist fiktiv. Bleibt bei den erfundenen Personen: Die Ergebnisse werden nachher im Plenum gezeigt.",
     "Eine Person aus eurer Gruppe präsentiert, fünf Minuten.",
 ])
 
