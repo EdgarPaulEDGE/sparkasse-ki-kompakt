@@ -59,7 +59,7 @@ Die beiden Pizza-Roboter auf Folie 21 sind am 04.09.2026 mit Higgsfield
 (Nano Banana Pro, Referenzen: `Sparky.png` plus die K64-Pizzabilder) neu
 gebaut und per Background-Remover freigestellt worden.
 
-## Was noch fehlt (Stand 04.09.2026)
+## Stand 05.09.2026
 
 1. **Slido** ist angelegt, zwei Events, weil der kostenlose Plan drei
    Abfragen je Event erlaubt: **#9940537** (Folien 4, 12, 19: Einstiegsfrage,
@@ -72,7 +72,7 @@ gebaut und per Background-Remover freigestellt worden.
    (`create.kahoot.it/creator/1871ffde-06f3-448b-96e3-6b06f419230a`), zehn
    Fragen aus `kahoot/kahoot-ki-kompakt.xlsx`. Die richtige Antwort steht
    überall an Position 1, deshalb beim Hosten „Antworten mischen“ einschalten.
-   PIN entsteht erst beim Hosten, Folie 32 bleibt bei „Code kommt in den Chat“.
+   PIN entsteht erst beim Hosten, Folie 32 zeigt kahoot.it und „Code kommt in den Chat“.
 3. **Live-Momente einmal in Claude durchspielen**: Fördermittel-Prompt (25)
    mit Websuche, Live-Reparatur (24) mit der Fördermittel-Anfrage als
    Unterlage. Beide Prompts vorher in den Zwischenspeicher. Die Demos laufen

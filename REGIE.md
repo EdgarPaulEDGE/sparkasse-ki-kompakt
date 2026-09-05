@@ -13,7 +13,7 @@ Alle 18 sind neu im Thema, deshalb bleibt der Basisteil komplett drin.
 | 14:00 | 18 bis 19 | Block 2: Prompt-Battle (10 Minuten) | Emre moderiert, Eddie sammelt |
 | 14:12 | 20 bis 23 | Merksatz, Pizza, schwach gegen stark, RAKETE | Emre |
 | 14:30 | 24 | Live-Reparatur per Slido (8 Minuten) | Eddie tippt, Emre moderiert |
-| 14:40 | 25 | Live: Fördermittel mit Web-Hilfe (5 Minuten) | Eddie |
+| 14:40 | 25 | Live: Fördermittel mit Websuche in Claude (5 Minuten) | Eddie |
 | 14:50 | 26 | Vier Tipps | Emre |
 | 15:00 | 27 | Pause, Breakout-Räume anlegen | |
 | 15:10 | 28 bis 30 | Block 3: Fälle erklären, PDFs in den Chat, Breakout | beide |
