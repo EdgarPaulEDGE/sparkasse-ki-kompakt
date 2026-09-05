@@ -7,11 +7,12 @@ Referenten: Emre Erdogan und Edgar Paul-Ghazaryan (Eddie).
 
 ## Live
 
-**https://edgarpauledge.github.io/sparkasse-ki-kompakt/**
+**https://kompakt.edge-digital.ai/**
 GitHub Pages aus `main`, Repo `EdgarPaulEDGE/sparkasse-ki-kompakt`, öffentlich.
-Jeder Push auf `main` geht in etwa einer Minute live. Eine eigene Adresse
-unter edge-digital.ai (wie `aufgeweckt.` und `ueberblick.`) braucht einen
-CNAME bei Wix, siehe README des K64-Decks; erst DNS, dann `CNAME`-Datei.
+Jeder Push auf `main` geht in etwa einer Minute live. Die alte Adresse
+`edgarpauledge.github.io/sparkasse-ki-kompakt/` leitet per 301 dorthin um.
+Der CNAME `kompakt` liegt in der Wix-DNS-Zone von edge-digital.ai (gesetzt am
+05.09.2026, Wix-Editor scrollt nur über die Scrollleiste, nicht per Mausrad).
 
 ## Bauweise
 
