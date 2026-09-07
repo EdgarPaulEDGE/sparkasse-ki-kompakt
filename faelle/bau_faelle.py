@@ -28,12 +28,12 @@ W, H = A4
 RAND = 18 * mm
 
 FAELLE = {
-    "A": dict(farbe=colors.HexColor("#FF3B3B"), bereich="Kundencenter",
+    "A": dict(farbe=colors.HexColor("#FF3B3B"), bereich="Privatkunden",
               titel="Die verärgerte Kundenmail",
-              datei="Fall_A_Kundencenter_Kundenmail.pdf"),
-    "B": dict(farbe=colors.HexColor("#3FB4FF"), bereich="Vorstandsstab",
+              datei="Fall_A_Privatkunden_Kundenmail.pdf"),
+    "B": dict(farbe=colors.HexColor("#3FB4FF"), bereich="Prozesse",
               titel="Das FI-Rundschreiben",
-              datei="Fall_B_Vorstandsstab_Rundschreiben.pdf"),
+              datei="Fall_B_Prozesse_Rundschreiben.pdf"),
     "C": dict(farbe=colors.HexColor("#3AD29F"), bereich="Firmenkundencenter",
               titel="Fördermittel für die PV-Anlage",
               datei="Fall_C_Firmenkundencenter_Foerdermittel.pdf"),
@@ -166,8 +166,8 @@ bauen("A", [
         "Herr Jansen ist seit 14 Jahren Kunde und hat im Juli auf Empfehlung eines Beraters vom "
         "Kontomodell „Giro Klassik“ auf „Giro Komfort“ gewechselt. Auf dem Augustauszug steht zum "
         "ersten Mal eine Kontoführungsgebühr von 9,90 Euro. Er hatte verstanden, das neue Modell sei "
-        "für ihn kostenlos. Heute Morgen kam seine Mail ins Kundencenter, und sie ist deutlich.")),
-    ("mail", (["Von: t.jansen@beispiel-mail.de", "An: kundencenter@sparkasse-luebeck.de",
+        "für ihn kostenlos. Heute Morgen kam seine Mail in der Privatkundenberatung an, und sie ist deutlich.")),
+    ("mail", (["Von: t.jansen@beispiel-mail.de", "An: privatkunden@sparkasse-luebeck.de",
                "Betreff: Kontoführungsgebühr?? Ich bin fassungslos"], [
         "Sehr geehrte Damen und Herren,",
         "im Juli hat mir Ihr Kollege den Wechsel auf Giro Komfort empfohlen. Kostenlos, hieß es, "
@@ -244,7 +244,7 @@ bauen("B", [
         "typischen Aufsichts- und Juristendeutsch. Der Vorstand will es in zwei Minuten erfassen, die "
         "Belegschaft will wissen, was sich für sie ändert. Beide aus derselben Quelle.")),
     ("kasten", ("Was ihr wisst", [
-        "Betroffen sind alle Geschäftsstellen, das Kundencenter und die Marktfolge. Die Rolle "
+        "Betroffen sind alle Geschäftsstellen, die Privatkundenberatung und die Marktfolge. Die Rolle "
         "„Legitimation Freigabe“ muss bis 15. Oktober vergeben sein, das Training steht ab "
         "1. Oktober bereit, Stichtag ist der 2. November 2026.",
         "Das Rundschreiben ist fiktiv und für die Übung geschrieben. Es enthält keine echten "

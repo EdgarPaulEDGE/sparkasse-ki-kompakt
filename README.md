@@ -103,8 +103,8 @@ Hintergrundbilder der Seitenleisten-Vorschau, nicht über den Editor.
 
 | Fall | Gruppe | Farbe | Aufgabe |
 |---|---|---|---|
-| A | Kundencenter | Rot | Verärgerte Kundenmail: Antwortmail + Leitfaden für den Rückruf |
-| B | Vorstandsstab | Blau | FI-Rundschreiben (Seite 2): Management Summary + Intranet-Meldung |
+| A | Privatkunden | Rot | Verärgerte Kundenmail: Antwortmail + Leitfaden für den Rückruf |
+| B | Prozesse | Blau | FI-Rundschreiben (Seite 2): Management Summary + Intranet-Meldung |
 | C | Firmenkundencenter | Grün | PV-Förderung mit Web-Hilfe: Antwortmail mit Optionen und nächsten Schritten |
 
 Alles fiktiv, alles S1. Firmen, Personen und das Rundschreiben 2026/41 sind
