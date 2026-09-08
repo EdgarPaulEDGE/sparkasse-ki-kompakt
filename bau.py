@@ -80,7 +80,11 @@ zusatz = """
 .strahl.zwei .strahl-linie { display: none; }
 .strahl.zwei .strahl-reihe { position: relative; }
 .strahl.zwei .strahl-reihe::before { content: ""; position: absolute; left: 0; right: 0; top: 76px; height: 2px;
-  background: linear-gradient(90deg, rgba(244,246,255,.18), var(--blau) 55%, var(--cyan)); }
+  background: linear-gradient(90deg, rgba(244,246,255,.18), var(--blau) 62%, var(--cyan)); }
+/* Die zweite Reihe wird von rechts nach links gelesen, deshalb läuft auch der
+   Verlauf andersherum: kräftig dort, wo die Leserichtung endet. */
+.strahl.zwei .strahl-reihe.rueck::before {
+  background: linear-gradient(270deg, var(--cyan), var(--blau) 38%, var(--cyan) 92%); }
 .strahl.zwei .strahl-jahr { margin-bottom: 14px; }
 .strahl.zwei .strahl-knoten { margin-bottom: 22px; }
 .strahl.zwei .strahl-text { font-size: 24px; }
@@ -104,7 +108,7 @@ zusatz = """
 .typen .minus { color: var(--warn); }
 
 /* ---------- Slido-Kennung am Folienrand ---------- */
-.slido { position: absolute; right: 130px; top: 176px; display: flex; align-items: center; gap: 18px; }
+.slido { position: absolute; right: 130px; top: 150px; display: flex; align-items: center; gap: 18px; }
 .slido img { width: 120px; height: 120px; border-radius: 12px; display: block; background: #fff; }
 .slido span { font-size: 20px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--w-45); text-align: right; line-height: 1.5; }
 
@@ -151,7 +155,7 @@ zusatz = """
 /* ---------- Zeitstrahl mit Begleiter je Station ---------- */
 .strahl-figur { height: 130px; margin: 18px auto 0; display: block; }
 .strahl.zwei .strahl-reihe { padding-bottom: 4px; }
-.strahl-wende { position: absolute; right: -34px; top: 62px; width: 60px; height: 190px; pointer-events: none; }
+.strahl-wende { position: absolute; right: -46px; top: 68px; width: 70px; height: 210px; pointer-events: none; }
 
 /* ---------- Nachrichtenkarten auf der Aktuelles-Folie ---------- */
 .news { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; width: 100%; }
@@ -187,6 +191,7 @@ zusatz = """
 
 /* ---------- Wachstumskurve: zwei Linien, eine zieht davon ---------- */
 .kurve { width: 100%; height: 470px; display: block; }
+.kurve.gross { height: 620px; }
 .kurve .achse { stroke: var(--hairline-stark); stroke-width: 2; }
 .kurve .linie { fill: none; stroke-width: 9; stroke-linecap: round; stroke-dasharray: 1800; stroke-dashoffset: 1800; }
 .reveal .slides section.present .kurve .linie { animation: kurve-zeichnen 2.6s cubic-bezier(.4,0,.2,1) forwards; }
@@ -200,6 +205,18 @@ zusatz = """
 @keyframes marke-ein { from { opacity: 0; } to { opacity: 1; } }
 body.standbild .kurve .linie { stroke-dashoffset: 0 !important; }
 body.standbild .kurve .marke, body.standbild .kurve .punkt { opacity: 1 !important; }
+
+/* ---------- Begleiter mit weicher Unterkante ----------
+   Mehrere Sparky-Bilder sind unten hart beschnitten (Torso endet mit gerader
+   Kante). Auf der Leinwand sieht das aus wie ein Fehler, besonders im Vollbild,
+   wo unter der Folie noch schwarzer Raum liegt. Die Maske lässt die Figur
+   stattdessen weich in den Raum auslaufen. Nur dort einsetzen, wo die Figur
+   wirklich beschnitten ist: bei einer stehenden Figur mit Füßen würde sie die
+   Beine wegblenden. */
+.begleiter.weich img {
+  -webkit-mask-image: linear-gradient(180deg, #000 74%, rgba(0,0,0,.55) 90%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 74%, rgba(0,0,0,.55) 90%, transparent 100%);
+}
 </style>"""
 html = html.replace("</style>", zusatz, 1)
 

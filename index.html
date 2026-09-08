@@ -652,7 +652,11 @@ body.bildfolie #kosmos, body.bildfolie .nebel, body.bildfolie .vignette { opacit
 .strahl.zwei .strahl-linie { display: none; }
 .strahl.zwei .strahl-reihe { position: relative; }
 .strahl.zwei .strahl-reihe::before { content: ""; position: absolute; left: 0; right: 0; top: 76px; height: 2px;
-  background: linear-gradient(90deg, rgba(244,246,255,.18), var(--blau) 55%, var(--cyan)); }
+  background: linear-gradient(90deg, rgba(244,246,255,.18), var(--blau) 62%, var(--cyan)); }
+/* Die zweite Reihe wird von rechts nach links gelesen, deshalb läuft auch der
+   Verlauf andersherum: kräftig dort, wo die Leserichtung endet. */
+.strahl.zwei .strahl-reihe.rueck::before {
+  background: linear-gradient(270deg, var(--cyan), var(--blau) 38%, var(--cyan) 92%); }
 .strahl.zwei .strahl-jahr { margin-bottom: 14px; }
 .strahl.zwei .strahl-knoten { margin-bottom: 22px; }
 .strahl.zwei .strahl-text { font-size: 24px; }
@@ -676,7 +680,7 @@ body.bildfolie #kosmos, body.bildfolie .nebel, body.bildfolie .vignette { opacit
 .typen .minus { color: var(--warn); }
 
 /* ---------- Slido-Kennung am Folienrand ---------- */
-.slido { position: absolute; right: 130px; top: 176px; display: flex; align-items: center; gap: 18px; }
+.slido { position: absolute; right: 130px; top: 150px; display: flex; align-items: center; gap: 18px; }
 .slido img { width: 120px; height: 120px; border-radius: 12px; display: block; background: #fff; }
 .slido span { font-size: 20px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--w-45); text-align: right; line-height: 1.5; }
 
@@ -723,7 +727,7 @@ body.bildfolie #kosmos, body.bildfolie .nebel, body.bildfolie .vignette { opacit
 /* ---------- Zeitstrahl mit Begleiter je Station ---------- */
 .strahl-figur { height: 130px; margin: 18px auto 0; display: block; }
 .strahl.zwei .strahl-reihe { padding-bottom: 4px; }
-.strahl-wende { position: absolute; right: -34px; top: 62px; width: 60px; height: 190px; pointer-events: none; }
+.strahl-wende { position: absolute; right: -46px; top: 68px; width: 70px; height: 210px; pointer-events: none; }
 
 /* ---------- Nachrichtenkarten auf der Aktuelles-Folie ---------- */
 .news { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; width: 100%; }
@@ -759,6 +763,7 @@ body.bildfolie #kosmos, body.bildfolie .nebel, body.bildfolie .vignette { opacit
 
 /* ---------- Wachstumskurve: zwei Linien, eine zieht davon ---------- */
 .kurve { width: 100%; height: 470px; display: block; }
+.kurve.gross { height: 620px; }
 .kurve .achse { stroke: var(--hairline-stark); stroke-width: 2; }
 .kurve .linie { fill: none; stroke-width: 9; stroke-linecap: round; stroke-dasharray: 1800; stroke-dashoffset: 1800; }
 .reveal .slides section.present .kurve .linie { animation: kurve-zeichnen 2.6s cubic-bezier(.4,0,.2,1) forwards; }
@@ -772,6 +777,18 @@ body.bildfolie #kosmos, body.bildfolie .nebel, body.bildfolie .vignette { opacit
 @keyframes marke-ein { from { opacity: 0; } to { opacity: 1; } }
 body.standbild .kurve .linie { stroke-dashoffset: 0 !important; }
 body.standbild .kurve .marke, body.standbild .kurve .punkt { opacity: 1 !important; }
+
+/* ---------- Begleiter mit weicher Unterkante ----------
+   Mehrere Sparky-Bilder sind unten hart beschnitten (Torso endet mit gerader
+   Kante). Auf der Leinwand sieht das aus wie ein Fehler, besonders im Vollbild,
+   wo unter der Folie noch schwarzer Raum liegt. Die Maske lässt die Figur
+   stattdessen weich in den Raum auslaufen. Nur dort einsetzen, wo die Figur
+   wirklich beschnitten ist: bei einer stehenden Figur mit Füßen würde sie die
+   Beine wegblenden. */
+.begleiter.weich img {
+  -webkit-mask-image: linear-gradient(180deg, #000 74%, rgba(0,0,0,.55) 90%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 74%, rgba(0,0,0,.55) 90%, transparent 100%);
+}
 </style>
 </head>
 <body>
@@ -886,7 +903,7 @@ body.standbild .kurve .marke, body.standbild .kurve .punkt { opacity: 1 !importa
   <div class="slide" style="position:relative;">
     <h2 class="headline">Erste Frage an <span class="schimmer">euch.</span></h2>
     <div class="slido"><span>Slido<br>#9940537</span><img src="assets/images/slido-1.png" alt="Slido"></div>
-    <div class="begleiter" style="right:110px;bottom:0;height:560px;">
+    <div class="begleiter weich" style="right:110px;bottom:0;height:580px;">
       <img src="assets/images/sparky/ratlos.png" alt="">
     </div>
     <div class="gruppe-mittig wachsen" style="padding-right:560px;">
@@ -981,19 +998,20 @@ body.standbild .kurve .marke, body.standbild .kurve .punkt { opacity: 1 !importa
         <div class="strahl-punkt"><div class="strahl-jahr">1966</div><div class="strahl-knoten"></div><div class="strahl-text"><b>ELIZA</b>: der erste Chatbot spielt Therapeut</div><img class="strahl-figur" src="assets/images/zeitstrahl/eliza.png" alt=""></div>
         <div class="strahl-punkt"><div class="strahl-jahr">1997</div><div class="strahl-knoten"></div><div class="strahl-text"><b>Deep Blue</b> schlägt Kasparow</div><img class="strahl-figur" src="assets/images/zeitstrahl/schach.png" alt=""></div>
         <div class="strahl-punkt"><div class="strahl-jahr">2011</div><div class="strahl-knoten"></div><div class="strahl-text"><b>Watson</b> gewinnt Jeopardy, <b>Siri</b> bekommt eine Stimme</div><img class="strahl-figur" src="assets/images/zeitstrahl/quiz.png" alt=""></div>
-        <svg class="strahl-wende" viewBox="0 0 60 190" fill="none"><path d="M2 6 h34 a18 18 0 0 1 18 18 v140 a18 18 0 0 1 -18 18 h-30" stroke="#00E2E2" stroke-width="3" stroke-linecap="round" stroke-dasharray="7 9" opacity=".55"/><path d="M14 172 l-12 10 12 10" stroke="#00E2E2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg>
+        <svg class="strahl-wende" viewBox="0 0 70 210" fill="none" aria-hidden="true"><path d="M0 8 h34 a20 20 0 0 1 20 20 v154 a20 20 0 0 1 -20 20 h-30" stroke="#00E2E2" stroke-width="4" stroke-linecap="round"/><path d="M16 190 l-14 12 14 12" stroke="#00E2E2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
-      <div class="strahl-reihe">
-        <div class="strahl-punkt"><div class="strahl-jahr">2012</div><div class="strahl-knoten"></div><div class="strahl-text"><b>AlexNet</b>: Durchbruch bei der Bilderkennung</div><img class="strahl-figur" src="assets/images/zeitstrahl/bilder.png" alt=""></div>
-        <div class="strahl-punkt"><div class="strahl-jahr">2016</div><div class="strahl-knoten"></div><div class="strahl-text"><b>AlphaGo</b> schlägt Lee Sedol im Go</div><img class="strahl-figur" src="assets/images/zeitstrahl/go.png" alt=""></div>
-        <div class="strahl-punkt"><div class="strahl-jahr">2017</div><div class="strahl-knoten"></div><div class="strahl-text">Google erfindet den <b>Transformer</b>, die Basis für GPT</div><img class="strahl-figur" src="assets/images/zeitstrahl/transformer.png" alt=""></div>
-        <div class="strahl-punkt"><div class="strahl-jahr">2022</div><div class="strahl-knoten"></div><div class="strahl-text"><b>ChatGPT</b>: 100 Millionen Nutzer in zwei Monaten</div><img class="strahl-figur" src="assets/images/zeitstrahl/chatgpt.png" alt=""></div>
+      <div class="strahl-reihe rueck">
         <div class="strahl-punkt jetzt"><div class="strahl-jahr">Heute</div><div class="strahl-knoten"></div><div class="strahl-text">Der <b>S-KIPilot</b> bei der Sparkasse</div><img class="strahl-figur" src="assets/images/sparky/daumen.png" alt=""></div>
+        <div class="strahl-punkt"><div class="strahl-jahr">2022</div><div class="strahl-knoten"></div><div class="strahl-text"><b>ChatGPT</b>: 100 Millionen Nutzer in zwei Monaten</div><img class="strahl-figur" src="assets/images/zeitstrahl/chatgpt.png" alt=""></div>
+        <div class="strahl-punkt"><div class="strahl-jahr">2017</div><div class="strahl-knoten"></div><div class="strahl-text">Google erfindet den <b>Transformer</b>, die Basis für GPT</div><img class="strahl-figur" src="assets/images/zeitstrahl/transformer.png" alt=""></div>
+        <div class="strahl-punkt"><div class="strahl-jahr">2016</div><div class="strahl-knoten"></div><div class="strahl-text"><b>AlphaGo</b> schlägt Lee Sedol im Go</div><img class="strahl-figur" src="assets/images/zeitstrahl/go.png" alt=""></div>
+        <div class="strahl-punkt"><div class="strahl-jahr">2012</div><div class="strahl-knoten"></div><div class="strahl-text"><b>AlexNet</b>: Durchbruch bei der Bilderkennung</div><img class="strahl-figur" src="assets/images/zeitstrahl/bilder.png" alt=""></div>
       </div>
     </div>
     </div>
     <aside class="notes">
-      76 Jahre in einer Minute, die Reihe läuft oben rechts nach unten weiter.
+      76 Jahre in einer Minute. Die Reihe läuft rechts außen nach unten und dann
+      zurück nach links, der Pfeil zeigt es.
       Nur zwei Punkte ausspielen: 2017 (der Transformer, ohne den es kein ChatGPT gäbe)
       und 2022 (die schnellste Verbreitung, die ein Produkt je hatte). Der Rest ist Kulisse.
     </aside>
@@ -1006,7 +1024,7 @@ body.standbild .kurve .marke, body.standbild .kurve .punkt { opacity: 1 !importa
     <h2 class="headline">Das neue <span class="schimmer">Tempo.</span></h2>
     <p class="label" style="margin-bottom:10px;">Leistung im Vergleich, zwei Jahre</p>
     <div class="gruppe-mittig wachsen">
-    <svg class="kurve" viewBox="0 0 1520 470" aria-hidden="true">
+    <svg class="kurve gross" viewBox="0 0 1520 470" aria-hidden="true">
       <defs>
         <linearGradient id="kiverlauf" x1="90" y1="400" x2="1150" y2="40" gradientUnits="userSpaceOnUse">
           <stop stop-color="#C15DE6"/><stop offset=".5" stop-color="#009FF4"/><stop offset="1" stop-color="#00E2E2"/>
@@ -1068,10 +1086,10 @@ body.standbild .kurve .marke, body.standbild .kurve .punkt { opacity: 1 !importa
 <section>
   <div class="slide" style="position:relative;">
     <h2 class="headline">Berechtigte <span class="schimmer">Fragen.</span></h2>
-    <div class="begleiter" style="right:20px;bottom:0;height:560px;">
+    <div class="begleiter weich" style="right:20px;bottom:0;height:620px;">
       <img src="assets/images/sparky/nachdenken.png" alt="">
     </div>
-    <div class="gruppe-mittig wachsen" style="padding-right:520px;">
+    <div class="gruppe-mittig wachsen" style="padding-right:520px;margin-top:40px;">
     <div class="zeilen feld" style="padding:10px 56px;">
       <div class="antwort">
         <span class="label">Nimmt KI mir den Job?</span>
@@ -1100,7 +1118,7 @@ body.standbild .kurve .marke, body.standbild .kurve .punkt { opacity: 1 !importa
   <div class="slide" style="position:relative;">
     <h2 class="headline">KI für euren <span class="schimmer">Alltag.</span></h2>
     <div class="slido"><span>Slido<br>#9940537</span><img src="assets/images/slido-1.png" alt="Slido"></div>
-    <div class="gruppe-mittig wachsen">
+    <div class="gruppe-mittig wachsen" style="margin-top:96px;">
     <div class="spalten feld" style="grid-template-columns:repeat(3,1fr);padding:56px 52px;">
       <div>
         <div class="sp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#C15DE6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2Z"/><path d="M4 19a2 2 0 0 0 2 2h13"/><path d="M9 7h6M9 11h4"/></svg></div>
@@ -1223,7 +1241,7 @@ body.standbild .kurve .marke, body.standbild .kurve .punkt { opacity: 1 !importa
       </div>
       <div class="zeilen" style="flex:1;">
         <div class="ampel-zeile">
-          <b><span class="warn">Hochrisiko:</span> Kredit-Scoring und automatische Ablehnung</b>
+          <b><span style="color:#ff6b5e;">Hochrisiko:</span> Kredit-Scoring und automatische Ablehnung</b>
           <span>Brauchen Aufsicht und Transparenz. Frist bis Dezember 2027.</span>
         </div>
         <div class="ampel-zeile">
@@ -1231,7 +1249,7 @@ body.standbild .kurve .marke, body.standbild .kurve .punkt { opacity: 1 !importa
           <span>Seit 2. August 2026 muss erkennbar sein, dass KI im Spiel ist.</span>
         </div>
         <div class="ampel-zeile">
-          <b><span class="ok">Niedriges Risiko:</span> der S-KIPilot im Haus</b>
+          <b><span style="color:#3ad29f;">Niedriges Risiko:</span> der S-KIPilot im Haus</b>
           <span>Die niedrigste Stufe, solange die Daten bei euch bleiben.</span>
         </div>
       </div>
@@ -1418,16 +1436,12 @@ body.standbild .kurve .marke, body.standbild .kurve .punkt { opacity: 1 !importa
           <span class="ring klein warn"><b>2</b></span>
           <span class="label">So fragen die meisten</span>
         </div>
-        <div class="feld karte-schwach" style="justify-content:center;">
-          <div class="prompt"><span>Fass mir diese Unterlagen mal zusammen.</span></div>
-        </div>
+        <div class="prompt" style="border-color:rgba(255,107,94,.4);background:rgba(255,107,94,.05);padding:34px 38px;"><span>Fass mir diese Unterlagen mal zusammen.</span></div>
         <div class="station-kopf" style="margin-top:26px;">
           <span class="ring klein ok"><b>3</b></span>
           <span class="label">So fragen wir gleich</span>
         </div>
-        <div class="feld karte-gut" style="justify-content:center;">
-          <div class="prompt klein"><span><b>Du bist Firmenkundenberater.</b> Fasse den Businessplan für mein Gespräch morgen zusammen. <b>Eine Seite: Vorhaben, drei Kennzahlen, fünf offene Fragen. Sachlich. Was fehlt, markierst du als offen.</b></span></div>
-        </div>
+        <div class="prompt" style="border-color:rgba(58,210,159,.42);background:rgba(58,210,159,.05);padding:34px 38px;font-size:27px;"><span><b>Du bist Firmenkundenberater.</b> Fasse den Businessplan für mein Gespräch morgen zusammen. <b>Eine Seite: Vorhaben, drei Kennzahlen, fünf offene Fragen. Sachlich. Was fehlt, markierst du als offen.</b></span></div>
       </div>
       <svg class="pfeil-r" width="86" height="60" viewBox="0 0 86 60" fill="none">
         <path d="M5 30h66M58 16l16 14-16 14" stroke="url(#z1b)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1589,7 +1603,7 @@ body.standbild .kurve .marke, body.standbild .kurve .punkt { opacity: 1 !importa
 <section>
   <div class="slide" style="position:relative;">
     <h2 class="headline">Quiz <span class="schimmer">Time.</span></h2>
-    <div class="begleiter" style="right:0;bottom:0;height:720px;">
+    <div class="begleiter weich" style="right:0;bottom:0;height:740px;">
       <img src="assets/images/sparky/highfive.png" alt="">
     </div>
     <div class="gruppe-mittig wachsen" style="padding-right:560px;">
@@ -1691,7 +1705,7 @@ body.standbild .kurve .marke, body.standbild .kurve .punkt { opacity: 1 !importa
   <div class="slide" style="position:relative;">
     <h2 class="headline">In einem Wort: Wie <span class="schimmer">war es?</span></h2>
     <div class="slido"><span>Slido<br>#9940537</span><img src="assets/images/slido-1.png" alt="Slido"></div>
-    <div class="begleiter" style="right:20px;bottom:0;height:520px;">
+    <div class="begleiter weich" style="right:20px;bottom:0;height:600px;">
       <img src="assets/images/sparky/herz.png" alt="">
     </div>
     <div class="gruppe-mittig wachsen" style="padding-right:520px;">
