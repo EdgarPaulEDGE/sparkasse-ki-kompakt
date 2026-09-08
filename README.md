@@ -81,9 +81,7 @@ Nachrichtenbilder für Folie 7 und zwei Szenen für Pause und Block-3-Auftakt
    Websuche auf Folie 24. Beide Prompts vorher in den Zwischenspeicher. Die
    Demos laufen in Claude, weil EDGE keinen S-KIPilot-Zugang hat; die
    Teilnehmenden arbeiten in ihren Übungen im S-KIPilot.
-4. **Chakiras Rollenbezeichnung** auf Folie 2 steht als „EDGE Team“ da,
-   weil nirgends etwas Genaueres dokumentiert ist. Bei Bedarf in
-   `folien.html` ersetzen.
+
 
 ## Kahoot
 
