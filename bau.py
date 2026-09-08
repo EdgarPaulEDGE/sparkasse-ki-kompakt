@@ -155,7 +155,9 @@ zusatz = """
 /* ---------- Zeitstrahl mit Begleiter je Station ---------- */
 .strahl-figur { height: 130px; margin: 18px auto 0; display: block; }
 .strahl.zwei .strahl-reihe { padding-bottom: 4px; }
-.strahl-wende { position: absolute; right: -46px; top: 68px; width: 70px; height: 210px; pointer-events: none; }
+/* Der Strich von 2011 hinunter zu 2012: rechts außen, gerade, ohne Rundung.
+   460px ist der gemessene Abstand der beiden Reihenlinien. */
+.strahl-wende { position: absolute; right: -10px; top: 76px; width: 20px; height: 460px; pointer-events: none; }
 
 /* ---------- Nachrichtenkarten auf der Aktuelles-Folie ---------- */
 .news { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; width: 100%; }
