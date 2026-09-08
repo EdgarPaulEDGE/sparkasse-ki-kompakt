@@ -157,7 +157,7 @@ zusatz = """
 .strahl.zwei .strahl-reihe { padding-bottom: 4px; }
 /* Der Strich von 2011 hinunter zu 2012: rechts außen, gerade, ohne Rundung.
    460px ist der gemessene Abstand der beiden Reihenlinien. */
-.strahl-wende { position: absolute; right: -1px; top: 76px; width: 20px; height: 458px; pointer-events: none; }
+.strahl-wende { position: absolute; right: -10px; top: 76px; width: 20px; height: 458px; pointer-events: none; }
 
 /* ---------- Nachrichtenkarten auf der Aktuelles-Folie ---------- */
 .news { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; width: 100%; }
@@ -180,16 +180,15 @@ zusatz = """
 .ampel-zeile b { font-size: 40px; font-weight: 700; display: block; margin-bottom: 10px; }
 .ampel-zeile span { font-size: 29px; line-height: 1.45; color: var(--w-70); }
 
-/* ---------- Drei Stufen als Treppe ---------- */
-.treppe { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; align-items: end; width: 100%; }
-.treppe > div { display: flex; flex-direction: column; justify-content: flex-end; }
-.treppe .stufe-block { border: 1px solid var(--hairline); border-radius: 24px; padding: 40px 36px;
-  background: rgba(8, 11, 22, .62); }
-.treppe .stufe-block h3 { font-size: 36px; font-weight: 700; margin: 0 0 14px; }
-.treppe .stufe-block p { font-size: 28px; line-height: 1.45; color: var(--w-70); margin: 0; }
-.treppe .h1 { height: 300px; } .treppe .h2 { height: 380px; } .treppe .h3 { height: 470px; }
-.treppe .zeit { font-weight: 700; font-size: 24px; letter-spacing: .16em; text-transform: uppercase;
-  margin-bottom: 18px; }
+/* ---------- Drei Stufen auf einer steigenden Linie ----------
+   Kein Kasten um die Stufen: die Steigung trägt die Aussage. Knoten und Text
+   liegen auf festen Koordinaten, damit beide auf derselben Achse sitzen. */
+.aufstieg { position: relative; width: 1220px; height: 580px; margin: 0 auto; }
+.aufstieg-linie { position: absolute; inset: 0; width: 100%; height: 100%; }
+.aufstieg .stufe { position: absolute; width: 360px; }
+.aufstieg .zeit { font-weight: 700; font-size: 24px; letter-spacing: .16em; text-transform: uppercase; margin: 0 0 14px; }
+.aufstieg .stufe h3 { font-size: 44px; font-weight: 700; margin: 0 0 14px; letter-spacing: -.01em; }
+.aufstieg .stufe p:last-child { font-size: 29px; line-height: 1.45; color: var(--w-70); margin: 0; }
 
 /* ---------- Wachstumskurve: zwei Linien, eine zieht davon ---------- */
 .kurve { width: 100%; height: 470px; display: block; }

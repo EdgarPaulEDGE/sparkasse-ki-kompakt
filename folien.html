@@ -461,36 +461,45 @@
 <section>
   <div class="slide" style="position:relative;">
     <h2 class="headline">Wo geht die Reise <span class="schimmer">hin?</span></h2>
-    <div class="begleiter" style="right:20px;bottom:0;height:520px;">
+    <div class="begleiter weich" style="right:0;bottom:0;height:560px;">
       <img src="assets/images/sparky/fernglas.png" alt="">
     </div>
-    <div class="gruppe-mittig wachsen" style="padding-right:460px;">
-    <div class="treppe">
-      <div>
-        <div class="stufe-block h1">
+    <div class="gruppe-mittig wachsen" style="padding-right:400px;">
+      <!-- Die drei Stufen sitzen als Knoten auf einer steigenden Linie. Kein
+           Kasten: die Steigung selbst ist die Aussage. Die Koordinaten sind
+           fest, damit Knoten und Text auf derselben Achse liegen. -->
+      <div class="aufstieg">
+        <svg class="aufstieg-linie" viewBox="0 0 1220 580" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="steig" x1="40" y1="330" x2="950" y2="90" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#C15DE6"/><stop offset=".5" stop-color="#009FF4"/><stop offset="1" stop-color="#00E2E2"/>
+            </linearGradient>
+          </defs>
+          <path d="M20 344 C 200 330, 300 246, 480 210 S 740 150, 950 84" stroke="url(#steig)" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="100" cy="332" r="13" fill="#C15DE6"/>
+          <circle cx="480" cy="210" r="13" fill="#009FF4"/>
+          <circle cx="860" cy="106" r="16" fill="#00E2E2"/>
+          <circle cx="860" cy="106" r="30" fill="none" stroke="#00E2E2" stroke-width="2" opacity=".4"/>
+        </svg>
+        <div class="stufe" style="left:80px;top:372px;">
           <p class="zeit" style="color:var(--purple);">Heute</p>
           <h3>Er antwortet</h3>
           <p>Fragen stellen, zusammenfassen, suchen.</p>
         </div>
-      </div>
-      <div>
-        <div class="stufe-block h2">
+        <div class="stufe" style="left:460px;top:250px;">
           <p class="zeit" style="color:var(--blau);">Morgen</p>
           <h3>Er wird besser</h3>
           <p>Jedes Update bringt mehr, ohne dass ihr etwas tun müsst.</p>
         </div>
-      </div>
-      <div>
-        <div class="stufe-block h3">
+        <div class="stufe" style="left:840px;top:146px;">
           <p class="zeit" style="color:var(--cyan);">Übermorgen</p>
           <h3>Er denkt mit</h3>
           <p>KI steckt in euren Prozessen und meldet sich, bevor ihr fragt.</p>
         </div>
       </div>
     </div>
-    </div>
     <aside class="notes">
-      Die Treppe steigt, das reicht als Bild. Der Bogen zu Block 2: wer heute gut fragt,
+      Die Linie steigt, das reicht als Bild. Der Bogen zu Block 2: wer heute gut fragt,
       profitiert von jedem Update automatisch. Prompting ist keine Eintagsfliege.
     </aside>
   </div>
