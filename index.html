@@ -657,8 +657,8 @@ body.bildfolie #kosmos, body.bildfolie .nebel, body.bildfolie .vignette { opacit
    Verlauf andersherum: kräftig dort, wo die Leserichtung endet. */
 .strahl.zwei .strahl-reihe.rueck::before {
   background: linear-gradient(270deg, var(--cyan), var(--blau) 38%, var(--cyan) 92%); }
-.strahl.zwei .strahl-jahr { margin-bottom: 14px; }
-.strahl.zwei .strahl-knoten { margin-bottom: 22px; }
+.strahl.zwei .strahl-jahr { margin-bottom: 10px; height: 50px; }
+.strahl.zwei .strahl-knoten { margin-bottom: 18px; }
 .strahl.zwei .strahl-text { font-size: 24px; }
 
 /* ---------- Zwei Zahlen nebeneinander (Tempo) ---------- */
@@ -704,7 +704,7 @@ body.bildfolie #kosmos, body.bildfolie .nebel, body.bildfolie .vignette { opacit
 .mitnehmen > div { padding: 34px 4px; }
 .mitnehmen .satz { font-size: 42px; }
 .mitnehmen .satz small { font-size: 30px; }
-.strahl.zwei .strahl-reihe + .strahl-reihe { margin-top: 80px; }
+.strahl.zwei .strahl-reihe + .strahl-reihe { margin-top: 48px; }
 .strahl.zwei .strahl-text { font-size: 27px; }
 .strahl.zwei .strahl-jahr { font-size: 46px; }
 .tempo .zahl { font-size: 320px; }
@@ -725,11 +725,12 @@ body.bildfolie #kosmos, body.bildfolie .nebel, body.bildfolie .vignette { opacit
   width: 300px; height: 300px; opacity: .30; pointer-events: none; }
 
 /* ---------- Zeitstrahl mit Begleiter je Station ---------- */
-.strahl-figur { height: 130px; margin: 18px auto 0; display: block; }
+.strahl-figur { height: 92px; margin: 12px auto 0; display: block; }
 .strahl.zwei .strahl-reihe { padding-bottom: 4px; }
 /* Der Strich von 2011 hinunter zu 2012: rechts außen, gerade, ohne Rundung.
-   460px ist der gemessene Abstand der beiden Reihenlinien. */
-.strahl-wende { position: absolute; right: -10px; top: 76px; width: 20px; height: 458px; pointer-events: none; }
+   367px ist der im Browser gemessene Abstand der beiden Reihenlinien; wer an
+   Figurengröße oder Reihenabstand dreht, misst neu und trägt den Wert hier ein. */
+.strahl-wende { position: absolute; right: -10px; top: 70px; width: 20px; height: 367px; pointer-events: none; }
 
 /* ---------- Nachrichtenkarten auf der Aktuelles-Folie ---------- */
 .news { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; width: 100%; }
@@ -757,10 +758,10 @@ body.bildfolie #kosmos, body.bildfolie .nebel, body.bildfolie .vignette { opacit
    liegen auf festen Koordinaten, damit beide auf derselben Achse sitzen. */
 .aufstieg { position: relative; width: 1220px; height: 580px; margin: 0 auto; }
 .aufstieg-linie { position: absolute; inset: 0; width: 100%; height: 100%; }
-.aufstieg .stufe { position: absolute; width: 360px; }
+.aufstieg .halt { position: absolute; width: 360px; font-weight: 400; letter-spacing: normal; }
 .aufstieg .zeit { font-weight: 700; font-size: 24px; letter-spacing: .16em; text-transform: uppercase; margin: 0 0 14px; }
-.aufstieg .stufe h3 { font-size: 44px; font-weight: 700; margin: 0 0 14px; letter-spacing: -.01em; }
-.aufstieg .stufe p:last-child { font-size: 29px; line-height: 1.45; color: var(--w-70); margin: 0; }
+.aufstieg .halt h3 { font-size: 44px; font-weight: 700; margin: 0 0 14px; letter-spacing: -.01em; }
+.aufstieg .halt p:last-child { font-size: 29px; line-height: 1.45; color: var(--w-70); margin: 0; }
 
 /* ---------- Wachstumskurve: zwei Linien, eine zieht davon ---------- */
 .kurve { width: 100%; height: 470px; display: block; }
@@ -991,7 +992,7 @@ body.standbild .kurve .marke, body.standbild .kurve .punkt { opacity: 1 !importa
 <section>
   <div class="slide">
     <h2 class="headline">Von Turing bis <span class="schimmer">heute.</span></h2>
-    <div class="gruppe-mittig wachsen">
+    <div class="gruppe-mittig wachsen" style="margin-top:56px;">
     <div class="strahl zwei">
       <div class="strahl-reihe">
         <div class="strahl-punkt"><div class="strahl-jahr">1950</div><div class="strahl-knoten"></div><div class="strahl-text"><b>Turing-Test</b>: Können Maschinen&nbsp;denken?</div><img class="strahl-figur" src="assets/images/zeitstrahl/turing.png" alt=""></div>
@@ -999,7 +1000,7 @@ body.standbild .kurve .marke, body.standbild .kurve .punkt { opacity: 1 !importa
         <div class="strahl-punkt"><div class="strahl-jahr">1966</div><div class="strahl-knoten"></div><div class="strahl-text"><b>ELIZA</b>: der erste Chatbot spielt Therapeut</div><img class="strahl-figur" src="assets/images/zeitstrahl/eliza.png" alt=""></div>
         <div class="strahl-punkt"><div class="strahl-jahr">1997</div><div class="strahl-knoten"></div><div class="strahl-text"><b>Deep Blue</b> schlägt Kasparow</div><img class="strahl-figur" src="assets/images/zeitstrahl/schach.png" alt=""></div>
         <div class="strahl-punkt"><div class="strahl-jahr">2011</div><div class="strahl-knoten"></div><div class="strahl-text"><b>Watson</b> gewinnt Jeopardy, <b>Siri</b> bekommt eine Stimme</div><img class="strahl-figur" src="assets/images/zeitstrahl/quiz.png" alt=""></div>
-        <svg class="strahl-wende" viewBox="0 0 20 460" fill="none" preserveAspectRatio="none" aria-hidden="true"><path d="M10 0 V460" stroke="#00E2E2" stroke-width="3"/></svg>
+        <svg class="strahl-wende" viewBox="0 0 20 367" fill="none" preserveAspectRatio="none" aria-hidden="true"><path d="M10 0 V367" stroke="#00E2E2" stroke-width="3"/></svg>
       </div>
       <div class="strahl-reihe rueck">
         <div class="strahl-punkt jetzt"><div class="strahl-jahr">Heute</div><div class="strahl-knoten"></div><div class="strahl-text">Der <b>S-KIPilot</b> bei der Sparkasse</div><img class="strahl-figur" src="assets/images/sparky/daumen.png" alt=""></div>
@@ -1288,17 +1289,17 @@ body.standbild .kurve .marke, body.standbild .kurve .punkt { opacity: 1 !importa
           <circle cx="860" cy="106" r="16" fill="#00E2E2"/>
           <circle cx="860" cy="106" r="30" fill="none" stroke="#00E2E2" stroke-width="2" opacity=".4"/>
         </svg>
-        <div class="stufe" style="left:80px;top:372px;">
+        <div class="halt" style="left:80px;top:372px;">
           <p class="zeit" style="color:var(--purple);">Heute</p>
           <h3>Er antwortet</h3>
           <p>Fragen stellen, zusammenfassen, suchen.</p>
         </div>
-        <div class="stufe" style="left:460px;top:250px;">
+        <div class="halt" style="left:460px;top:250px;">
           <p class="zeit" style="color:var(--blau);">Morgen</p>
           <h3>Er wird besser</h3>
           <p>Jedes Update bringt mehr, ohne dass ihr etwas tun müsst.</p>
         </div>
-        <div class="stufe" style="left:840px;top:146px;">
+        <div class="halt" style="left:840px;top:146px;">
           <p class="zeit" style="color:var(--cyan);">Übermorgen</p>
           <h3>Er denkt mit</h3>
           <p>KI steckt in euren Prozessen und meldet sich, bevor ihr fragt.</p>

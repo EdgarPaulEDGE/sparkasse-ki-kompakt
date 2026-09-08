@@ -85,8 +85,8 @@ zusatz = """
    Verlauf andersherum: kräftig dort, wo die Leserichtung endet. */
 .strahl.zwei .strahl-reihe.rueck::before {
   background: linear-gradient(270deg, var(--cyan), var(--blau) 38%, var(--cyan) 92%); }
-.strahl.zwei .strahl-jahr { margin-bottom: 14px; }
-.strahl.zwei .strahl-knoten { margin-bottom: 22px; }
+.strahl.zwei .strahl-jahr { margin-bottom: 10px; height: 50px; }
+.strahl.zwei .strahl-knoten { margin-bottom: 18px; }
 .strahl.zwei .strahl-text { font-size: 24px; }
 
 /* ---------- Zwei Zahlen nebeneinander (Tempo) ---------- */
@@ -132,7 +132,7 @@ zusatz = """
 .mitnehmen > div { padding: 34px 4px; }
 .mitnehmen .satz { font-size: 42px; }
 .mitnehmen .satz small { font-size: 30px; }
-.strahl.zwei .strahl-reihe + .strahl-reihe { margin-top: 80px; }
+.strahl.zwei .strahl-reihe + .strahl-reihe { margin-top: 48px; }
 .strahl.zwei .strahl-text { font-size: 27px; }
 .strahl.zwei .strahl-jahr { font-size: 46px; }
 .tempo .zahl { font-size: 320px; }
@@ -153,11 +153,12 @@ zusatz = """
   width: 300px; height: 300px; opacity: .30; pointer-events: none; }
 
 /* ---------- Zeitstrahl mit Begleiter je Station ---------- */
-.strahl-figur { height: 130px; margin: 18px auto 0; display: block; }
+.strahl-figur { height: 92px; margin: 12px auto 0; display: block; }
 .strahl.zwei .strahl-reihe { padding-bottom: 4px; }
 /* Der Strich von 2011 hinunter zu 2012: rechts außen, gerade, ohne Rundung.
-   460px ist der gemessene Abstand der beiden Reihenlinien. */
-.strahl-wende { position: absolute; right: -10px; top: 76px; width: 20px; height: 458px; pointer-events: none; }
+   367px ist der im Browser gemessene Abstand der beiden Reihenlinien; wer an
+   Figurengröße oder Reihenabstand dreht, misst neu und trägt den Wert hier ein. */
+.strahl-wende { position: absolute; right: -10px; top: 70px; width: 20px; height: 367px; pointer-events: none; }
 
 /* ---------- Nachrichtenkarten auf der Aktuelles-Folie ---------- */
 .news { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; width: 100%; }
@@ -185,10 +186,10 @@ zusatz = """
    liegen auf festen Koordinaten, damit beide auf derselben Achse sitzen. */
 .aufstieg { position: relative; width: 1220px; height: 580px; margin: 0 auto; }
 .aufstieg-linie { position: absolute; inset: 0; width: 100%; height: 100%; }
-.aufstieg .stufe { position: absolute; width: 360px; }
+.aufstieg .halt { position: absolute; width: 360px; font-weight: 400; letter-spacing: normal; }
 .aufstieg .zeit { font-weight: 700; font-size: 24px; letter-spacing: .16em; text-transform: uppercase; margin: 0 0 14px; }
-.aufstieg .stufe h3 { font-size: 44px; font-weight: 700; margin: 0 0 14px; letter-spacing: -.01em; }
-.aufstieg .stufe p:last-child { font-size: 29px; line-height: 1.45; color: var(--w-70); margin: 0; }
+.aufstieg .halt h3 { font-size: 44px; font-weight: 700; margin: 0 0 14px; letter-spacing: -.01em; }
+.aufstieg .halt p:last-child { font-size: 29px; line-height: 1.45; color: var(--w-70); margin: 0; }
 
 /* ---------- Wachstumskurve: zwei Linien, eine zieht davon ---------- */
 .kurve { width: 100%; height: 470px; display: block; }
