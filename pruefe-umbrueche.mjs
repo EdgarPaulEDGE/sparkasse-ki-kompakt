@@ -3,7 +3,7 @@ import puppeteer from "puppeteer";
 const b = await puppeteer.launch();
 const s = await b.newPage();
 await s.setViewport({ width: 1920, height: 1080 });
-await s.goto("http://localhost:8150/?nofrag", { waitUntil: "networkidle0" });
+await s.goto("http://localhost:8171/?nofrag", { waitUntil: "networkidle0" });
 await s.evaluate(() => document.fonts.ready);
 await s.evaluate(() => Reveal.configure({ transition: "none" }));
 await new Promise((r) => setTimeout(r, 1200));
