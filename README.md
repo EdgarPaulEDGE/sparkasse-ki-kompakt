@@ -3,7 +3,8 @@
 Workshop von EDGE Digital für die **Sparkasse zu Lübeck**, online,
 **10. September 2026, 13:00 bis 16:30 Uhr**. 18 Teilnehmende in drei
 Sechsergruppen, alle neu im Thema. 35 Folien plus drei Fall-PDFs.
-Vor Ort: Emre Erdogan, Edgar Paul-Ghazaryan (Eddie) und Chakira Kambara.
+Vor Ort: Edgar Paul-Ghazaryan (Eddie, COO) und Chakira Kambara
+(AI Social Media Managerin). Emre ist an dem Tag nicht dabei.
 
 ## Live
 

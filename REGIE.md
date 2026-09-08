@@ -8,20 +8,20 @@ Alle 18 sind neu im Thema, deshalb bleibt der Basisteil komplett drin.
 
 | Zeit | Folien | Block | Wer |
 |---|---|---|---|
-| 13:00 | 1 bis 4 | Ankommen, Team, Fahrplan, Slido-Einstiegsfrage | Emre |
+| 13:00 | 1 bis 4 | Ankommen, Team, Fahrplan, Slido-Einstiegsfrage | Eddie |
 | 13:10 | 5 bis 16 | Block 1: Verstehen und Einordnen | Eddie |
 | 13:50 | 17 | Pause | |
-| 14:00 | 18 bis 22 | Block 2: Merksatz, Pizza, schwach gegen stark, RAKETE | Emre |
-| 14:22 | 23 | Live: zweimal dasselbe Dokument | Eddie tippt, Emre erzählt |
+| 14:00 | 18 bis 22 | Block 2: Merksatz, Pizza, schwach gegen stark, RAKETE | Eddie |
+| 14:22 | 23 | Live: zweimal dasselbe Dokument | Eddie |
 | 14:32 | 24 | Live: Fördermittel mit Websuche | Eddie |
-| 14:45 | 25 | Vier Tipps | Emre |
+| 14:45 | 25 | Vier Tipps | Eddie |
 | 15:00 | 26 | Pause, Breakout-Räume anlegen | |
-| 15:10 | 27 bis 28 | Block 3: Fälle erklären, PDFs in den Chat | beide |
+| 15:10 | 27 bis 28 | Block 3: Fälle erklären, PDFs in den Chat | Eddie, Chakira |
 | 15:15 | 29 | Breakout, 30 Minuten | Gruppen |
-| 15:45 | 28 | Drei Präsentationen, je 5 Minuten (Folie 28 bleibt stehen) | beide |
+| 15:45 | 28 | Drei Präsentationen, je 5 Minuten (Folie 28 bleibt stehen) | Eddie |
 | 16:00 | 30 | Kahoot | Eddie hostet |
-| 16:12 | 31 bis 33 | Prompt-Typen, drei Dinge, Traut euch | beide |
-| 16:22 | 34 | Wortwolke: Wie war es? | Emre |
+| 16:12 | 31 bis 33 | Prompt-Typen, drei Dinge, Traut euch | Eddie |
+| 16:22 | 34 | Wortwolke: Wie war es? | Eddie |
 | 16:28 | 35 | Danke | |
 
 ## Die drei Momente, auf die es ankommt
@@ -80,6 +80,13 @@ für die Einstiegsfrage, das Feedback am Schluss mündlich in die Runde.
 - Drei Fall-PDFs als Dateien im Chat vorbereitet
 - Breakout-Räume vorbelegt, Gruppensprecher von Alyssa benannt
 - Wasserglas
+
+## Wer macht was
+
+Eddie führt durch den ganzen Tag und tippt die Live-Demos. Chakira betreut
+Chat, Slido und die Breakout-Räume, hält beim Kahoot die Zeit und geht in den
+Gruppenphasen mit durch die Räume. Emre ist am 10. September nicht dabei und
+wird auch nicht erwähnt.
 
 ## Ton
 
