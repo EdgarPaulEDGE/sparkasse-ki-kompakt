@@ -157,7 +157,7 @@ zusatz = """
 .strahl.zwei .strahl-reihe { padding-bottom: 4px; }
 /* Der Strich von 2011 hinunter zu 2012: rechts außen, gerade, ohne Rundung.
    460px ist der gemessene Abstand der beiden Reihenlinien. */
-.strahl-wende { position: absolute; right: -10px; top: 76px; width: 20px; height: 460px; pointer-events: none; }
+.strahl-wende { position: absolute; right: -1px; top: 76px; width: 20px; height: 458px; pointer-events: none; }
 
 /* ---------- Nachrichtenkarten auf der Aktuelles-Folie ---------- */
 .news { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; width: 100%; }
