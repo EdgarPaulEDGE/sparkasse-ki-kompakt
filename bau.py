@@ -104,7 +104,7 @@ zusatz = """
 .typen .minus { color: var(--warn); }
 
 /* ---------- Slido-Kennung am Folienrand ---------- */
-.slido { position: absolute; right: 130px; top: 132px; display: flex; align-items: center; gap: 18px; }
+.slido { position: absolute; right: 130px; top: 176px; display: flex; align-items: center; gap: 18px; }
 .slido img { width: 120px; height: 120px; border-radius: 12px; display: block; background: #fff; }
 .slido span { font-size: 20px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--w-45); text-align: right; line-height: 1.5; }
 
@@ -142,6 +142,64 @@ zusatz = """
 .rakete.kompakt .buchstabe { font-size: 96px; }
 .rakete.kompakt b { font-size: 34px; margin-bottom: 6px; }
 .rakete.kompakt span { font-size: 26px; line-height: 1.4; }
+
+/* ---------- EU-Zitatkasten: Sternenkreis hinter dem Zitat ---------- */
+.eu-feld { background: linear-gradient(120deg, rgba(0, 51, 153, .42), rgba(8, 11, 22, .72) 62%); }
+.eu-feld .eu-sterne { position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+  width: 300px; height: 300px; opacity: .30; pointer-events: none; }
+
+/* ---------- Zeitstrahl mit Begleiter je Station ---------- */
+.strahl-figur { height: 130px; margin: 18px auto 0; display: block; }
+.strahl.zwei .strahl-reihe { padding-bottom: 4px; }
+.strahl-wende { position: absolute; right: -34px; top: 62px; width: 60px; height: 190px; pointer-events: none; }
+
+/* ---------- Nachrichtenkarten auf der Aktuelles-Folie ---------- */
+.news { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; width: 100%; }
+.news figure { margin: 0; display: flex; flex-direction: column; }
+.news img { width: 100%; height: 250px; object-fit: cover; border-radius: 18px; border: 1px solid var(--hairline); display: block; }
+.news .label { margin: 22px 0 12px; }
+.news h3 { font-size: 36px; font-weight: 700; margin: 0 0 12px; line-height: 1.15; }
+.news p { font-size: 27px; line-height: 1.5; color: var(--w-70); margin: 0; }
+
+/* ---------- Ampel für den EU AI Act ---------- */
+.ampel-buehne { flex: 0 0 260px; display: flex; align-items: center; justify-content: center; }
+.ampel { width: 190px; padding: 26px 0; border-radius: 60px; border: 2px solid var(--hairline-stark);
+  background: rgba(6, 8, 18, .9); display: flex; flex-direction: column; align-items: center; gap: 26px; }
+.ampel i { width: 108px; height: 108px; border-radius: 50%; display: block; }
+.ampel i.rot { background: radial-gradient(circle at 38% 34%, #ff9a8e, #e03a2a 62%); }
+.ampel i.gelb { background: radial-gradient(circle at 38% 34%, #ffe08a, #f0b429 62%); }
+.ampel i.gruen { background: radial-gradient(circle at 38% 34%, #8fe9c9, #29a97a 62%); }
+.ampel-zeile { display: grid; grid-template-columns: 1fr; padding: 34px 6px; }
+.ampel-zeile b span { font-weight: 700; }
+.ampel-zeile b { font-size: 40px; font-weight: 700; display: block; margin-bottom: 10px; }
+.ampel-zeile span { font-size: 29px; line-height: 1.45; color: var(--w-70); }
+
+/* ---------- Drei Stufen als Treppe ---------- */
+.treppe { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; align-items: end; width: 100%; }
+.treppe > div { display: flex; flex-direction: column; justify-content: flex-end; }
+.treppe .stufe-block { border: 1px solid var(--hairline); border-radius: 24px; padding: 40px 36px;
+  background: rgba(8, 11, 22, .62); }
+.treppe .stufe-block h3 { font-size: 36px; font-weight: 700; margin: 0 0 14px; }
+.treppe .stufe-block p { font-size: 28px; line-height: 1.45; color: var(--w-70); margin: 0; }
+.treppe .h1 { height: 300px; } .treppe .h2 { height: 380px; } .treppe .h3 { height: 470px; }
+.treppe .zeit { font-weight: 700; font-size: 24px; letter-spacing: .16em; text-transform: uppercase;
+  margin-bottom: 18px; }
+
+/* ---------- Wachstumskurve: zwei Linien, eine zieht davon ---------- */
+.kurve { width: 100%; height: 470px; display: block; }
+.kurve .achse { stroke: var(--hairline-stark); stroke-width: 2; }
+.kurve .linie { fill: none; stroke-width: 9; stroke-linecap: round; stroke-dasharray: 1800; stroke-dashoffset: 1800; }
+.reveal .slides section.present .kurve .linie { animation: kurve-zeichnen 2.6s cubic-bezier(.4,0,.2,1) forwards; }
+.reveal .slides section.present .kurve .linie.ki { animation-delay: .5s; }
+@keyframes kurve-zeichnen { to { stroke-dashoffset: 0; } }
+.kurve .marke { font-family: var(--font); }
+.kurve .marke.gross { font-size: 40px; font-weight: 700; }
+.kurve .marke.klein { font-size: 26px; font-weight: 500; }
+.reveal .slides section.present .kurve .marke,
+.reveal .slides section.present .kurve .punkt { animation: marke-ein .6s ease 2.4s both; }
+@keyframes marke-ein { from { opacity: 0; } to { opacity: 1; } }
+body.standbild .kurve .linie { stroke-dashoffset: 0 !important; }
+body.standbild .kurve .marke, body.standbild .kurve .punkt { opacity: 1 !important; }
 </style>"""
 html = html.replace("</style>", zusatz, 1)
 

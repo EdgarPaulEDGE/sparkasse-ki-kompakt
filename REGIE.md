@@ -2,6 +2,7 @@
 
 210 Minuten, 13:00 bis 16:30. Drei Blöcke, zwei Pausen, drei Breakout-Räume.
 Alle 18 sind neu im Thema, deshalb bleibt der Basisteil komplett drin.
+35 Folien.
 
 ## Zeitplan
 
@@ -10,90 +11,86 @@ Alle 18 sind neu im Thema, deshalb bleibt der Basisteil komplett drin.
 | 13:00 | 1 bis 4 | Ankommen, Team, Fahrplan, Slido-Einstiegsfrage | Emre |
 | 13:10 | 5 bis 16 | Block 1: Verstehen und Einordnen | Eddie |
 | 13:50 | 17 | Pause | |
-| 14:00 | 18 bis 19 | Block 2: Prompt-Battle (10 Minuten) | Emre moderiert, Eddie sammelt |
-| 14:12 | 20 bis 23 | Merksatz, Pizza, schwach gegen stark, RAKETE | Emre |
-| 14:30 | 24 | Live-Reparatur per Slido (8 Minuten) | Eddie tippt, Emre moderiert |
-| 14:40 | 25 | Live: Fördermittel mit Websuche in Claude (5 Minuten) | Eddie |
-| 14:50 | 26 | Vier Tipps | Emre |
-| 15:00 | 27 | Pause, Breakout-Räume anlegen | |
-| 15:10 | 28 bis 30 | Block 3: Fälle erklären, PDFs in den Chat, Breakout | beide |
-| 15:40 | 31 | Drei Präsentationen, je 5 Minuten | beide |
-| 15:55 | 32 | Kahoot | Eddie hostet |
-| 16:05 | 33 | Mein erster Prompt für morgen (Slido) | Emre |
-| 16:12 | 34 bis 37 | Prompt-Typen, drei Dinge, Traut euch, Danke | beide |
-| 16:30 | | Ende | |
+| 14:00 | 18 bis 22 | Block 2: Merksatz, Pizza, schwach gegen stark, RAKETE | Emre |
+| 14:22 | 23 | Live: zweimal dasselbe Dokument | Eddie tippt, Emre erzählt |
+| 14:32 | 24 | Live: Fördermittel mit Websuche | Eddie |
+| 14:45 | 25 | Vier Tipps | Emre |
+| 15:00 | 26 | Pause, Breakout-Räume anlegen | |
+| 15:10 | 27 bis 28 | Block 3: Fälle erklären, PDFs in den Chat | beide |
+| 15:15 | 29 | Breakout, 30 Minuten | Gruppen |
+| 15:45 | 28 | Drei Präsentationen, je 5 Minuten (Folie 28 bleibt stehen) | beide |
+| 16:00 | 30 | Kahoot | Eddie hostet |
+| 16:12 | 31 bis 33 | Prompt-Typen, drei Dinge, Traut euch | beide |
+| 16:22 | 34 | Wortwolke: Wie war es? | Emre |
+| 16:28 | 35 | Danke | |
 
-## Die vier Momente, auf die es ankommt
+## Die drei Momente, auf die es ankommt
 
-**Prompt-Battle (19).** Gleiche Aufgabe, 18 Prompts, 18 Ergebnisse. Das ist
-der Aha-Moment, den keine Folie schafft. Ablauf: Aufgabe zeigen, drei Minuten
-tippen, Ergebnisse in den Chat, Eddie zieht drei davon in ein Slido-Voting,
-Sieger nennt seinen Prompt. Nicht bewerten, wer schwach war. Nur zeigen, was
-der gute anders macht. Danach kommt der Merksatz (20) und steht zwei Sekunden
-allein.
+**Zweimal dasselbe Dokument (23).** Der Businessplan der Westphal GmbH liegt als
+PDF auf dem Rechner, 25 Seiten, erfunden. Eddie zieht ihn in Claude und tippt
+„Fass mir diese Unterlagen mal zusammen." Heraus kommt eine brave Inhaltsangabe,
+die niemand braucht. Dann derselbe Anhang mit dem langen Prompt: eine Seite, die
+man mit ins Kundengespräch nimmt. Nichts erklären, den Unterschied sehen lassen.
 
-**Live-Reparatur (24).** Ersetzt die stille Einzelübung vom Juni. Slido als
-offene Frage: „Welchen Baustein gibst du dem Prompt?" Eddie baut aus den
-Antworten live den Prompt, ein Satz je Baustein, in RAKETE-Reihenfolge, in Claude. Erst
-den Original-Prompt laufen lassen (das Ergebnis ist die Sorte Zusammenfassung,
-die niemand liest), dann den reparierten. Unterlage: die Fördermittel-Mail aus
-Fall C, liegt im Zwischenspeicher.
+**Fördermittel live (24).** In Claude die Websuche einschalten, Prompt einfügen,
+eine halbe Minute warten, eine Quelle anklicken. Dazu der Satz: im S-KIPilot
+heißt der Schalter Web-Hilfe. Wenn die KI ein Programm erfindet, ist das der
+Punkt und nicht die Panne: prüfen bleibt euer Klick.
 
-**Fördermittel live (25).** In Claude die Websuche einschalten, Prompt einfügen, eine halbe
-Minute warten, eine Quelle anklicken. Wenn die KI ein Programm erfindet, ist
-das der Punkt, nicht die Panne: prüfen bleibt euer Klick. Vorher einmal selbst
-durchspielen, damit man weiß, was kommt.
-
-**Mein erster Prompt für morgen (33).** Der Transfer. Drei Minuten anonym in
-Slido schreiben, Emre liest vier vor und sagt zu jedem einen Satz, welcher
-Baustein ihn noch besser macht. Das Slido-Ergebnis geht nach dem Workshop an
-Alyssa: dort steht, wo das Haus Potenzial sieht.
+**Wortwolke am Schluss (34).** Ein Wort, anonym, die Wolke wächst live auf der
+Leinwand. Zwei Minuten laufen lassen, ein oder zwei Wörter vorlesen, nicht
+kommentieren. Das Ergebnis geht danach an Alyssa.
 
 ## Wie sich eine Folie aufbaut
 
-Folienwechsel zeigt sofort die finale Folie. Nur die RAKETE (23) baut sich in
-sechs Klicks auf, weil Emre jeden Baustein einzeln bespricht. `?nofrag` an die
-Adresse zeigt alles sofort.
+Folienwechsel zeigt sofort die finale Folie. Nur die RAKETE (22) baut sich in
+sechs Klicks auf. Auf Folie 9 laufen die beiden Wachstumslinien von selbst los,
+das ist keine Einblendung und braucht keinen Klick. `?nofrag` an die Adresse
+zeigt alles sofort.
 
 ## Streichliste, wenn es eng wird
 
 1. **Folie 8** (Zeitstrahl) nur zeigen, nicht erzählen. Eine Minute.
-2. **Folie 34** (Prompt-Typen) gesprochen statt gezeigt, oder ganz raus.
-   Zwei Minuten.
-3. **Folie 25** (Fördermittel live) auf das fertige Ergebnis reduzieren, das
-   vorher erzeugt wurde. Drei Minuten.
+2. **Folie 31** (Prompt-Typen) gesprochen statt gezeigt. Zwei Minuten.
+3. **Folie 24** (Fördermittel live) auf das vorbereitete Ergebnis reduzieren.
+   Drei Minuten.
 
-Nicht streichen: 19, 23, 24, 33. Das sind die Folien, wegen denen der
-Workshop stattfindet.
+Nicht streichen: 22, 23, 34. Das sind die Folien, wegen denen der Workshop
+stattfindet.
 
-## Wenn Slido oder der S-KIPilot zickt
+## Wenn etwas zickt
 
-Battle ohne Slido: Ergebnisse im Chat lesen, Emre wählt zwei aus, Handzeichen
-im Call. Reparatur ohne Slido: Bausteine per Zuruf, Alyssa sammelt im Chat.
-Claude ohne Netz: das Fördermittel-Ergebnis von der Probe als
-Screenshot zeigen, liegt im Ordner `backup/` (vor dem Termin anlegen).
+Claude ohne Netz: die Ergebnisse der Probe als Screenshot zeigen, sie liegen im
+Ordner `backup/` (vor dem Termin anlegen). Slido ohne Verbindung: Handzeichen
+für die Einstiegsfrage, das Feedback am Schluss mündlich in die Runde.
 
 ## Checkliste vor dem Termin
 
-- Deck im Kiosk-Modus (`Vollbild starten.command` auf die lokale Adresse
-  umstellen oder `F` im Browser), zweiter Bildschirm für die Redneransicht (S)
-- Claude im zweiten Fenster (Websuche verfügbar), eingeloggt, leerer Verlauf, Schriftgröße hoch. Die Live-Demos laufen in Claude, weil wir keinen S-KIPilot-Zugang haben; Teilnehmende arbeiten im S-KIPilot
-- Beide Live-Prompts (24 und 25) im Zwischenspeicher, Fördermittel-Mail dazu
-- Slido: Event #9940537 (Block 1 und Battle) und #3748531 (Reparatur, Prompt für morgen) im Admin öffnen, beide auf „aktiv“; beim Battle die Optionen live nach den Chat-Ergebnissen benennen
-- Kahoot „KI-Kompakt Sparkasse zu Lübeck“ hosten, „Antworten mischen“ an, PIN in den Chat
-- Drei Fall-PDFs als Dateien im Chat vorbereitet, nicht erst in der Pause suchen
+- Deck im Kiosk-Modus (`Vollbild starten.command` oder `F` im Browser), zweiter
+  Bildschirm für die Redneransicht (S)
+- Claude im zweiten Fenster, eingeloggt, leerer Verlauf, Schriftgröße hoch. Die
+  Live-Demos laufen in Claude, weil EDGE keinen S-KIPilot-Zugang hat. Die
+  Teilnehmenden arbeiten in ihren Übungen im S-KIPilot
+- Businessplan Westphal GmbH auf dem Desktop, beide Prompts im Zwischenspeicher
+- Slido: nur Event **#9940537** wird benutzt, drei Abfragen (Einstiegsfrage,
+  Potenzial-Wortwolke, Wortwolke am Schluss). Das zweite Event #3748531 aus der
+  alten Planung bleibt ungenutzt liegen
+- Kahoot „KI-Kompakt Sparkasse zu Lübeck" hosten, PIN in den Chat. Die richtige
+  Antwort steht jetzt auf wechselnden Positionen, mischen ist nicht mehr nötig
+- Drei Fall-PDFs als Dateien im Chat vorbereitet
 - Breakout-Räume vorbelegt, Gruppensprecher von Alyssa benannt
 - Wasserglas
 
 ## Ton
 
 Kollegial, norddeutsch, keine Superlative. Alle sind neu, niemand wird
-vorgeführt. Wer beim Battle einen schwachen Prompt hatte, hat genau das
-gelernt, was der Workshop lehren soll.
+vorgeführt.
 
 ## Der Begleiter
 
-Sparky, der Roboter mit der roten Kappe, steht auf elf Folien. Er ist ein
-Wiedererkennungszeichen, kein Erklärstück: nicht kommentieren, außer jemand
-fragt. Dann: „Mit KI gebaut, aus einem Roboter-Render und eurem Logo, zehn
-Minuten." Das ist zugleich die Antwort auf die Kennzeichnungsfrage.
+Sparky, der Roboter mit der roten Kappe, steht auf fast jeder Folie: als
+Begleiter am Rand, als Figur unter jeder Station des Zeitstrahls und in den
+Kahoot-Fragen. Er ist ein Wiedererkennungszeichen, kein Erklärstück: nicht
+kommentieren, außer jemand fragt. Dann: „Mit KI gebaut, aus einem
+Roboter-Render und eurem Logo." Das ist zugleich die Antwort auf die
+Kennzeichnungsfrage.
