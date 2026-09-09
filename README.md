@@ -23,7 +23,7 @@ Projekt hält nur `folien.html`, den Zusatzstil in `bau.py` und die Bilder.
 
 ```bash
 python3 bau.py          # setzt index.html aus Stamm + folien.html zusammen
-npm run serve           # http://localhost:8080
+npm run serve           # http://localhost:8171
 npm run pruefe-alles    # Layoutprüfungen im Browser, braucht laufenden Server
 ```
 

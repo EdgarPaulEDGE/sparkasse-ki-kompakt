@@ -76,7 +76,8 @@ zusatz = """
 .fall-c { border-color: rgba(58, 210, 159, .45); }
 
 /* ---------- Zeitstrahl mit zwei Reihen à fünf ---------- */
-.strahl.zwei .strahl-reihe + .strahl-reihe { margin-top: 44px; }
+.strahl.zwei { --reihen-abstand: 44px; }
+.strahl.zwei .strahl-reihe + .strahl-reihe { margin-top: var(--reihen-abstand); }
 .strahl.zwei .strahl-linie { display: none; }
 .strahl.zwei .strahl-reihe { position: relative; }
 .strahl.zwei .strahl-reihe::before { content: ""; position: absolute; left: 0; right: 0; top: 76px; height: 2px;
@@ -132,7 +133,7 @@ zusatz = """
 .mitnehmen > div { padding: 34px 4px; }
 .mitnehmen .satz { font-size: 42px; }
 .mitnehmen .satz small { font-size: 30px; }
-.strahl.zwei .strahl-reihe + .strahl-reihe { margin-top: 48px; }
+.strahl.zwei { --reihen-abstand: 48px; }
 .strahl.zwei .strahl-text { font-size: 27px; }
 .strahl.zwei .strahl-jahr { font-size: 46px; }
 .tempo .zahl { font-size: 320px; }
@@ -156,9 +157,15 @@ zusatz = """
 .strahl-figur { height: 92px; margin: 12px auto 0; display: block; }
 .strahl.zwei .strahl-reihe { padding-bottom: 4px; }
 /* Der Strich von 2011 hinunter zu 2012: rechts außen, gerade, ohne Rundung.
-   367px ist der im Browser gemessene Abstand der beiden Reihenlinien; wer an
-   Figurengröße oder Reihenabstand dreht, misst neu und trägt den Wert hier ein. */
-.strahl-wende { position: absolute; right: -10px; top: 70px; width: 20px; height: 367px; pointer-events: none; }
+   Er beginnt auf der oberen Linie (top: 76px, wie die Linie selbst) und endet
+   unten auf der zweiten. Die Höhe steht bewusst nicht als gemessene Zahl da,
+   sondern rechnet sich aus der Reihe: von der Linie bis zum Reihenende sind es
+   100% minus 76px, dazu der Reihenabstand, dazu wieder 76px bis zur zweiten
+   Linie und deren 2px Dicke. Wer an Figuren oder Abstand dreht, muss hier
+   nichts nachmessen. */
+.strahl-wende { position: absolute; right: 0; top: 76px; width: 2px;
+  height: calc(100% + var(--reihen-abstand) + 2px);
+  background: var(--cyan); pointer-events: none; }
 
 /* ---------- Nachrichtenkarten auf der Aktuelles-Folie ---------- */
 .news { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; width: 100%; }
