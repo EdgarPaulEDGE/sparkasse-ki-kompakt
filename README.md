@@ -111,6 +111,29 @@ hängt sie an. Zwei Fallen stecken darin, beide teuer gelernt:
   übrigens nur im Text des Antwortblocks („als die richtige Antwort markiert“),
   nicht im aria-label des Schalters.
 
+## PDF-Export: nicht mit decktape
+
+`npm run pdf` nimmt die Folien direkt aus dem Browser auf und setzt sie zu einem
+PDF zusammen (`export-seiten.mjs`, dann `bau_pdf.py`). Ergebnis: 35 Seiten,
+2880 x 1620 Pixel je Seite, rund 9 MB.
+
+**decktape darf hier nicht benutzt werden**, obwohl es sonst das Mittel der Wahl
+ist. Es fasst nach dem Drucken gleiche Bildobjekte zusammen und vergleicht sie
+dabei nur über ihren Datenstrom, nicht über Größe und Maske. Dieses Deck hat
+viele ähnliche dunkle Verlaufsflächen, deshalb legt decktape Kästen zusammen,
+die nichts miteinander zu tun haben. Am 10.09.2026 fehlten dadurch auf den
+Folien 3, 10, 12, 13, 23, 28 und 32 ganze Karten, ohne jede Fehlermeldung.
+Geprüft mit decktape 3.16.1, auch mit `--slides`.
+
+Ghostscript scheidet für das Nachkomprimieren ebenfalls aus: Der Schleier über
+den Vollbildern ist ein CSS-Verlauf mit Alpha, den Chrome als weiche Maske
+schreibt. Ghostscript wirft ihn weg, das Foto steht dann in voller Helligkeit
+unter weißer Schrift. Die Größe wird deshalb über die JPEG-Güte in
+`export-seiten.mjs` gesteuert, nicht nachträglich.
+
+Der Preis dieses Weges: Die Seiten sind Bilder, der Text ist nicht markierbar.
+Dafür stimmt jede Fläche, jeder Verlauf und jede Maske.
+
 ## Die drei Fälle
 
 `faelle/bau_faelle.py` baut die PDFs mit reportlab und den Sparkasse-Schriften:

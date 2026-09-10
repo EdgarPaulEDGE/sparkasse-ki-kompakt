@@ -5,7 +5,7 @@
   "scripts": {
     "build": "node pruefe.mjs",
     "serve": "npx http-server -p 8171 -c-1",
-    "pdf": "npx decktape reveal --size 1920x1080 --pause 3000 --load-pause 3000 \"http://localhost:8171/?nofrag\" aufgeweckt-ki-klartext.pdf",
+    "pdf": "node export-seiten.mjs http://localhost:8171 .pruefung/seiten 78 1.5 && python3 bau_pdf.py .pruefung/seiten EDGE_Digital_Praesentation_KI_Kompakt_Sparkasse_zu_Luebeck.pdf 1440 810",
     "pruefe": "node pruefe-folien.mjs http://localhost:8171 ./.pruefung",
     "pruefe-karte": "node pruefe-karte.mjs ./.pruefung",
     "pruefe-alles": "node pruefe-folien.mjs http://localhost:8171 ./.pruefung && node pruefe-ueberlappung.mjs http://localhost:8171 && node pruefe-verzerrung.mjs http://localhost:8171 && node pruefe-ausrichtung.mjs http://localhost:8171 && node pruefe-reihenfolge.mjs http://localhost:8171 && node pruefe-kaesten.mjs http://localhost:8171",
