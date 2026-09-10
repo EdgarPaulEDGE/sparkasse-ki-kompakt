@@ -44,4 +44,41 @@ for (let h = 0; h < n; h++) {
     console.log(`${String(h + 1).padStart(2)} ${problem ? "<<<" : "   "} ${f.join("  /  ")}`);
   }
 }
+
+// Zweiter Durchgang: Textblöcke, deren letzte Zeile als einzelnes Wort hängt.
+// Genau so stand auf Folie 10 das Wort „schickt." allein unter seinem Satz.
+console.log("\n--- haengende Einzelwoerter ---");
+let haenger = 0;
+for (let h = 0; h < n; h++) {
+  await s.evaluate((i) => Reveal.slide(i, 0), h);
+  await new Promise((r) => setTimeout(r, 150));
+  const funde = await s.evaluate(() => {
+    const raus = [];
+    const bloecke = document.querySelectorAll("section.present .feld p, section.present .fenster p, section.present .prompt span, section.present .station p");
+    for (const el of bloecke) {
+      const kasten = el.getBoundingClientRect().width;
+      for (const knoten of el.childNodes) {
+        if (knoten.nodeType !== 3 || !knoten.textContent.trim()) continue;
+        const r = document.createRange();
+        r.selectNodeContents(knoten);
+        const rects = [...r.getClientRects()];
+        if (rects.length < 2) continue;
+        const letzte = rects[rects.length - 1];
+        const worte = knoten.textContent.trim().split(/\s+/);
+        // letzte Zeile schmaler als ein Viertel des Kastens: da haengt ein Rest
+        if (letzte.width < kasten * 0.25) {
+          raus.push({ text: knoten.textContent.trim().slice(0, 60), zeilen: rects.length,
+                      rest: Math.round(letzte.width), kasten: Math.round(kasten), worte: worte.length });
+        }
+      }
+    }
+    return raus;
+  });
+  for (const f of funde) {
+    haenger++;
+    console.log(`${String(h + 1).padStart(2)} <<< "${f.text}" bricht auf ${f.zeilen} Zeilen, die letzte ist nur ${f.rest} von ${f.kasten} Pixeln breit`);
+  }
+}
+console.log(haenger === 0 ? "Kein Textblock endet mit einem haengenden Rest." : `${haenger} haengende Zeile(n).`);
+
 await b.close();
