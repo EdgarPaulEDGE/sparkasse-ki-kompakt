@@ -22,7 +22,94 @@ html = html.replace('<img src="assets/logos/convention-bureau.png" alt="Conventi
                     '<img src="assets/logos/sparkasse-weiss.svg" alt="Sparkasse zu Lübeck">')
 html = html.replace('content="#030309">\n<link rel="icon"', 'content="#030309">\n<meta name="description" content="KI-Kompakt Workshop, Sparkasse zu Lübeck, 10. September 2026">\n<link rel="icon"')
 
+# ---------- Buehne folgt dem Bildschirm: keine Balken mit harter Bildkante im Vollbild ----------
+# Der Stamm setzt die Buehne fest auf 1920x1080. Auf einem MacBook (16:10) skaliert Reveal
+# dann nur auf die Breite und laesst oben/unten schwarze Streifen stehen, an denen Vollbilder
+# hart abschneiden. Die Loesung (zuerst gebaut in der EDGE x Deutsche Bank Praesentation,
+# dortige stamm.html, Suche nach "buehnenHoehe"): die Buehne uebernimmt im Vollbild das
+# Seitenverhaeltnis des Fensters (1080 bis 1440 Pixel hoch), Reveal bekommt die neue Hoehe
+# per Reveal.configure(), CSS haelt das 1080er Layout mittig darin. cbl-aufgeweckt kennt
+# keinen Hochkant-Modus, deshalb faellt die dortige Quer/Hochkant-Weiche hier weg.
+# Der Stamm selbst bleibt unveraendert, nur hier ersetzt.
+vorher_bau = html
+alte_reveal_init = """Reveal.initialize({
+  /* ?nofrag zeigt alle Einblendungen sofort: für die visuelle Prüfung und den PDF-Export */
+  fragments: !new URLSearchParams(location.search).has('nofrag'),
+  hash: true,
+  history: true,
+  transition: 'fade',
+  transitionSpeed: 'default',
+  backgroundTransition: 'none',
+  controls: true,
+  controlsLayout: 'bottom-right',
+  controlsTutorial: false,
+  progress: true,
+  slideNumber: false,
+  center: false,
+  width: 1920,
+  height: 1080,
+  margin: 0,
+  plugins: [RevealNotes]
+});"""
+neue_reveal_init = """/* Bühnenhöhe folgt dem Bildschirm: 1080 bei 16:9, rund 1200 bei 16:10 (MacBook),
+   bis 1440 bei 4:3. Breite bleibt immer 1920. */
+function buehnenHoehe() {
+  return Math.max(1080, Math.min(1440, Math.round(1920 * window.innerHeight / window.innerWidth)));
+}
+function buehneSetzen() {
+  var h = buehnenHoehe(), w = document.documentElement.style;
+  w.setProperty('--buehne-h', h + 'px');
+  w.setProperty('--extra', Math.round((h - 1080) / 2) + 'px');
+  if (window.Reveal && Reveal.isReady && Reveal.isReady()) {
+    var c = Reveal.getConfig();
+    if (c.height !== h) Reveal.configure({ width: 1920, height: h });
+  }
+}
+buehneSetzen();
+window.addEventListener('resize', buehneSetzen);
+
+Reveal.initialize({
+  /* ?nofrag zeigt alle Einblendungen sofort: für die visuelle Prüfung und den PDF-Export */
+  fragments: !new URLSearchParams(location.search).has('nofrag'),
+  hash: true,
+  history: true,
+  transition: 'fade',
+  transitionSpeed: 'default',
+  backgroundTransition: 'none',
+  controls: true,
+  controlsLayout: 'bottom-right',
+  controlsTutorial: false,
+  progress: true,
+  slideNumber: false,
+  center: false,
+  width: 1920,
+  height: buehnenHoehe(),
+  margin: 0,
+  plugins: [RevealNotes]
+});"""
+html = html.replace(alte_reveal_init, neue_reveal_init, 1)
+assert html != vorher_bau, "Reveal.initialize nicht im Stamm gefunden, Buehnen-Fix griff nicht (K64-Stamm geändert?)"
+
+vorher_bau = html
+html = html.replace(
+    "w.setProperty('--folie-skala', String(r.height / 1080));",
+    "w.setProperty('--folie-skala', String(r.height / buehnenHoehe()));",
+    1)
+assert html != vorher_bau, "folie-skala Zeile nicht im Stamm gefunden, Buehnen-Fix unvollständig (K64-Stamm geändert?)"
+
 zusatz = """
+/* ---------- Buehne folgt dem Bildschirm: keine Balken mit harter Bildkante im Vollbild ----------
+   --buehne-h und --extra setzt buehneSetzen() oben im Skript. Im 16:9-Normalfall (und beim
+   PDF-Export, der exakt im 16:9-Format rendert) bleibt --buehne-h bei 1080px und --extra bei 0,
+   dann ist hier pixelgleich nichts anders als vorher.
+   .slide bekommt eine eigene Positionierungsebene: sonst würden absolut positionierte Kinder
+   (der Begleiter Sparky, die Titel-Logos) an der jetzt höheren Section hängen statt an der
+   mittig sitzenden 1080er Folie. Einzelne Folien setzen das heute schon inline
+   (style="position:relative") für genau diesen Zweck, das wird hiermit zur Regel. */
+:root { --buehne-h: 1080px; --extra: 0px; }
+.reveal .slides > section { height: var(--buehne-h); }
+.slide { position: relative; margin-top: var(--extra); }
+
 /* ---------- Gastfarbe: Sparkassen-Rot ---------- */
 :root { --rot: #FF0000; --gold: #FFC531; }
 .rot { color: var(--rot); }
